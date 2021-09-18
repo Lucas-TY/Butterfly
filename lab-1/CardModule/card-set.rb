@@ -12,7 +12,7 @@ module CardModule
 		#
 		# @return [CardSet] a new instance of type CardSet
 		def initialize
-			@deck = [];
+			@deck = []
 
 			Card.NUM_SHAPES.each do |num|
 				Card.SHAPES.each do |shape|
@@ -34,7 +34,7 @@ module CardModule
 		#
 		# @return [Card] a card removed from the deck
 		def deal_card!
-			card = nil;
+			card = nil
 			if @deck.length > 0
 				card = @deck.pop
 			end
