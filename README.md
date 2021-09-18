@@ -1,4 +1,15 @@
+# <font color=red>Deadline is Sep 26 at 11:59pm</font>
+---
+
+
+# We have three things to do on saturday:
++ [ ] Read through the whole document and make sure everyone agree with it
++ [ ] Pick a module and write some api document for your part(just let others know how to use your function)
++ [ ] Build your branch on both remote repo and your locale laptop, and make sure your are working on your on branch.
+
+---
 # Module card 
+
 ***This part needs to be done by the end of this week***
 
 ## Card class
@@ -18,6 +29,7 @@
 + A funtion to select cards from Card set and update it.
 + + A funtion that return the set.
 
+---
 # Module player 
 ***This part needs to be done by the end of this week***
 
@@ -26,7 +38,7 @@
 + a function that init the player by using input parameters.
 + functions that can return player's property(can't change).
 + a function that can update player's score.
-
+---
 # Module interaction 
 ***This part needs to be done by 9/21***
 
@@ -34,9 +46,9 @@
 + Function play: ask player to input card index that they selected, use other function to check correctness, return true or false
 + Fountion correctness: If true, update score and update display card set. If false.... return true or false
 + Function display: print out display card set.
-
+---
 # Module main
+***This part needs to be done by 9/21***
 + begin: init everything by asking the user, then play the game until condition matched(print out cards remain, player information, correcness information)
- 
-
++ end: show the result
 
