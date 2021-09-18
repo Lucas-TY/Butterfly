@@ -2,11 +2,11 @@ module CardModule
 
 	# a class that represents a single card in the game Set.
 	#
-	# attr_reader num_shapes [Number] number of shapes on the card
-	# attr_reader shape [Symbol] type of shape on the card
-	# attr_reader shading [Symbol] type of shading of the shape
-	# attr_reader color [Symbol] color of the shape
-	# attr_reader index [index] index of the card in a hand (or other collection)
+	# @attr_reader num_shapes [Number] number of shapes on the card
+	# @attr_reader shape [Symbol] type of shape on the card
+	# @attr_reader shading [Symbol] type of shading of the shape
+	# @attr_reader color [Symbol] color of the shape
+	# @attr_reader index [index] index of the card in a hand (or other collection)
 	#
 	# @author Adam Lechliter
 
