@@ -1,0 +1,1 @@
+Schedule will be released on Saturday morning
