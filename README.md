@@ -18,7 +18,7 @@ git push --set-upstream origin replaceItWithYourBranchName
 ## Next time
 ```
 git pull origin main
-git add .
+git add -A
 git commit -m "replaceItWithYourCommitMessage"
 git push replaceItWithYourBranchName
 ```
