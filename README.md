@@ -6,7 +6,23 @@
 + [ ] Read through the whole document and make sure everyone agree with it
 + [ ] Pick a module and write some api document for your part(just let others know how to use your function)
 + [ ] Build your branch on both remote repo and your locale laptop, and make sure your are working on your own branch.
-
+---
+# How to create a branch
+## First time
+```
+git clone git@github.com:cse-3901-sharkey/Butterfly.git
+cd butterfly
+git checkout -b  replaceItWithYourBranchName
+git push --set-upstream origin replaceItWithYourBranchName
+```
+## Next time
+```
+git pull origin main
+git add .
+git commit -m "replaceItWithYourCommitMessage"
+git push replaceItWithYourBranchName
+```
+---
 ---
 # Module card 
 
