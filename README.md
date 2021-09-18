@@ -20,7 +20,7 @@ git push --set-upstream origin replaceItWithYourBranchName
 git pull origin main
 git add -A
 git commit -m "replaceItWithYourCommitMessage"
-git push replaceItWithYourBranchName
+git push 
 ```
 ---
 ---
