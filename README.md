@@ -5,7 +5,7 @@
 # We have three things to do on saturday:
 + [ ] Read through the whole document and make sure everyone agree with it
 + [ ] Pick a module and write some api document for your part(just let others know how to use your function)
-+ [ ] Build your branch on both remote repo and your locale laptop, and make sure your are working on your on branch.
++ [ ] Build your branch on both remote repo and your locale laptop, and make sure your are working on your own branch.
 
 ---
 # Module card 
