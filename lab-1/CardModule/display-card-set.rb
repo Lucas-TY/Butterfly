@@ -233,7 +233,7 @@ module CardModule
 			numberMatched && shapeMatched && shadingMatched && colorMatched
 		end	
 
-		# Find the 3 card that make up a set. Return an empty array is none are found.
+		# Find the 3 card that make up a set. Return an empty array if none are found.
 		#
 		# @param cards [Array(Card)] the array cards to compare with each other
 		# @return [Number] return the index of card that is a part of set.
