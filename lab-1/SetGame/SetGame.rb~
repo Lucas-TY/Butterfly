@@ -1,0 +1,82 @@
+require "../CardModule/display-card-set.rb"
+
+# Display the current hand to the user(s).
+#
+# @param hand [DisplayCardSet] The current hand in play
+# @param numberCardsLeft [Number] The numbers of cards left in the deck
+# outside of the hand
+def display_hand(hand, numberCardsLeft)
+	puts "Current Hand:"
+	hand.each { |card| puts "#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color}" }
+	puts "Cards left in deck: #{numberCardsLeft}"
+end
+
+#Get player info for each player.
+puts "Welcome to Set! You may play this game with a maximum of 10 players."
+puts "Enter Player 1's name or an empty line when all players are entered:"
+players = []
+playerIndex = 1
+until (playerName = gets.chomp) == "" || players.length == 10
+	#player = Player.new(playerName, 0)
+	players.push(playerName)
+	playerIndex += 1
+	puts "Enter Player #{playerIndex}'s name or an empty line when all players are entered:"
+end
+
+#Create the display for the hand of cards.
+setDisplay = CardModule::DisplayCardSet.new
+
+#Run the game until there are no cards left in the deck.
+hintLevel = 0 #Used to determine which hint has been used. 0 = none, 1 = regular hint, 2 = full set.
+until setDisplay.amount_in_deck == 0
+	display_hand(setDisplay.hand, setDisplay.amount_in_deck)
+	#Different printouts based off hint level. After getting a full set as a hint, players may not request another hint until a set is entered.
+	if hintLevel == 0
+		puts "If you need a hint, enter 'h'. Otherwise, enter the player number of the person who finds a set!"
+	elsif hintLevel == 1
+		puts "If you still cannot find a set, enter 'h'. Otherwise, enter the player number of the person who finds a set!"
+	else
+		puts "Enter the player number of the person to enter the set."
+	end
+	setDisplay.get_set.each { |card| puts "#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color}"}
+
+	playerInput = gets.chomp
+
+	if playerInput == "h" && hintLevel == 0 #No hints used and a hint is requested, one card index given.
+		puts "Card with index #{setDisplay.get_hint} is part of a set!"
+		hintLevel += 1
+	elsif playerInput == "h" && hintLevel == 1 #One hint already used and another requested, full set given.
+		puts "The cards that make up a set are:"
+		setDisplay.get_set.each { |card| puts "#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color}"}
+		hintLevel += 1
+	elsif playerInput.to_i != 0 #Players entered a player number which may or may not be valid.
+		#Continuously prompt the user for a valid player number for scoring purposes.
+		until playerInput.to_i <= players.length && playerInput.to_i > 0
+			puts "Invalid player number. Please enter a new player number:"
+			playerInput = gets.chomp
+		end
+		puts "Enter the indices of the cards in the set, each separated by a space. (E.g. 1 4 8)"
+		cardIndices = gets.chomp.split()
+		isSet = setDisplay.is_selection_set?(setDisplay.get_card(cardIndices[0].to_i), setDisplay.get_card(cardIndices[1].to_i), setDisplay.get_card(cardIndices[2].to_i))
+		if isSet #User entered a valid set, point is given. Show the scoreboard before continuting.
+			puts "Valid set!"
+			cardIndices.map! { |index| index.to_i }
+			setDisplay.deal_full_hand!(cardIndices)
+			#players[playerInput - 1].change_score
+			puts "--SCOREBOARD--"
+			playerIndex = 1
+			while playerIndex < players.length
+				#puts "Player #{playerIndex}: #{players[playerIndex - 1].score} point(s)"
+				playerIndex += 1
+			end
+			hintLevel = 0
+		else #Invalid set, cycle back to the top without changing the current hint state.
+			puts "That was not a valid set!"
+		end
+	else #Input is completely invalid, cycle back to the top.
+		puts "Invalid input."
+	end
+end
+
+
+
