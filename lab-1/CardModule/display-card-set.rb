@@ -65,7 +65,21 @@ module CardModule
 		#
 		# @return [Boolean] true if the hand has at least 3 cards that make up a set
 		def hand_contains_set?
-			cards_contain_set? @hand
+			cards_contain_set?(@hand).length > 0
+		end
+
+		# Gives the index of a card that is a part of a possible set. Index is -1 if no card exists.
+		#
+		# @return [Number] index of a card that is a part of a possible set
+		def get_hint
+			cards_contain_set?(@hand)[0].index
+		end
+
+		# Returns an array of 3 cards in the hand that make up a set
+		#
+		# @return [Array(Card)] an array of cards that make up a set, empty if there is no set in the hand.
+		def get_set
+			cards_contain_set?(@hand)
 		end
 
 		# Checks if the given cards form a set.
@@ -219,10 +233,10 @@ module CardModule
 			numberMatched && shapeMatched && shadingMatched && colorMatched
 		end	
 
-		# Checks if the given array of cards contains 3 cards that create a set
+		# Find the 3 card that make up a set. Return an empty array is none are found.
 		#
 		# @param cards [Array(Card)] the array cards to compare with each other
-		# @return [Boolean] true if the array contains 3 cards that make up a set.
+		# @return [Number] return the index of card that is a part of set.
 		private def cards_contain_set?(cards)
 			index_a = 0;
 			index_b = index_a + 1;
@@ -232,7 +246,7 @@ module CardModule
 				while index_b < cards.length - 1
 					while index_c < cards.length
 						if(is_set?(cards[index_a], cards[index_b], cards[index_c]))
-							return true;
+							return [cards[index_a], cards[index_b], cards[index_c]];
 						end
 						index_c += 1;
 					end
@@ -245,7 +259,7 @@ module CardModule
 				index_c = index_b + 1;
 			end
 
-			return false;
+			return [];
 		end
 	end
 end
