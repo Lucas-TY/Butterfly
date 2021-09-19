@@ -100,7 +100,7 @@ module CardModule
 		# into the deck, and then adds [@@DEFAULT_DEAL_SIZE]. If given an array of indices 
 		# [indices], it will replace the cards at the given indices with cards from the deck. 
 		# If the deck is empty, it will remove the cards at those indices from the hand and 
-		# shift the remaining cards in the deck.
+		# shift the remaining cards in the hand.
 		#
 		# @require indices to either be left out or contain valid indices for the hand array
 		# @param indices [nil, Array(Number)] list of indices of cards to be replaced from the 
@@ -132,10 +132,12 @@ module CardModule
 				update_indices = false
 				indices.each do |index|
 					if @deck.remaining_amount > 0
+						@hand[index].set_index! # sets index to empty index
 						@hand[index] = @deck.deal_card!
 						@hand[index].set_index! index
 					else
 						# mark card for removal
+						@hand[index].set_index! # sets index to empty index
 						@hand[index] = nil
 						update_indices = true
 					end
