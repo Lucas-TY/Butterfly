@@ -1,6 +1,6 @@
 README - Card Module
 
-#Card Class
+# Card Class
 
 - Get an array of the possible card properties (constants that are independent from an instance)
 	+ Constants (Class Variables): NUM_SHAPES, SHAPES, SHADING, COLOR
@@ -20,7 +20,7 @@ README - Card Module
 			+ cardInstance.shape --> :oval
 
 
-#Card Set Class
+# Card Set Class
 
 - Initialize a deck
 + Create an instance of Set
@@ -44,7 +44,7 @@ README - Card Module
 
 
 
-Display Class
+# Display Class
 
 - Initialize a hand
 + Create an instance of DisplayCardSet
