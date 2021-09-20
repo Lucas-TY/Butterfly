@@ -35,6 +35,9 @@ puts "\nDoes hand contain a set? #{displaySet.hand_contains_set?}"
 print "\nDo the cards at indices 0, 1, and 2 create a set? "
 isSet = displaySet.is_selection_set?(displaySet.get_card(0), displaySet.get_card(1), displaySet.get_card(2));
 puts "#{isSet}"
+puts "[Hint] Index of a card the makes up a set: #{displaySet.get_hint}"
+puts "Three cards that make up a set: "
+displaySet.get_set.each { |card| print_card card }
 
 puts "\nAn example of three cards that do create a set:"
 card1 = CardModule::Card.new(CardModule::Card.NUM_SHAPES[0], CardModule::Card.SHAPES[0], CardModule::Card.SHADING[0], CardModule::Card.COLOR[0])

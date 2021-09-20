@@ -34,14 +34,15 @@ module CardModule
 			@shape = shape;
 			@shading = shading;
 			@color = color;
-			@index = -1;
+			@EMPTY_INDEX = -1;
+			@index = @EMPTY_INDEX;
 		end
 
 		# Changes the index of the card 
 		#
 		# @param new_index [number, #read] new index of the card
 		# @return [Number] index of the card
-		def set_index!(new_index)
+		def set_index!(new_index = @EMPTY_INDEX)
 			@index = new_index;
 		end
 

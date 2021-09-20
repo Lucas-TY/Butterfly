@@ -11,7 +11,7 @@
 ## First time
 ```
 git clone git@github.com:cse-3901-sharkey/Butterfly.git
-cd butterfly
+cd Butterfly
 git checkout -b  replaceItWithYourBranchName
 git push --set-upstream origin replaceItWithYourBranchName
 ```
