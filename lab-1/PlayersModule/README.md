@@ -1,10 +1,9 @@
 README - Player Module
 
-Player Class
+Players Class
 
-    - Initialize three global variables
+    - Initialize two class variables
         + no_of_players: number of players participating in this game
-        + DEFAULT_SCORE: default initial score for each player
         + players_list: storing all of the players' information
     
     - Example:
@@ -27,3 +26,9 @@ Player Class
     - Report the total number of players participating in this game.
         + example:
             - # of players: 2
+
+Player Class
+    
+    - Initialize one specific player's property.
+    - Update one specific player's property.
+    - Get the property of a single player.
