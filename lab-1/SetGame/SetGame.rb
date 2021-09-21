@@ -1,5 +1,5 @@
-require "../CardModule/display-card-set.rb"
-require "../PlayerModule/player-set.rb"
+require_relative "../CardModule/display-card-set.rb"
+require_relative "../PlayerModule/player-set.rb"
 
 # Display the current hand to the user(s).
 #
