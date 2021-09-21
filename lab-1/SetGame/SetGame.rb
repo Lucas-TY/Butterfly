@@ -33,7 +33,7 @@ if players.no_of_players > 0
 	#Run the game until there are no cards left in the deck.
 	#Used to determine which hint has been used. 0 = none, 1  = regular hint, 2 = full set.
 	hintLevel = 0 
-	until setDisplay.amount_in_deck == 0
+	until setDisplay.amount_in_deck == 0 && !setDisplay.hand_contains_set?
 		display_hand(setDisplay.hand, setDisplay.amount_in_deck)
 		#Different printouts based off hint level. After getting a full set as a hint, players may not request another hint until a set is entered.
 		if hintLevel == 0
