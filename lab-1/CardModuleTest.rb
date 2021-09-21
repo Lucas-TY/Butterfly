@@ -2,7 +2,7 @@ require_relative "./CardModule/display-card-set.rb"
 
 def print_card(card)
 	if card
-		puts "#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color}"
+		puts "#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color} (#{card.image_file})"
 	else
 		puts "Card doesn't exist at that index"
 	end

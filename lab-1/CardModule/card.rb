@@ -6,7 +6,8 @@ module CardModule
 	# @attr_reader shape [Symbol] type of shape on the card
 	# @attr_reader shading [Symbol] type of shading of the shape
 	# @attr_reader color [Symbol] color of the shape
-	# @attr_reader index [index] index of the card in a hand (or other collection)
+	# @attr_reader index [Number] index of the card in a hand (or other collection)
+	# @attr_reader image_file [Symobl] filename of the corresponding image (use is optional)
 	#
 	# @author Adam Lechliter
 
@@ -21,6 +22,7 @@ module CardModule
 		attr_reader :shading;
 		attr_reader :color;
 		attr_reader :index;
+		attr_reader :image_file;
 
 		# Initialize a new instance of a Card
 		#
@@ -36,6 +38,7 @@ module CardModule
 			@color = color;
 			@EMPTY_INDEX = -1;
 			@index = @EMPTY_INDEX;
+			@image_file = "#{color}_#{shading}_#{shape}_#{num}.png"
 		end
 
 		# Changes the index of the card 
