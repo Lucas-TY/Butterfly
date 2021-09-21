@@ -67,6 +67,7 @@ puts "players: #{game.no_of_players}\n"
 game.delete_player!("leon");
 puts "players: #{game.no_of_players}\n"
 puts "playersName: #{game.players_name}\n"
+puts "list: #{game.players_list[0].player_name}"
 game.delete_player!("lucas");
 puts "players: #{game.no_of_players}\n"
 puts "playersName: #{game.players_name}\n"

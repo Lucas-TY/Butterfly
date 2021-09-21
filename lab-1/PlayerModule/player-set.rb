@@ -5,9 +5,9 @@ module PlayerModule
     # a class that represents the profile of one or more players participating in this game
     #
     # @attr_reader no_of_players [Number] number of players participating in this game
-    #
+    # @attr_reader players_list [Array(Player)] Array of players
     # @author Lucas Wu / Jing Wen
-
+    attr_reader :players_list
     attr_reader :no_of_players;
     # initialize the players list
     # @return [PlayerSet] a new instance of type Players

@@ -2,7 +2,7 @@
 # a function that asking for input(with a timer)
 # @param seconds [Number] Countup if it's 0, otherwise will count down
 # @param seconds [String] the print message
-# @return [Array(Input,Number)] the first index contain the input value, and the second is time use.
+# @return [Array(Input,Number)] the first index contain the input value, and the second is time used.
 # @author Lucas Wu 
 
 def timer_input(seconds,message)
