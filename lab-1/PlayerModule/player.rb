@@ -21,7 +21,7 @@ module PlayerModule
     #
     # @param points [Number] points that the player won or lost
     # @return the updated score
-    def score_add(points)
+    def score_add!(points)
 
       @player_score += points;
       @player_score = 0 if @player_score < 0;
@@ -32,7 +32,7 @@ module PlayerModule
     #
     # @param name [Number] the players's new score
     # @return the new score
-    def score_change_to(score )
+    def score_change_to!(score)
       @player_score = score;
       score
     end
@@ -40,7 +40,7 @@ module PlayerModule
     #
     # @param name [String] the players's new name
     # @return the new name
-    def name_change_to(name)
+    def name_change_to!(name)
       @player_name = name;
       name
     end

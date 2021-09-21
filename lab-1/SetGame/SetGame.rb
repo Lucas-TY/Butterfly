@@ -18,7 +18,7 @@ puts "Enter Player 1's name or an empty line when all players are entered:"
 players = PlayerModule::PlayerSet.new
 playerIndex = 1
 until (playerName = gets.chomp) == ""
-	players.add_player(playerName)
+	players.add_player!(playerName)
 	playerIndex += 1
 	puts "Enter Player #{playerIndex}'s name or an empty line when all players are entered:"
 	
@@ -67,7 +67,7 @@ if players.no_of_players > 0
 				puts "Valid set! #{playerInput} gains #{3 - hintLevel} point(s)!"
 				cardIndices.map! { |index| index.to_i }
 				setDisplay.deal_full_hand!(cardIndices)
-				playerToScore.score_add(3 - hintLevel)
+				playerToScore.score_add!(3 - hintLevel)
 				playerNames = players.players_name
 				puts "--SCOREBOARD--"
 				for name in playerNames

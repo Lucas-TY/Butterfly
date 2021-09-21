@@ -1,8 +1,8 @@
 require_relative "./PlayerModule/player-set.rb"
 puts "\ntest adding"
 game=PlayerModule::PlayerSet.new;
-game.add_player("jack");
-game.add_player("lucas");
+game.add_player!("jack");
+game.add_player!("lucas");
 
 puts "num of player #{}"
 
@@ -15,18 +15,18 @@ puts "\ntest player"
 puts jack.player_name
 puts jack.player_score
 
-puts  "\nadd score test: #{jack.score_add(10)}"
+puts  "\nadd score test: #{jack.score_add!(10)}"
 puts "jack :#{game.players_search("jack").player_score}"
 puts "lucas :#{game.players_search("lucas").player_score}"
 puts "highest score should be #{game.players_highest_score}"
 
-puts  "\nadd score test: #{jack.score_add(-20)}"
+puts  "\nadd score test: #{jack.score_add!(-20)}"
 puts "jack :#{game.players_search("jack").player_score}"
 puts "lucas :#{game.players_search("lucas").player_score}"
 puts "highest score should be #{game.players_highest_score}"
 
-puts  "\nadd score test: #{jack.score_add(50)}"
-puts  "add score test: #{lucas.score_add(60)}"
+puts  "\nadd score test: #{jack.score_add!(50)}"
+puts  "add score test: #{lucas.score_add!(60)}"
 puts "jack :#{game.players_search("jack").player_score}"
 puts "lucas :#{game.players_search("lucas").player_score}"
 puts "highest score should be #{game.players_highest_score}"
@@ -55,9 +55,9 @@ game.delete_player!("leon");
 puts game.no_of_players
 puts "\ntest adding"
 game=PlayerModule::PlayerSet.new;
-game.add_player("jack");
-game.add_player("jack");
-game.add_player("lucas");
+game.add_player!("jack");
+game.add_player!("jack");
+game.add_player!("lucas");
 puts "players: #{game.no_of_players}\n"
 puts "playersName: #{game.players_name}\n"
 puts "\ntest delete"

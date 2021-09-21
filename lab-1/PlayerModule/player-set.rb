@@ -22,7 +22,7 @@ module PlayerModule
     # @param name [String] the name of the specific player
     # @return [Player] the player that just added
     # @return [Nil] if the name is aready exsit.
-    def add_player(name)
+    def add_player!(name)
       return nil if player_exsit?(name);
       @no_of_players+=1
       player=Player.new(name)
@@ -64,7 +64,7 @@ module PlayerModule
     # reset all player's score
     def reset_all_score!
       for element in @players_list
-        element.score_change_to(0)
+        element.score_change_to!(0)
       end
     end
     
