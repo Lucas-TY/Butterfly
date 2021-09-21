@@ -1,6 +1,6 @@
 README - Player Module
 
-#Player Class
+# Player Class
 
 ---
 
@@ -29,7 +29,7 @@ README - Player Module
       + Example:
           + playerInstance.name_change_to(\"Jim")\ --> "Jim"
           
-#PlayerSet Class
+# PlayerSet Class
 
 ---
 
