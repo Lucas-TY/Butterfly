@@ -4,7 +4,7 @@ module CardModule
 
 	# a class that represents a deck of cards in the game of Set.
 	#
-	# @author
+	# @author Adam Lechliter / Jing
 
 	class CardSet
 
