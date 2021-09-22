@@ -12,14 +12,28 @@ def display_hand(hand, numberCardsLeft)
 	puts "Cards left in deck: #{numberCardsLeft}"
 end
 
+# Takes an array of 3 strings and checks if their numeric values are all different.
+#
+# @param indices Array[String] the array of strings to check
+# @return [Boolean] true if all different, false otherwise
+def all_different?(indices)
+	indices[0] != indices[1] && indices[0] != indices[2] && indices[1] != indices[2]
+end
+	
+
 #Get player info for each player.
 puts "Welcome to Set! You may play this game with as many players that are available!"
 puts "Enter Player 1's name or an empty line when all players are entered:"
 players = PlayerModule::PlayerSet.new
 playerIndex = 1
 until (playerName = gets.chomp) == ""
-	players.add_player!(playerName)
-	playerIndex += 1
+	#Nil if player already exists, player object otherwise
+	playerInGame = players.add_player!(playerName)
+	if playerInGame
+		playerIndex += 1
+	else
+		puts "Player #{playerName} is already playing!"
+	end
 	puts "Enter Player #{playerIndex}'s name or an empty line when all players are entered:"
 	
 end
@@ -30,10 +44,11 @@ if players.no_of_players > 0
 	#Create the display for the hand of cards.
 	setDisplay = CardModule::DisplayCardSet.new
 
-	#Run the game until there are no cards left in the deck.
+	#Run the game until there are no more possible sets in the hand. deal_full_hand! ensures there will be a set
+	#in the hand if possible.
 	#Used to determine which hint has been used. 0 = none, 1  = regular hint, 2 = full set.
 	hintLevel = 0 
-	until setDisplay.amount_in_deck == 0 && !setDisplay.hand_contains_set?
+	until !setDisplay.hand_contains_set?
 		display_hand(setDisplay.hand, setDisplay.amount_in_deck)
 		#Different printouts based off hint level. After getting a full set as a hint, players may not request another hint until a set is entered.
 		if hintLevel == 0
@@ -60,10 +75,22 @@ if players.no_of_players > 0
 				playerInput = gets.chomp
 			end
 			playerToScore = players.players_search(playerInput)
-			puts "Enter the indices of the cards in the set, each separated by a space. (E.g. 1 4 8)"
-			cardIndices = gets.chomp.split()
+			validIndices = false
+			#Continuously prompt for a valid set of indices.
+			until validIndices
+				puts "Enter the indices of the cards in the set, each separated by a space. (E.g. 1 4 8)"
+				cardIndices = gets.chomp.split()
+				if cardIndices.length == 3
+					#Flip validIndices to true, then flip to false if any value was a string or greater than the number of cards in the hand.
+					validIndices = !validIndices
+					cardIndices.each { |index| validIndices = false if (index.to_i == 0 && index != "0") || index.to_i >= setDisplay.hand.length }
+					#Only check if the values are all different if validIndices is still true, as there are 3 values and they are all valid integers.
+					validIndices = all_different?(cardIndices) if validIndices
+				end
+			end
 			isSet = setDisplay.is_selection_set?(setDisplay.get_card(cardIndices[0].to_i), setDisplay.get_card(cardIndices[1].to_i), setDisplay.get_card(cardIndices[2].to_i))
-			if isSet #User entered a valid set, points are given based off the current hint level. Show the scoreboard before continuting.
+			#User entered a valid set, points are given based off the current hint level. Show the scoreboard before continuting.
+			if isSet 
 				puts "Valid set! #{playerInput} gains #{3 - hintLevel} point(s)!"
 				cardIndices.map! { |index| index.to_i }
 				setDisplay.deal_full_hand!(cardIndices)
@@ -82,7 +109,7 @@ if players.no_of_players > 0
 	puts "--Final Scoreboard--"
 	loopBound = players.no_of_players
 	loopIndex = 1
-	#Iterate until loopBound + 1 as loopIndex is used for printing ranks.
+	#Iterate until loopBound + 1 as loopIndex is used for printing ranks starting from 1.
 	while loopIndex < loopBound + 1
 		playerNames = players.players_name
 		nameToPrint = ""
