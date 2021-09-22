@@ -44,7 +44,7 @@ README - Player Module
 
 - Public methods:
 
-- add_player(\<String>\) 
+- add_player!(\<String>\) 
   + Purpose: add a new player in the game
   + According to the player's name to add him/her in the game. If the name has already exist, do nothing.
     + Examples:
