@@ -28,11 +28,13 @@ players = PlayerModule::PlayerSet.new
 playerIndex = 1
 until (playerName = gets.chomp) == ""
 	#Nil if player already exists, player object otherwise
-	playerInGame = players.add_player!(playerName)
-	if playerInGame
+	playerInGame = players.players_search(playerName)
+	#Don't allow the same name twice and don't allow the name 'h'
+	if !playerInGame && playerName != "h"
 		playerIndex += 1
+		players.add_player!(playerName)
 	else
-		puts "Player #{playerName} is already playing!"
+		if playerName != "h" then puts "Player #{playerName} is already playing!" else puts "Player name 'h' is not allowed!" end
 	end
 	puts "Enter Player #{playerIndex}'s name or an empty line when all players are entered:"
 	
