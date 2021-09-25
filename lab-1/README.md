@@ -43,7 +43,7 @@
   - Robot Player
   ```
 ---
-# Others
+# Other
 - ## CardImages 
   - @Author Jing Wen
 - ## Project Manager
