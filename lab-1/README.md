@@ -36,7 +36,7 @@
   - Executable on all platform (Java environment required)
   ```
 - ## GUI based on TK `GUI`
-  - @Author Songyuan Wu
+  - @Author Songyuan Wu/ Jing Wen
   ```
   - Muiltiple player support
   - Hint
