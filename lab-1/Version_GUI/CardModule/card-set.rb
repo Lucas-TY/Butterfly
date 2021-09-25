@@ -4,8 +4,7 @@ module CardModule
 
 	# a class that represents a deck of cards in the game of Set.
 	#
-	# @author Adam Lechliter
-
+	# @author Adam
 	class CardSet
 
 		# Initialize a deck of 81 cards and shuffles the deck
@@ -26,6 +25,17 @@ module CardModule
 			@deck.shuffle!
 		end
 
+
+		def print_deck()
+			@deck.each {|card|
+				puts "#{card.num_shapes},#{card.shape},#{card.shading},#{card.color}"
+			}
+		end
+
+
+
+
+		
 		# public methods ----------------------------------------------------
 
 

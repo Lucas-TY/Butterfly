@@ -8,7 +8,7 @@ module CardModule
 	# @attr_reader color [Symbol] color of the shape
 	# @attr_reader index [index] index of the card in a hand (or other collection)
 	#
-	# @author Adam Lechliter
+	# @author Adam
 
 	class Card
 		@@NUM_SHAPES = [1, 2, 3];
