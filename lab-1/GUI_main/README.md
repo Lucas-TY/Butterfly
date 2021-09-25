@@ -1,6 +1,7 @@
 ## GUI Version Guide
 
 **To start running GUI version, install `tk` on your platform first.**
+Install instructions <a href="https://dev.to/kojix2/installing-ruby-tk-on-ubuntu-1d86">here</a>.
 
 ---
 
