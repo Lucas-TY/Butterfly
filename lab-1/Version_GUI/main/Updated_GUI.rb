@@ -2,6 +2,9 @@ require 'tk'
 require "../CardModule/display-card-set.rb"
 require "../PlayerModule/player-set.rb"
 
+# A GUI Version for Set Game.
+# @author Songyuan Wu, Ben Mathys, Jing Wen
+
 #display a message on the screen by a alert window
 #@param text[str] message to show
 def message(text)
@@ -28,9 +31,9 @@ def create_human_player()
         return
       end
       if (!$players.add_player(playerName.value).nil?)
-        status.value="success"
+        status.value="Success"
       else
-        status.value="already have this player!"
+        status.value="Already have this player!"
 
       end
     }
@@ -86,6 +89,7 @@ end
 def reset_game()
   $turn=-1
   $players.reset_all_score!
+  reset_cardset($mode)
 end
 
 
@@ -93,13 +97,27 @@ end
 #func invoked when game window is closed by user
 #this func invokes reset_game
 def on_closing(window)
-  reset_game
   window.destroy
+  reset_game
   message("game exit!")
   $game_window=nil
 end
 
-
+#reset card set by name
+#@param mode_name [String] the name of a specific mode
+def reset_cardset(mode_name)
+  if mode_name=="normal"
+    $setDisplay.deck.normal!
+  elsif mode_name=="rookie_shuffle1"
+    $setDisplay.deck.rookie_shuffle1!
+  elsif mode_name=="rookie_shuffle2"
+    $setDisplay.deck.rookie_shuffle2!
+  else
+    return
+  end
+  $setDisplay.hand=[]
+  $setDisplay.deal_full_hand!
+end
 
 #game main window
 #create buttons and players and their proc
@@ -143,7 +161,7 @@ def start_game()
   side='left'
   $setDisplay.hand.each do |card|
     $card_buttons.append(TkButton.new($game_window){
-      text "#{card.color}\n#{card.shading}\n#{card.shape}\n#{card.num_shapes}"
+      image $card_pic_dict["#{card.color}_#{card.shading}_#{card.shape}_#{card.num_shapes}"]
       command proc{
         if $playerName !="" && $selected.length <3
           $selected.append(card.index)
@@ -208,7 +226,7 @@ def start_game()
   turn_now=$turn
   #cache answer
   ans=$setDisplay.get_set.map {|card| card.index}
-  $game_window.after(1000){schedule(turn_now,ans,time)}
+  $game_window.after(2000){schedule(turn_now,ans,time)}
 end
 
 
@@ -255,12 +273,8 @@ def schedule(turn_now,ans,time)
       end
     end
   end
-  $game_window.after(1000){schedule(turn_now,ans,time)}
+  $game_window.after(2000){schedule(turn_now,ans,time)}
 end
-
-
-
-
 
 
 #use turn count
@@ -269,15 +283,22 @@ end
 $turn=0
 $setDisplay = CardModule::DisplayCardSet.new
 
-
-
-
-
+# cache all the images of the cards into a dict
+$card_pic_dict={}
+CardModule::Card.NUM_SHAPES.each do |num|
+  CardModule::Card.SHAPES.each do |shape|
+    CardModule::Card.SHADING.each do |shading|
+      CardModule::Card.COLOR.each do |color|
+        #cache a image
+        $card_pic_dict["#{color}_#{shading}_#{shape}_#{num}"]=TkPhotoImage.new("file"=>"../image/#{color}_#{shading}_#{shape}_#{num}.png")
+      end
+    end
+  end
+end
 
 
 $players = PlayerModule::PlayerSet.new
 $playerName=""
-
 
 
 #init window
@@ -298,12 +319,42 @@ create_player_button=TkButton.new(root){
   grid('row'=>0,'column'=>2,'sticky' =>'EW')
 }
 
+# mode control block
+# use this block to control
+$mode=TkVariable.new
+$mode.value="normal"
+TkLabel.new(root,'textvariable' => $mode).grid('row'=>2,'column'=>4)
+TkLabel.new(root){text " "}.grid('row'=>1,'column'=>0,'sticky' =>'EW')
 
 
+TkLabel.new(root){text "mode"}.grid('row'=>2,'column'=>0,'sticky' =>'EW')
 
+diffculitly_button0=TkButton.new(root){
+  text  'normal'
+  command proc {
+    $mode.value="normal"
+    reset_cardset($mode.value)
+  }
+  grid('row'=>2,'column'=>1,'sticky' =>'EW')
+}
+diffculitly_button2=TkButton.new(root){
+  text  'rookie_shuffle1'
+  command proc {
+    $mode.value="rookie_shuffle1"
+    reset_cardset($mode.value)
+  }
+  grid('row'=>2,'column'=>2,'sticky' =>'EW')
+}
+diffculitly_button3=TkButton.new(root){
+  text  'rookie_shuffle2'
+  command proc {
+    $mode.value="rookie_shuffle2"
+    reset_cardset($mode.value)
+  }
+  grid('row'=>2,'column'=>3,'sticky' =>'EW')
+}
 
-
-
+TkLabel.new(root){text " "}.grid('row'=>3,'column'=>0,'sticky' =>'EW')
 
 #start game button
 

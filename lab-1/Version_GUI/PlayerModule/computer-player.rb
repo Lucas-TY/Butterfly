@@ -4,6 +4,7 @@ module PlayerModule
     # @attr_reader player_name [String] name of the player
     # @attr_reader player_score [Number] Score of the player
     # @author Songyuan Wu, Lucas Wu, Jing Wen
+
       class ComputerPlayer
         attr_reader  :player_name;
         attr_reader  :player_score;

@@ -8,6 +8,7 @@ module PlayerModule
     # @attr_reader no_of_players [Number] number of players participating in this game
     # @attr_reader players_list [Array(Player)] Array of players
     # @author Lucas Wu, Jing Wen, Songyuan Wu
+    #
     attr_reader :players_list
     attr_reader :no_of_players;
     # initialize the players list
