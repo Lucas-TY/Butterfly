@@ -302,7 +302,7 @@ $playerName=""
 
 
 #init window
-root = TkRoot.new { title "Game Window" }.geometry("500x400+0+0")
+root = TkRoot.new { title "Game Window" }.geometry("600x400+0+0")
 
 TkLabel.new(root){text "Create:"}.grid('row'=>0,'column'=>0,'sticky' =>'EW')
 
@@ -369,7 +369,7 @@ start_button=TkButton.new(root){
       return
     end
   }
-  grid('row'=>4,'column'=>1,'sticky' =>'EW','columnspan'=>2)
+  grid('row'=>4,'column'=>1,'sticky' =>'EW','columnspan'=>3)
 }
 #make the col width be same
 root.grid_columnconfig(0,"minsize"=>100)
