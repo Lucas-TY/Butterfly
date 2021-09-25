@@ -1,6 +1,9 @@
 require_relative "../CardModule/display-card-set.rb"
 require_relative "../PlayerModule/player-set.rb"
 
+# Main console version of Set.
+# @author Ben Mathys, Adam Lechliter
+
 # Display the current hand to the user(s).
 #
 # @param hand [DisplayCardSet] The current hand in play
