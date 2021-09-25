@@ -4,6 +4,7 @@
 - Console player: `ruby path_to_the_SetGame.rb`
 - Mac GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) ***Java environment required***
 - Windows GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) ***Java environment required***
+- Linux GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases)`java -jar shoes_gui.jar` ***Java environment required***
 - Ruby GUI:`ruby path_to_the_Updated_GUI.rb.rb` ***Ruby TK gem required***
 
 ---
