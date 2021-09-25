@@ -1,6 +1,6 @@
 
 
-#Usage
+# Usage
 - Console player: `ruby path_to_the_SetGame.rb`
 - Mac GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) **Java environment required**
 - Windows GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) **Java environment required**
@@ -8,7 +8,7 @@
 
 ---
 
-#Modules 
+# Modules 
 - ## CardModules 
   - @Author Adam Lechliter 
   - [CardModules README](CardModule)
