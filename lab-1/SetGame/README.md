@@ -1,14 +1,14 @@
-Welcome to Set!
+# Welcome to Set!
 
 Players: 1+
 
-#System Requirements
+# System Requirements
 Ruby (Developed on v2.7.1)
 
-#The Game
+# The Game
 In Set, you will have a board of 12 cards by default. If there are no sets in the 12 card board, 3 cards will be added until there is a set on the board. The first player to find a set will say "Set!" and will enter their player name into the console. They will then enter the indices of the cards that make up the set that they found. If they found a valid set, they will earn a point and 3 new cards will be dealt if there were 12 cards on the board. The game ends when the deck is empty.
 
-#Sets
+# Sets
 Sets consist of 3 cards with the following properties:
 All 3 cards have the SAME shape or have 3 DIFFERENT shapes
 All 3 cards are the SAME color or are 3 DIFFERENT colors.
