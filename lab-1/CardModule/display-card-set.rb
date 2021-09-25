@@ -120,7 +120,7 @@ module CardModule
 		# @param indices [nil, Array(Number)] list of indices of cards to be replaced from the 
 		# 	hand.
 		# @return [Array(Card)] current array of cards in the hand
-		private def deal_hand!(indices = [])
+		def deal_hand!(indices = [])
 			if indices == nil || indices.length == 0
 				if @hand.length == 0
 					# initialize hand with 12 cards
