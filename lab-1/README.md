@@ -2,8 +2,8 @@
 
 #Usage
 - Console player: `ruby path_to_the_SetGame.rb`
-- Mac GUI: unzip then double click .jar file **Java environment required**
-- Windows GUI: unzip then double click .jar file **Java environment required**
+- Mac GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) **Java environment required**
+- Windows GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) **Java environment required**
 - Ruby GUI:`ruby path_to_the_Updated_GUI.rb.rb` **Ruby TK gem required**
 
 ---
@@ -11,23 +11,23 @@
 #Modules 
 - ## CardModules 
   - @Author Adam Lechliter 
-  - CardModules README
+  - [CardModules README](CardModule)
 - ## PlayerModules 
   - @Author Jing Wen/ Lucas Wu
-  - PlayerModules README
+  - [PlayerModules README](PlayerModule)
 ---
 # Game version
 - ## SetGame `Console`
   - @Author Ben Mathys 
-  - SetGame README
+  - [SetGame README](SetGame\SetRules.txt)
   ```
   - Muiltiple player support
   - Hint
   ```
 - ## GUI based on Shoes `GUI`
   - @Author Lucas Wu
-  - Under pkg folder 
-  - Source code path
+  - [Download](https://github.com/cse-3901-sharkey/Butterfly/releases)
+  - [Source code](Shoes_GUI.rb)
   ```
   - Timer
   - Muiltiple player support

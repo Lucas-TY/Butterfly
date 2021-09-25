@@ -4,8 +4,7 @@ module CardModule
 
 	# a class that represents a deck of cards in the game of Set.
 	#
-	# @author Adam Lechliter
-
+	# @author Adam Lechliter, Jing Wen
 	class CardSet
 
 		# Initialize a deck of 81 cards and shuffles the deck
@@ -26,6 +25,17 @@ module CardModule
 			@deck.shuffle!
 		end
 
+
+		def print_deck()
+			@deck.each {|card|
+				puts "#{card.num_shapes},#{card.shape},#{card.shading},#{card.color}"
+			}
+		end
+
+
+
+
+		
 		# public methods ----------------------------------------------------
 
 
@@ -39,6 +49,56 @@ module CardModule
 				card = @deck.pop
 			end
 			card
+		end
+
+		# reshuffle the cards in normal mode
+		def normal!()
+			Card.NUM_SHAPES.each do |num|
+				Card.SHAPES.each do |shape|
+					Card.SHADING.each do |shading|
+						Card.COLOR.each do |color|
+							@deck.push Card.new(num, shape, shading, color)
+						end
+					end
+				end
+			end
+			@deck.shuffle!
+		end
+
+		# reshuffle the cards in the rookie mode 1
+		def rookie_shuffle1!()
+			@deck=[]
+			temp=[]
+			Card.NUM_SHAPES.each do |num|
+				Card.SHAPES.each do |shape|
+					Card.SHADING.each do |shading|
+						Card.COLOR.each do |color|
+							temp.push Card.new(num, shape, shading, color)
+						end
+					end
+					temp.shuffle!
+					@deck+=temp
+					temp=[]
+				end
+			end
+		end
+
+		# reshuffle the cards in rookie mode 2
+		def rookie_shuffle2!()
+			@deck=[]
+			temp=[]
+			Card.NUM_SHAPES.each do |num|
+				Card.SHAPES.each do |shape|
+					Card.SHADING.each do |shading|
+						Card.COLOR.each do |color|
+							temp.push Card.new(num, shape, shading, color)
+						end
+					end
+				end
+				temp.shuffle!
+				@deck+=temp
+				temp=[]
+			end
 		end
 
 

@@ -9,15 +9,15 @@ module CardModule
 	#
 	# @attr_reader hand [Array(Card)] array of the current cards in the hand
 	#
-	# @author Adam Lechliter
+	# @author Adam
 
 	class DisplayCardSet
 
 		@@DEFAULT_HAND_SIZE = 12;
 		@@DEFAULT_DEAL_SIZE = 3;
 
-		attr_reader :hand;
-
+		attr_accessor :hand;
+		attr_reader :deck;
 		# Initializes a new instance of a DisplayCardSet
 		#
 		# @return [DisplayCardSet] a new instance of DisplayCardSet
@@ -44,7 +44,6 @@ module CardModule
 			until self.hand_contains_set? || @deck.is_empty?
 				self.deal_hand!
 			end
-
 			@hand
 		end
 

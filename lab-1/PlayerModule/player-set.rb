@@ -1,4 +1,5 @@
 require_relative './player.rb'
+require_relative './computer-player.rb'
 module PlayerModule
 
   class PlayerSet
@@ -6,7 +7,8 @@ module PlayerModule
     #
     # @attr_reader no_of_players [Number] number of players participating in this game
     # @attr_reader players_list [Array(Player)] Array of players
-    # @author Lucas Wu / Jing Wen
+    # @author Lucas Wu, Jing Wen, Songyuan Wu
+    #
     attr_reader :players_list
     attr_reader :no_of_players;
     # initialize the players list
@@ -16,6 +18,24 @@ module PlayerModule
       @no_of_players=0
 
     end
+
+    # add a computer player to the game
+    #
+    # @require the the player is not the game
+    # @param name [String] the name of the specific player
+    # @param win_prob [float] the win prob of the computer
+    # @return [Player] the player that just added
+    # @return [Nil] if the name is aready exsit.
+    def add_computer_player(name,win_prob)
+      return nil if player_exsit?(name);
+      @no_of_players+=1
+      player=ComputerPlayer.new(name)
+      player.win_prob=win_prob
+      @players_list.push player
+      player
+    end
+
+
     # add a player to the game
     #
     # @require the the player is not the game
@@ -29,6 +49,7 @@ module PlayerModule
       @players_list.push player
       player
     end
+
     
     # delete a player to the game
     #
@@ -59,12 +80,12 @@ module PlayerModule
       end
       nil
     end
-
+    
 
     # reset all player's score
     def reset_all_score!
       for element in @players_list
-        element.score_change_to!(0)
+        element.score_change_to(0)
       end
     end
     
