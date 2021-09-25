@@ -9,15 +9,15 @@ module CardModule
 	#
 	# @attr_reader hand [Array(Card)] array of the current cards in the hand
 	#
-	# @author Adam
+	# @author Adam Lechliter
 
 	class DisplayCardSet
 
 		@@DEFAULT_HAND_SIZE = 12;
 		@@DEFAULT_DEAL_SIZE = 3;
 
-		attr_accessor :hand;
-		attr_reader :deck;
+		attr_reader :hand;
+
 		# Initializes a new instance of a DisplayCardSet
 		#
 		# @return [DisplayCardSet] a new instance of DisplayCardSet
@@ -44,6 +44,7 @@ module CardModule
 			until self.hand_contains_set? || @deck.is_empty?
 				self.deal_hand!
 			end
+
 			@hand
 		end
 
@@ -97,7 +98,7 @@ module CardModule
 		def amount_in_deck
 			@deck.remaining_amount
 		end
-		
+
 		# Deals cards into the hand from the deck. Initially deals [@@DEFAULT_HAND_SIZE] cards
 		# into the deck, and then adds [@@DEFAULT_DEAL_SIZE]. If given an array of indices 
 		# [indices], it will replace the cards at the given indices with cards from the deck. 
@@ -167,7 +168,6 @@ module CardModule
 		end
 
 		
-
 
 		# Checks if the given features either all three match or are all three unique from each 
 		# other.
