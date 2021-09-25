@@ -98,18 +98,7 @@ module CardModule
 		def amount_in_deck
 			@deck.remaining_amount
 		end
-
-		# private methods ----------------------------------------------------
-
-		# Initializes the @hand array with at least [@@DEFAULT_HAND_SIZE] cards (will add three
-		# cards until a set is possible in the hand).
-		#
-		# @return [Array(Card)] an array of cards, representing the current hand
-		private def initialize_hand!
-			@hand = [];
-			self.deal_full_hand!
-		end
-
+		
 		# Deals cards into the hand from the deck. Initially deals [@@DEFAULT_HAND_SIZE] cards
 		# into the deck, and then adds [@@DEFAULT_DEAL_SIZE]. If given an array of indices 
 		# [indices], it will replace the cards at the given indices with cards from the deck. 
@@ -166,6 +155,19 @@ module CardModule
 			end
 				
 		end
+
+		# private methods ----------------------------------------------------
+
+		# Initializes the @hand array with at least [@@DEFAULT_HAND_SIZE] cards (will add three
+		# cards until a set is possible in the hand).
+		#
+		# @return [Array(Card)] an array of cards, representing the current hand
+		private def initialize_hand!
+			@hand = [];
+			self.deal_full_hand!
+		end
+
+		
 
 
 		# Checks if the given features either all three match or are all three unique from each 
