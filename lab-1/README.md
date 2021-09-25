@@ -36,7 +36,8 @@
   - Executable on all platform (Java environment required)
   ```
 - ## GUI based on TK `GUI`
-  - @Author Songyuan Wu
+  - @Author Songyuan Wu & Jing Wen
+  - [install tk](https://dev.to/kojix2/installing-ruby-tk-on-ubuntu-1d86)
   ```
   - Muiltiple player support
   - Hint
@@ -46,6 +47,8 @@
 ---
 # Other
 - ## CardImages 
+  - @Author Jing Wen
+- ## Statistics
   - @Author Jing Wen
 - ## Project Manager
   - Lucas Wu
