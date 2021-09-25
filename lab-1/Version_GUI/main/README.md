@@ -14,3 +14,5 @@
 - Press the `start` button to start the game.
 - Call 'set!' by clicking your own name block, and then you can choose three cards you would like to choose.
 - If you cannot find a set on the hand, press the `hint` button to get the hint.
+
+We tested it on Ubuntu 20.04.
