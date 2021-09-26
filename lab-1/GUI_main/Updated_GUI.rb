@@ -163,7 +163,7 @@ def start_game()
 		$card_buttons.append(TkButton.new($game_window){
 			image $card_pic_dict["#{card.color}_#{card.shading}_#{card.shape}_#{card.num_shapes}"]
 			command proc{
-				if $playerName !="" && $selected.length <3
+				if $playerName !="" && $selected.length <3 && !$selected.include?(card.index)
 					$selected.append(card.index)
 					$card_buttons[card.index].background="green"
 				end
@@ -364,7 +364,11 @@ start_button=TkButton.new(root){
 		$turn=0
 		puts $game_window
 		if $game_window==nil
-			start_game
+			if $players.players_name.empty?
+				message("Please create a player to start game!")
+			else
+				start_game
+			end
 		else
 			return
 		end
