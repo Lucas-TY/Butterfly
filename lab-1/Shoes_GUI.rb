@@ -31,6 +31,9 @@ Shoes.app width:630, height:500,scroll:false,title:"Team Butterfly" ,resizable: 
 
   #Ok button, it will check the answer if the program is still running and there are more than one player in the game
   @bth_ok = button 'OK',  :top=>380,:left=>10 do
+    if @player_choose==nil
+      @print_message.text="Please choose a player"
+    end
     if  @running &&@players.no_of_players >=1&&@setDisplay.hand_contains_set? 
       check!()
     end
@@ -44,6 +47,9 @@ Shoes.app width:630, height:500,scroll:false,title:"Team Butterfly" ,resizable: 
 
   #Hint button, it show the set index to screen if the program is still running and there are more than one player in the game
   @bth_hint = button "Hint", :top=>380,:left=>95 do
+    if @running==false
+      @print_message.text="Please start the game or exit"
+    end
     if @running &&@players.no_of_players >=1 &&@setDisplay.hand_contains_set? 
       if  @hintLevel == 0 #No hints used and a hint is requested, one card index given.
         @hint_card.text ="Card with index #{@setDisplay.get_hint} is \npart of a set!"
