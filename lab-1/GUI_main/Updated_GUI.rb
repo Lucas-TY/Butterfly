@@ -124,109 +124,119 @@ end
 #handle click events
 #create a task that invokes every 1s to handle computer player and timer
 def start_game()
-	$game_window=TkToplevel.new{title "Gaming"}.geometry("850x700+0+0")
-	$game_window.protocol("WM_DELETE_WINDOW", proc{on_closing($game_window)})
-	$playerName=""
+	if $setDisplay.hand_contains_set?
+		$game_window=TkToplevel.new{title "Gaming"}.geometry("850x700+0+0")
+		$game_window.protocol("WM_DELETE_WINDOW", proc{on_closing($game_window)})
+		$playerName=""
 
-	hint_level=0
-	hint_text=TkVariable.new
-	hint_text.value="need some hint?"
-	hint_label=TkLabel.new($game_window,'textvariable'=> hint_text).grid('row' =>0 ,'column'=>0,"columnspan"=>2)
+		hint_level=0
+		hint_text=TkVariable.new
+		hint_text.value="need some hint?"
+		hint_label=TkLabel.new($game_window,'textvariable'=> hint_text).grid('row' =>0 ,'column'=>0,"columnspan"=>2)
 
-	hint_button=TkButton.new($game_window){
-		text "hint"
-		command proc{
-			hint_level+=1
-			puts hint_level
-			if hint_level==1
-				hint_text.value="Card with index #{$setDisplay.get_hint}\n is part of a set!"
-			elsif hint_level>1
-				hint_text.value=""
-				hint_level=2
-				$setDisplay.get_set.each{ |card| hint_text.value+="#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color}\n"}
+		hint_button=TkButton.new($game_window){
+			text "hint"
+			command proc{
+				hint_level+=1
+				puts hint_level
+				if hint_level==1
+					hint_text.value="Card with index #{$setDisplay.get_hint}\n is part of a set!"
+				elsif hint_level>1
+					hint_text.value=""
+					hint_level=2
+					$setDisplay.get_set.each{ |card| hint_text.value+="#{card.index}: #{card.num_shapes} #{card.shape} #{card.shading} #{card.color}\n"}
+				end
+			}
+		}.grid('row' =>0 ,'column'=>2)
+
+
+
+		#need a row_now here beacuse the card may be 15 or more in some times
+		#so the rows of card display can be more than 2
+		row_now=1
+			# create all the buttons for card
+			$card_buttons=[]
+			$selected=[]
+			count=0
+			side='left'
+			$setDisplay.hand.each do |card|
+				$card_buttons.append(TkButton.new($game_window){
+					image $card_pic_dict["#{card.color}_#{card.shading}_#{card.shape}_#{card.num_shapes}"]
+					command proc{
+						if $playerName !="" && $selected.length <3 && !$selected.include?(card.index)
+							$selected.append(card.index)
+							$card_buttons[card.index].background="green"
+						end
+						if $selected.length ==3
+							#check if the set is right
+							isSet = $setDisplay.is_selection_set?($setDisplay.get_card($selected[0]), $setDisplay.get_card($selected[1]), $setDisplay.get_card($selected[2]))
+							if isSet
+								$players.players_search($playerName).score_add!(3-hint_level)
+								$setDisplay.deal_full_hand!($selected)
+								puts "ok!!"
+								$turn+=1
+								message("player #{$playerName} wins #{3-hint_level} point in turn #{$turn}")
+								$game_window.destroy()
+								start_game
+							else
+
+								$turn+=1
+								message("player #{$playerName} gives a wrong answer!")
+								$game_window.destroy()
+								start_game
+							end
+						end
+					}
+				}.grid('row'=>row_now+count/6, 'column'=>count%6) )
+				count+=1
 			end
-		}
-	}.grid('row' =>0 ,'column'=>2)
 
 
 
-	#need a row_now here beacuse the card may be 15 or more in some times
-	#so the rows of card display can be more than 2
-	row_now=1
+		#get the row num for next row
+		row_now=(row_now+(count-1)/6)+1
+		$player_buttons=Hash.new
 
-	# create all the buttons for card
-	$card_buttons=[]
-	$selected=[]
-	count=0
-	side='left'
-	$setDisplay.hand.each do |card|
-		$card_buttons.append(TkButton.new($game_window){
-			image $card_pic_dict["#{card.color}_#{card.shading}_#{card.shape}_#{card.num_shapes}"]
-			command proc{
-				if $playerName !="" && $selected.length <3 && !$selected.include?(card.index)
-					$selected.append(card.index)
-					$card_buttons[card.index].background="green"
-				end
-				if $selected.length ==3
-					#check if the set is right
-					isSet = $setDisplay.is_selection_set?($setDisplay.get_card($selected[0]), $setDisplay.get_card($selected[1]), $setDisplay.get_card($selected[2]))
-					if isSet
-						$players.players_search($playerName).score_add!(3-hint_level)
-						$setDisplay.deal_full_hand!($selected)
-						puts "ok!!"
-						$turn+=1
-						message("player #{$playerName} wins #{3-hint_level} point in turn #{$turn}")
-						$game_window.destroy()
-						start_game
-					else
 
-						$turn+=1
-						message("player #{$playerName} gives a wrong answer!")
-						$game_window.destroy()
-						start_game
+		count=0
+		$players.players_list.each do |player|
+
+			$player_buttons[player.player_name]=TkButton.new($game_window){
+				text "name:#{player.player_name}\nscore:#{player.player_score}"
+				command proc{
+					if !player.is_human
+						return
 					end
-				end
-			}
-		}.grid('row'=>row_now+count/6, 'column'=>count%6) )
-		count+=1
-	end
-
-
-	#get the row num for next row
-	row_now=(row_now+(count-1)/6)+1
-	$player_buttons=Hash.new
-
-
-	count=0
-	$players.players_list.each do |player|
-
-		$player_buttons[player.player_name]=TkButton.new($game_window){
-			text "name:#{player.player_name}\nscore:#{player.player_score}"
-			command proc{
-				if !player.is_human
-					return
-				end
-				if $playerName ==""
-					$playerName=player.player_name
-					$player_buttons[player.player_name].background="green"
-				end
-			}
-		}.grid('row'=>row_now, 'column'=>count)
-		if !player.is_human
-			$player_buttons[player.player_name].background='DodgerBlue'
+					if $playerName ==""
+						$playerName=player.player_name
+						$player_buttons[player.player_name].background="green"
+					end
+				}
+			}.grid('row'=>row_now, 'column'=>count)
+			if !player.is_human
+				$player_buttons[player.player_name].background='DodgerBlue'
+			end
+			count+=1
 		end
-		count+=1
+		row_now+=1
+
+		time=TkVariable.new
+		time.value='10'
+
+		TkLabel.new($game_window,'textvariable'=> time).grid('row'=>row_now, 'column'=>0)
+		turn_now=$turn
+		#cache answer
+		ans=$setDisplay.get_set.map {|card| card.index}
+		$game_window.after(2000){schedule(turn_now,ans,time)}
+
+	else
+		final_message = "Game Over";
+		final_message += "\nScores:"
+		$players.players_list.each do |player|
+			final_message += "\n#{player.player_name} - #{player.player_score}"
+		end
+		message(final_message)
 	end
-	row_now+=1
-
-	time=TkVariable.new
-	time.value='10'
-
-	TkLabel.new($game_window,'textvariable'=> time).grid('row'=>row_now, 'column'=>0)
-	turn_now=$turn
-	#cache answer
-	ans=$setDisplay.get_set.map {|card| card.index}
-	$game_window.after(2000){schedule(turn_now,ans,time)}
 end
 
 
@@ -357,7 +367,6 @@ diffculitly_button3=TkButton.new(root){
 TkLabel.new(root){text " "}.grid('row'=>3,'column'=>0,'sticky' =>'EW')
 
 #start game button
-
 start_button=TkButton.new(root){
 	text 'start'
 	command proc {

@@ -33,7 +33,7 @@ module PlayerModule
 		#
 		# @param points [Number] points that the player won or lost
 		# @return the updated score
-		def score_add(points)
+		def score_add!(points)
 			@player_score += points;
 			@player_score = 0 if @player_score < 0;
 			@player_score
