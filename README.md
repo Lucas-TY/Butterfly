@@ -52,10 +52,9 @@ git push
 
 ## set-view.js
 + Purpose: keeps track of the current state of the game
-  + contains the DisplaySet for the game (the deck of cards and the current hand)
-  + contains the current players
 + Subscribes functions to events for button elements
 + Call functions from the set-controller to check if game actions were valid, if the game has completed, etc.
++ Call functions from the set-controller to update the current game mode, add players to the game, etc.
 
 ---
 # Module Controller
@@ -63,8 +62,17 @@ git push
 
 ## set-controller.js
 + Purpose: handle the game logic of set given the current state of the game provided by the set-view
-+ Function: Given the current DisplaySet (passed to the controller by the view), determine if the game has completed based on the hand (if it contains a set)
-+ Function: Given a selected array of cards and a card to be added to the array, determine if the card can be added to that selection (returns a boolean)
+  + contains the DisplaySet for the game (the deck of cards and the current hand)
+  + contains the list of current players
+  + current selection of cards (list of indices or cards, whichever way you want to implement it)
++ Function: isGameComplete - determine if the game has completed based on the hand (if it contains a set) (returns boolean value)
++ Function: getHand - return the current hand (an array of cards)
++ Function: addCardToSelection - given a card, add the card to the list of selected cards. Return false if the card cannot be added to the selection.
++ Function: removeCardFromSelection - given a card, remove that card from the list of selected cards (do nothing if that card wasn't selected).
++ Function: clearSelection - remove all selected cards from the list of selected cards.
++ Function: addPlayer - given a player name, add that player to the list of current players
++ (optional, we might not need it) Function: removePlayer - given a player name, remove that player from the list
++ Function: isSelectionSet - Determine if the selected cards create a set, if they do, deal a new hand (replace those cards with deal_full_hand(card indices) and clear selection (returns a boolean)
 + You can add any other functions you think would make sense for this module.
   + Make sure you communicate with the person creating the set-view when you want to add new functionality to the controller since the view and the controller depend on each other.
 
