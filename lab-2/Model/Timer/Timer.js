@@ -1,44 +1,53 @@
-var btn = document.getElementById("btn");
-var seconds = document.getElementById("second");
-var minutes = document.getElementById("minute");
-var secondsRunning = 0;
-var run = false;
+/**
+ * Creates a timer object that displays a timer.
+ * 
+ * @param {string} btnTag - Element ID of the timer start button
+ * @param {string} secondTag - Element ID of the seconds display element
+ * @param {string} minuteTag - Element ID of the minutes display element
+ */
+function Timer(btnTag, secondTag, minuteTag){
+	this.btn = document.getElementById(btnTag);
+	this.seconds = document.getElementById(secondTag);
+	this.minutes = document.getElementById(minuteTag);
+	this.secondsRunning = 0;
+	this.run = false;
 
-// count-up the time
-var interval = setInterval(function () {
-  if (run) {
-    secondsRunning += 1;
-    seconds.innerHTML = pad(secondsRunning % 60);
-    minutes.innerHTML = pad(parseInt(secondsRunning / 60));
-  }
-}, 1000);
+	// count-up the time
+	this.interval = setInterval(() => {
+		if (this.run) {
+			this.secondsRunning += 1;
+			this.seconds.innerHTML = pad(this.secondsRunning % 60);
+			this.minutes.innerHTML = pad(parseInt(this.secondsRunning / 60));
+		}
+	}, 1000);
 
-// when start timing, change "start" to "pause". 
-function changeRun() {
-  if (btn.value == "Start") {
-    btn.value = "Pause";
-    run = true;
-  } else {
-    btn.value = "Start";
-    run = false;
-  }
-}
+	// when start timing, change "start" to "pause". 
+	this.changeRun = function() {
+		if (this.btn.value == "Start") {
+			this.btn.value = "Pause";
+			this.run = true;
+		} else {
+			this.btn.value = "Start";
+			this.run = false;
+		}
+	}
 
-// reset the timer.
-function reset() {
-  btn.value = "Start";
-  run = false;
-  secondsRunning = 0;
-  seconds.innerHTML = pad(secondsRunning % 60);
-  minutes.innerHTML = pad(parseInt(secondsRunning / 60));
-}
+	// reset the timer.
+	this.reset = function() {
+		this.btn.value = "Start";
+		this.run = false;
+		this.secondsRunning = 0;
+		this.seconds.innerHTML = pad(this.secondsRunning % 60);
+		this.minutes.innerHTML = pad(parseInt(this.secondsRunning / 60));
+	}
 
-// when minutes and seconds are single digits respectively, add 0 in front.
-function pad(val) {
-  var valueString = val + "";
-  if (valueString.length < 2) {
-    return "0" + valueString;
-  } else {
-    return valueString;
-  }
+	// when this.minutes and this.seconds are single digits respectively, add 0 in front.
+	function pad(val) {
+		var valueString = val + "";
+		if (valueString.length < 2) {
+			return "0" + valueString;
+		} else {
+			return valueString;
+		}
+	}
 }
