@@ -19,7 +19,7 @@ README - Player Module
   + Add the points that the player won or lost
     + If the score is reduced to a negative number, set the score to 0.
       + Example:
-        + playerInstance.score_add(\100)\ --> 100
+        + playerInstance.score_add!(\100)\ --> 100
   
   + Update the score of the player to a new score
     + Example:

@@ -50,7 +50,7 @@ turns.each do |turn_num|
 				end
 				ans=cards.map {|card| card.index}
 				setDisplay.deal_full_hand!(ans)
-				player.score_add(3)
+				player.score_add!(3)
 				break
 			end
 		end

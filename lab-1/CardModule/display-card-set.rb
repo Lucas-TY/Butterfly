@@ -136,7 +136,7 @@ module CardModule
 				# Replace the cards at the given indices with new cards from the deck
 				update_indices = false
 				indices.each do |index|
-					if @deck.remaining_amount > 0
+					if @deck.remaining_amount > 0 && @hand.length <= @@DEFAULT_HAND_SIZE
 						@hand[index].set_index! # sets index to empty index
 						@hand[index] = @deck.deal_card!
 						@hand[index].set_index! index
