@@ -2,8 +2,6 @@ README - Card Module
 
 # Card Class
 
----
-
 - A class that represents a single card in the game set.
 
 
@@ -21,8 +19,6 @@ README - Card Module
 
 
 # Card Set Class
-
----
 
 - A class that represents a deck of cards in the game of Set.
 
@@ -60,7 +56,6 @@ README - Card Module
 
 # DisplaySet Constructor
 
----
 - A constructor that creates an object that would manage a deck of cards and deal cards to the hand.
 
 - Can also check if the hand has a possible set and check if a given list of cards create a set.
