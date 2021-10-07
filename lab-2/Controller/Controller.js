@@ -6,6 +6,7 @@ class Controller {
      * @param  {Array(Card)} currentSelection  - list of indices or cards
      * 
      * @returns {Controller} a new instance of a Controller object
+     * @author Lucas Wu
      */
     constructor() {
         this.displaySet = new DisplayCardSet();
