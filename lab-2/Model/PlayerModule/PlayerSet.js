@@ -26,8 +26,8 @@
      * @returns {ComputerPlayer} the player that just added.
      * @returns {null} if the name is aready exsit.
      */
-    static add_computer_player(name, win_prob) {
-      if (player_exist(name)) {
+     add_computer_player(name, win_prob) {
+      if (this.player_exist(name)) {
         return null;
       }
       this.no_of_players += 1;
@@ -46,8 +46,8 @@
      * @returns {Player} the player that just added.
      * @returns {null} if the name is aready exsit.
      */
-    static add_player(name) {
-      if (player_exist(name)) {
+     add_player(name) {
+      if (this.player_exist(name)) {
         return null;
       }
       this.no_of_players += 1;
@@ -65,17 +65,20 @@
      * @returns {Player} the player that just deleted
      * @returns {null} if player is not in the game
      */
-    static delete_player(name) {
-      for (var element in this.players_list) {
+     delete_player(name) {
+      for (var element of this.players_list) {
         if (element.player_name == name) {
           this.no_of_players -= 1;
-          copy_list = this.players_list;
-          this.players_list = [];
-          for (let i = 0; i < copy_list; i++) {
-            if (copy_list[i] != name) {
-              this.players_list.push(copy_list[i]);
-            }
-          }
+          
+          var idx=this.players_list.map(x=>x.player_name).indexOf(element.player_name)
+          this.players_list.splice(idx,1)
+          // copy_list = this.players_list;
+          // this.players_list = [];
+          // for (let i = 0; i < copy_list; i++) {
+          //   if (copy_list[i] != name) {
+          //     this.players_list.push(copy_list[i]);
+          //   }
+          // }
           return element;
         }
       }
@@ -90,8 +93,8 @@
      * @returns {Player} that player you are looking for
      * @returns {null} if the player does not exsit.
      */
-    static players_search(name) {
-      for (var element in this.players_list) {
+     players_search(name) {
+      for (var element of this.players_list) {
         if (element.player_name == name) {
           return element;
         }
@@ -102,8 +105,8 @@
     /**
      * reset all player's score.
      */
-    static reset_all_score() {
-      for (var element in this.players_list) {
+     reset_all_score() {
+      for (var element of this.players_list) {
         element.score_change_to(0);
       }
     }
@@ -115,8 +118,8 @@
      * @returns {number} the score of one specific player
      * @returns {null} if player does not exist.
      */
-    static players_score_check(name) {
-      for (var element in this.players_list) {
+     players_score_check(name) {
+      for (var element of this.players_list) {
         if (element.player_name == name) {
           return element.player_score;
         }
@@ -129,9 +132,9 @@
      *
      * @returns {number} the highest score
      */
-    static players_highest_score() {
-      highest_score = 0;
-      for (var element in this.players_list) {
+     players_highest_score() {
+      var highest_score = 0;
+      for (var element of this.players_list) {
         if (element.player_score > highest_score) {
           highest_score = element.player_score;
         }
@@ -145,16 +148,38 @@
      * @param {string} name the name of a specific player
      * @returns {boolean} true the player is already in the game
      */
-    static player_exist(name) {
-      result = false;
-      for (var element in this.players_list) {
-        if (element.player_score > name) {
-          resutl = true;
+     player_exist(name) {
+      var result = false;
+      for (var element of this.players_list) {
+        console.log(element)
+        if (element.player_name == name) {
+          result = true;
           return result;
         }
       }
       return result;
     }
+
+    /**
+     * add the socre to a player
+     *
+     * @param {string} name the name of a specific player
+     * @param {int} score the score to add
+     * @returns {boolean} true the player is already in the game
+     */
+     add_score(name,score) {
+      var result = false;
+      for (var element of this.players_list) {
+        console.log(element)
+        if (element.player_name == name) {
+          result = true;
+          element.score_add(score);
+          return result;
+        }
+      }
+      return result;
+    }
+
   
     /**
      * check is the player already in the game
@@ -162,9 +187,9 @@
      * @param {string} name the name of a specific player
      * @returns {boolean} true the player is already in the game
      */
-    static players_name() {
+     players_name() {
       players = [];
-      for (var element in this.players_list) {
+      for (var element of this.players_list) {
         players.concat(element.player_name);
       }
       return players;
