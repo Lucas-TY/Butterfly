@@ -5,32 +5,41 @@
     <title>Set</title>
     <meta charset="utf-8">
 </head>
-<script src="set-view.js"></script>
+<script type="text/javascript" src="../Model/PlayerModule/Player.js"></script>
+<script type="text/javascript" src="../Model/PlayerModule/ComputerPlayer.js"></script>
+<script type="text/javascript" src="../Model/PlayerModule/PlayerSet.js"></script>
+<script type="text/javascript" src="../Model/CardModule/Card.js"></script>
+<script type="text/javascript" src="../Model/CardModule/CardSet.js"></script>
+<script type="text/javascript" src="../Model/CardModule/DisplaySet.js"></script>
+<script type="text/javascript" src="../Controller/Controller.js"></script>
+<script type="text/javascript" src="set-view.js"></script>
 
 <body>
-    <div id="main-menu">
+    <div id="main_menu">
         <h1>Main Menu</h1>
         <p>
             Select game options and add players to game.
         <form>
             <label>Select Difficulty:</label>
-            <input type="button" id="normal" value="Normal Shuffle">
-            <input type="button" id="rookie1" value="Rookie Shuffle 1">
-            <input type="button" id="rookie2" value="Rookie Shuffle 2">
+            <input type="button" id="normal" value="Normal Shuffle" onclick="">
+            <input type="button" id="rookie1" value="Rookie Shuffle 1" onclick="">
+            <input type="button" id="rookie2" value="Rookie Shuffle 2" onclick="">
         </form>
         <form>
             <label for="playername">Enter player name:</label>
-            <input type="text" id="playername" name="playername">
-            <input type="button" id="addplayer" value="Add Player">
+            <input type="text" id="playername">
+            <input type="button" id="addplayer" value="Add Player" onclick="addPlayer(document.getElementById('playername').value)">
         </form>
-        <button type="button" id="startgame">Start Game</button>
+        <button type="button" id="startgame" onclick="startGame()">Start Game</button>
         </p>
     </div>
     <div id="cards" hidden>
+        <table id="cardtable">
 
+        </table>
     </div>
     <div id="players" hidden>
-
+        <p>I exist!</p>
     </div>
 
 </body>
