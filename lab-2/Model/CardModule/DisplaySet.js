@@ -31,7 +31,7 @@ function DisplayCardSet() {
 	this.dealFullHand = function (indices = []) {
 		this.dealHand(indices);
 
-		while (!this.handContainsSet && !this.deck.isEmpty) {
+		while (!this.handContainsSet() && !this.deck.isEmpty()) {
 			this.dealHand();
 		}
 
@@ -97,7 +97,7 @@ function DisplayCardSet() {
 	 * @return [Number] number of cards left in the deck.
 	 */
 	this.amountInDeck = function () {
-		return this.deck.remaining_amount;
+		return this.deck.remaining_amount();
 	}
 
 	/**
@@ -126,7 +126,7 @@ function DisplayCardSet() {
 			} else {
 				// add 3 cards to a hand
 				let count = DEFAULT_DEAL_SIZE;
-				while (count > 0 && this.deck.remaining_amount > 0) {
+				while (count > 0 && this.deck.remaining_amount() > 0) {
 					card = this.deck.dealCard();
 					card.setIndex(this.hand.length);
 					this.hand.push(card);
