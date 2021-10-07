@@ -8,13 +8,13 @@
  * @author Adam Lechliter
  */
 
-function DisplayCardSet(){
-    const DEFAULT_HAND_SIZE = 12;
+function DisplayCardSet() {
+	const DEFAULT_HAND_SIZE = 12;
 	const DEFAULT_DEAL_SIZE = 3;
 
 	this.hand = [];
 	this.deck = new CardSet();
-    
+
 	// public methods ----------------------------------------------------
 
 	/** 
@@ -28,15 +28,15 @@ function DisplayCardSet(){
 	 * @param {null | Array(Number)} indices - list of indices of cards to be replaced from the hand.
 	 * @return {Array(Card)} current array of cards in the hand
 	 */
-	this.dealFullHand = function(indices = []){
+	this.dealFullHand = function (indices = []) {
 		this.dealHand(indices);
 
-		while (!this.handContainsSet && !this.deck.isEmpty){
+		while (!this.handContainsSet() && !this.deck.isEmpty()) {
 			this.dealHand();
 		}
 
 		return this.hand;
-    }
+	}
 
 	/**
 	 * Retrieves a card from the hand given an index, leaving the card in the hand.
@@ -45,9 +45,9 @@ function DisplayCardSet(){
 	 * @param {number} index - index of a card in the this.hand to be returned.
 	 * @return {Card} a card in the hand at the given index
 	 */
-	this.getCard = function(index){
+	this.getCard = function (index) {
 		let card = null;
-		if(index < this.hand.length){
+		if (index < this.hand.length) {
 			card = this.hand[index];
 		}
 		return card;
@@ -57,7 +57,7 @@ function DisplayCardSet(){
 	 * 
 	 * @return {Boolean} true if the hand has at least 3 cards that make up a set
 	 */
-	this.handContainsSet = function(){
+	this.handContainsSet = function () {
 		return cards_contain_set(this.hand).length > 0;
 	}
 
@@ -66,7 +66,7 @@ function DisplayCardSet(){
 	 * 
 	 * @return {Number} index of a card that is a part of a possible set
 	 */
-	this.getHint = function(){
+	this.getHint = function () {
 		return cards_contain_set(this.hand)[0].index;
 	}
 
@@ -75,7 +75,7 @@ function DisplayCardSet(){
 	 * 
 	 * @return {Array(Card)} an array of cards that make up a set, empty if there is no set in the hand.
 	 */
-	this.getSet = function(){
+	this.getSet = function () {
 		return cards_contain_set(this.hand);
 	}
 
@@ -87,7 +87,7 @@ function DisplayCardSet(){
 	 * @param {Card} card3 - one of the cards to be checked with the others
 	 * @returns {Boolean} true if the given cards form a set.
 	 */
-	this.isSelectionSet = function(card1, card2, card3){
+	this.isSelectionSet = function (card1, card2, card3) {
 		return is_set(card1, card2, card3);
 	}
 
@@ -96,8 +96,8 @@ function DisplayCardSet(){
 	 * 
 	 * @return [Number] number of cards left in the deck.
 	 */
-	this.amountInDeck = function(){
-		return this.deck.remaining_amount;
+	this.amountInDeck = function () {
+		return this.deck.getRemainingAmount();
 	}
 
 	/**
@@ -112,49 +112,49 @@ function DisplayCardSet(){
 	 * 	hand.
 	 * @return {Array(Card)} current array of cards in the hand
 	 */
-	this.dealHand = function(indices = []){
-		if (indices == null || indices.length == 0){
-			if (this.hand.length == 0){
+	this.dealHand = function (indices = []) {
+		if (indices == null || indices.length == 0) {
+			if (this.hand.length == 0) {
 				// initialize hand with 12 cards
 				let count = DEFAULT_HAND_SIZE;
-				while (count > 0){
+				while (count > 0) {
 					card = this.deck.dealCard();
 					card.setIndex(this.hand.length);
 					this.hand.push(card);
 					count--;
 				}
-            }else {
+			} else {
 				// add 3 cards to a hand
 				let count = DEFAULT_DEAL_SIZE;
-				while (count > 0 && this.deck.remaining_amount > 0){
+				while (count > 0 && this.deck.getRemainingAmount() > 0) {
 					card = this.deck.dealCard();
 					card.setIndex(this.hand.length);
 					this.hand.push(card);
 					count--;
 				}
 			}
-        }else {
+		} else {
 			// Replace the cards at the given indices with new cards from the deck
-            let update_indices = false;
-            
-            indices.forEach((index) => {
-            	if (!this.deck.isEmpty() && this.hand.length <= DEFAULT_HAND_SIZE){
-            		this.hand[index].setIndex(); // sets index to empty index
-            		this.hand[index] = this.deck.dealCard();
-            		this.hand[index].setIndex(index);
-                }else{
-            		// mark card for removal
-            		this.hand[index].setIndex(); // sets index to empty index
-            		this.hand[index] = null;
-            		update_indices = true;
-            	}
-            });
-            if (update_indices){
-            	this.hand = this.hand.filter((card) => card !== null );
-            	this.hand.forEach((card, index) => {
-            		this.hand[index].setIndex(index);
-            	});
-            }
+			let update_indices = false;
+			console.log(indices);
+			indices.forEach((index) => {
+				if (!this.deck.isEmpty() && this.hand.length <= DEFAULT_HAND_SIZE) {
+					this.hand[index].setIndex(); // sets index to empty index
+					this.hand[index] = this.deck.dealCard();
+					this.hand[index].setIndex(index);
+				} else {
+					// mark card for removal
+					this.hand[index].setIndex(); // sets index to empty index
+					this.hand[index] = null;
+					update_indices = true;
+				}
+			});
+			if (update_indices) {
+				this.hand = this.hand.filter((card) => card !== null);
+				this.hand.forEach((card, index) => {
+					this.hand[index].setIndex(index);
+				});
+			}
 		}
 	}
 	/**
@@ -163,13 +163,13 @@ function DisplayCardSet(){
 	 *
 	 * @return {Array(Card)} an array of cards, representing the current hand
 	 */
-	this.initializeHand = function(){
+	this.initializeHand = function () {
 		this.hand = [];
 		this.dealFullHand();
 	}
 
 	// private methods ----------------------------------------------------
-	
+
 	/**
 	 * Checks if the given features either all three match or are all three unique from each 
 	 * other.
@@ -179,10 +179,10 @@ function DisplayCardSet(){
 	 * 	cards.
 	 * @return {Boolean} true if all three features are the same or completely different.
 	 */
-	function set_condition(feature1, feature2, feature3){
+	function set_condition(feature1, feature2, feature3) {
 		let result = feature1 == feature2 && feature2 == feature3;
 
-		if (!result){
+		if (!result) {
 			result = feature1 != feature2 && feature2 != feature3 && feature1 != feature3;
 		}
 
@@ -195,9 +195,9 @@ function DisplayCardSet(){
 	 *
 	 * @param {Card} card1, card2, card3 - the cards to compare with each other
 	 * @return {Boolean} true if all three cards meet the set condition for number of shapes
-	 */	
-	function number_condition(card1, card2, card3){
-		return set_condition(card1.num_shapes, card2.num_shapes, card3.num_shapes);
+	 */
+	function number_condition(card1, card2, card3) {
+		return set_condition(card1.numShapes, card2.numShapes, card3.numShapes);
 	}
 
 	/**
@@ -207,7 +207,7 @@ function DisplayCardSet(){
 	 * @param {Card} card1, card2, card3 - the cards to compare with each other.
 	 * @return {Boolean}true if all three cards meet the set condition for the type of shapes	
 	 */
-	function shape_condition(card1, card2, card3){
+	function shape_condition(card1, card2, card3) {
 		return set_condition(card1.shape, card2.shape, card3.shape);
 	}
 
@@ -217,8 +217,8 @@ function DisplayCardSet(){
 	 *
 	 * @param {Card} card1, card2, card3 - the cards to compare with each other.
 	 * @return {Boolean} true if all three cards meet the set condition for types of shading
-	 */	
-	function shading_condition(card1, card2, card3){
+	 */
+	function shading_condition(card1, card2, card3) {
 		return set_condition(card1.shading, card2.shading, card3.shading);
 	}
 	/**
@@ -227,7 +227,7 @@ function DisplayCardSet(){
 	 * @param {Card} card1, card2, card3 - the cards to compare with each other.
 	 * @return {Boolean} true if all three cards meet the set condition for color
 	 */
-	function color_condition(card1, card2, card3){
+	function color_condition(card1, card2, card3) {
 		return set_condition(card1.color, card2.color, card3.color);
 	}
 	/**
@@ -236,29 +236,29 @@ function DisplayCardSet(){
 	 * @param {Card} card1, card2, card3 - the cards to compare with each other.
 	 * @return {Boolean} true if all three cards meet all of the set conditions
 	 */
-	function is_set(card1, card2, card3){
+	function is_set(card1, card2, card3) {
 		const numberMatched = number_condition(card1, card2, card3);
 		const shapeMatched = shape_condition(card1, card2, card3);
 		const shadingMatched = shading_condition(card1, card2, card3);
 		const colorMatched = color_condition(card1, card2, card3);
 
 		return numberMatched && shapeMatched && shadingMatched && colorMatched;
-	}	
+	}
 	/**
 	 * Find the 3 card that make up a set. Return an empty array if none are found.
 	 *
 	 * @param {Array(Card)} cards - the array cards to compare with each other
 	 * @return {number} return the index of card that is a part of set.
 	 */
-	function cards_contain_set(cards){
+	function cards_contain_set(cards) {
 		index_a = 0;
 		index_b = index_a + 1;
 		index_c = index_b + 1;
 
-		while (index_a < cards.length - 2){
-			while (index_b < cards.length - 1){
-				while (index_c < cards.length){
-					if(is_set(cards[index_a], cards[index_b], cards[index_c])){
+		while (index_a < cards.length - 2) {
+			while (index_b < cards.length - 1) {
+				while (index_c < cards.length) {
+					if (is_set(cards[index_a], cards[index_b], cards[index_c])) {
 						return [cards[index_a], cards[index_b], cards[index_c]];
 					}
 					index_c += 1;

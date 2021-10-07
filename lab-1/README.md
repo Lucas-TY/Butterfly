@@ -44,7 +44,12 @@ The console version of the game does not require any further downloads beyond Ru
   - Executable on all platform (Java environment required)
   ```
 - ## GUI based on TK `GUI`
+<<<<<<< HEAD
+  - @Author Songyuan Wu & Jing Wen
+  - [install tk](https://dev.to/kojix2/installing-ruby-tk-on-ubuntu-1d86)
+=======
   - @Author Songyuan Wu/ Jing Wen
+>>>>>>> cf195b195edd6e0d0ff0b37b5ace9419fabe3c93
   ```
   - Muiltiple player support
   - Hint
@@ -54,6 +59,8 @@ The console version of the game does not require any further downloads beyond Ru
 ---
 # Other
 - ## CardImages 
+  - @Author Jing Wen
+- ## Statistics
   - @Author Jing Wen
 - ## Project Manager
   - Lucas Wu
