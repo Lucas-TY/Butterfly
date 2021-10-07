@@ -136,7 +136,6 @@ function DisplayCardSet() {
 		} else {
 			// Replace the cards at the given indices with new cards from the deck
 			let update_indices = false;
-
 			indices.forEach((index) => {
 				if (!this.deck.isEmpty() && this.hand.length <= DEFAULT_HAND_SIZE) {
 					this.hand[index].setIndex(); // sets index to empty index
@@ -197,7 +196,7 @@ function DisplayCardSet() {
 	 * @return {Boolean} true if all three cards meet the set condition for number of shapes
 	 */
 	function number_condition(card1, card2, card3) {
-		return set_condition(card1.num_shapes, card2.num_shapes, card3.num_shapes);
+		return set_condition(card1.numShapes, card2.numShapes, card3.numShapes);
 	}
 
 	/**

@@ -9,7 +9,8 @@ class Controller {
      */
     constructor() {
         this.displaySet = new DisplayCardSet();
-        //this.currentPlayers = new PlayerSet();
+        this.displaySet.initializeHand();
+        this.currentPlayers = new PlayerSet();
         this.currentSelection = [];
     }
     /**
@@ -17,14 +18,14 @@ class Controller {
      * @returns {boolean} true if it contains a set
      */
     isGameComplete() {
-        return this.displaySet.handContainsSet;
+        return this.displaySet.handContainsSet();
     }
     /**
      * return the current hand 
      * @returns {Array(Card)} the current hand
      */
     getHand() {
-        return this.displaySet.getHand;
+        return this.displaySet.hand;
     }
     /**
      * Given a card, add the card to the list of selected cards.
@@ -46,8 +47,10 @@ class Controller {
      */
     removeCardFromSelection(card) {
         if (this.currentSelection.includes(card, 0)) {
-            this.currentSelection.filter.filter(function (item, index, arr) {
-                return item !== card;
+            this.currentSelection = this.currentSelection.filter(function (item, index, arr) {
+                if (item != card) {
+                    return item;
+                }
 
             });
             return card;
@@ -65,14 +68,14 @@ class Controller {
      * @param {*} name 
      */
     addPlayer(name) {
-        //player.add(name)
+        this.currentPlayers.add_player(name);
     }
     /**Given a player name, remove that player from the list
      * 
      * @param {*} name 
      */
     removePlayer(name) {
-        //player.delete(name)
+        this.currentPlayers.delete_player(name);
     }
     /** Determine if the selected cards create a set. 
      * If they do, deal a new hand (replace those cards with deal_full_hand(card indices) and clear selection 
@@ -80,13 +83,17 @@ class Controller {
      * @returns {boolean} ture if the selected cards create a set
      */
     isSelectionSet() {
-        let isSet = this.displaySet.isSelectionSet(this.currentSelection);
+        var card1 = this.currentSelection[0];
+        var card2 = this.currentSelection[1];
+        var card3 = this.currentSelection[2];
+        let isSet = this.displaySet.isSelectionSet(card1, card2, card3);
         let selectedIndex = this.currentSelection.map(function index(card) {
-            return card.index;
+            return card.index + 1;
         })
+
         if (isSet) {
             this.displaySet.dealFullHand(selectedIndex);
-            removeCardFromSelection();
+            this.clearSelection();
         }
         return isSet;
     }
