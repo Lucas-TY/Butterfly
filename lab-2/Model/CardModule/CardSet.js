@@ -3,15 +3,15 @@
  * 
  * @param {Array} array - an array of objects to be randomized
  */
-function shuffleArray(array){
+function shuffleArray(array) {
     /* 
         Source for random number algorithm: 
         https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     */
-    for(let i = 0; i < array.length * array.length; i++){
+    for (let i = 0; i < array.length * array.length; i++) {
         const randIndex = Math.floor(Math.random() * array.length);
-        if(array[randIndex] == undefined){
-            
+        if (array[randIndex] == undefined) {
+
         }
         // removes an item at a random index an pushes it to the beginning of the array
         array.push(array.splice(randIndex, 1)[0]);
@@ -32,7 +32,7 @@ class CardSet {
      * 
      * @return {CardSet} a new instance of type CardSet
      */
-    constructor(){
+    constructor() {
         this.initializeNormalDeck();
     }
 
@@ -42,9 +42,9 @@ class CardSet {
      * 
      * @returns {Card | null} a card removed from the deck
      */
-    dealCard(){
+    dealCard() {
         let card = null;
-        if (this.deck.length > 0){
+        if (this.deck.length > 0) {
             card = this.deck.pop();
         }
         return card;
@@ -55,13 +55,13 @@ class CardSet {
      * 
      * @returns void
      */
-    initializeNormalDeck(){
+    initializeNormalDeck() {
         this.deck = [];
-        const tempDeck = [];
-        Card.getNumShapeTypes().forEach(function(numShapes){
-            Card.getShapeTypes().forEach(function(shape){
-                Card.getShadingTypes().forEach(function(shading){
-                    Card.getColorTypes().forEach(function(color){
+        let tempDeck = [];
+        Card.getNumShapeTypes().forEach(function (numShapes) {
+            Card.getShapeTypes().forEach(function (shape) {
+                Card.getShadingTypes().forEach(function (shading) {
+                    Card.getColorTypes().forEach(function (color) {
                         tempDeck.push(new Card(numShapes, shape, shading, color));
                     })
                 })
@@ -78,20 +78,20 @@ class CardSet {
      * 
      * @returns void
      */
-    initializeRookieDeck1(){
+    initializeRookieDeck1() {
         this.deck = [];
-        const tempDeck = [];
-
-        Card.getNumShapeTypes().forEach(function(numShapes){
-            Card.getShapeTypes().forEach(function(shape){
-                Card.getShadingTypes().forEach(function(shading){
-                    Card.getColorTypes().forEach(function(color){
-                        tempDeck.push(new Card(numShapes, shape, shading, color));
+        let tempDeck = [];
+        let tempShaffle = [];
+        Card.getNumShapeTypes().forEach(function (numShapes) {
+            Card.getShapeTypes().forEach(function (shape) {
+                Card.getShadingTypes().forEach(function (shading) {
+                    Card.getColorTypes().forEach(function (color) {
+                        tempShaffle.push(new Card(numShapes, shape, shading, color));
                     })
                 })
-                shuffleArray(tempDeck);
-                this.deck = this.deck.concat(tempDeck);
-                tempDeck = [];
+                shuffleArray(tempShaffle);
+                tempDeck = tempDeck.concat(tempShaffle);
+                tempShaffle = [];
             })
         });
         this.deck = tempDeck;
@@ -104,21 +104,23 @@ class CardSet {
      * 
      * @returns void
      */
-    initializeRookieDeck2(){
+    initializeRookieDeck2() {
         this.deck = [];
-        const tempDeck = [];
-        Card.getNumShapeTypes().forEach(function(numShapes){
-            Card.getShapeTypes().forEach(function(shape){
-                Card.getShadingTypes().forEach(function(shading){
-                    Card.getColorTypes().forEach(function(color){
-                        tempDeck.push(new Card(numShapes, shape, shading, color));
+        let tempDeck = [];
+        let tempShaffle = [];
+        Card.getNumShapeTypes().forEach(function (numShapes) {
+            Card.getShapeTypes().forEach(function (shape) {
+                Card.getShadingTypes().forEach(function (shading) {
+                    Card.getColorTypes().forEach(function (color) {
+                        tempShaffle.push(new Card(numShapes, shape, shading, color));
                     })
                 })
             })
-            shuffleArray(tempDeck);
-            this.deck = this.deck.concat(tempDeck);
-            tempDeck = [];
+            shuffleArray(tempShaffle);
+            tempDeck = tempDeck.concat(tempShaffle);
+            tempShaffle = [];
         });
+
         this.deck = tempDeck;
     }
 
@@ -127,7 +129,7 @@ class CardSet {
      * 
      * @returns {number} the number of remaing cards in the deck
      */
-    getRemainingAmount(){
+    getRemainingAmount() {
         return this.deck.length;
     }
 
@@ -136,7 +138,7 @@ class CardSet {
      * 
      * @returns {boolean} true if the deck is empty
      */
-    isEmpty(){
+    isEmpty() {
         return this.deck.length == 0;
     }
 
