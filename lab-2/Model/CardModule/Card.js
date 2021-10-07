@@ -7,7 +7,7 @@
  * @member {srting} shading - type of shading of the shape
  * @member {string} color - color of the shape
  * @member {number} index - index of the card in a hand (or other collection)
- * @member {string} image_file - filename of the corresponding image (use is optional)
+ * @member {string} imageFile - filename of the corresponding image (use is optional)
  * 
  * @author Adam Lechliter
  */
