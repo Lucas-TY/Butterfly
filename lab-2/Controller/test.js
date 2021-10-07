@@ -37,6 +37,19 @@ console.log(test.addCardToSelection(array[1]));
 console.log(test.addCardToSelection(array[2]));
 var result = test.isSelectionSet(array)
 console.log(result);
+console.log("swich mode test");
+console.log("Defualt:");
+test.setLevelDefault()
+console.log(test.displaySet.deck);
+console.log(test.displaySet.hand);
+console.log("Rookie1:");
+test.setLevelRookie1()
+console.log(test.displaySet.deck);
+console.log(test.displaySet.hand);
+console.log("Rookie2:");
+test.setLevelRookie2()
+console.log(test.displaySet.deck);
+console.log(test.displaySet.hand);
 
 console.log(`
   く__,.ヘヽ.        /  ,ー､ 〉
