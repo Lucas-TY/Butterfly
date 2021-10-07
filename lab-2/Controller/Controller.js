@@ -89,7 +89,7 @@ class Controller {
         var card3 = this.currentSelection[2];
         let isSet = this.displaySet.isSelectionSet(card1, card2, card3);
         let selectedIndex = this.currentSelection.map(function index(card) {
-            return card.index + 1;
+            return card.index;
         })
 
         if (isSet) {
