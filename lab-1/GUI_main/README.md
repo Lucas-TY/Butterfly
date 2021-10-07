@@ -1,12 +1,13 @@
 ## GUI Version Guide
 
 **To start running GUI version, install `tk` on your platform first.**
+Install instructions <a href="https://dev.to/kojix2/installing-ruby-tk-on-ubuntu-1d86">here</a>.
 
 ---
 
 ### How to play:
 
-- Launch the game by running `$ ruby Updated_GUI.rb`.
+- Launch the game by running `$ bundle exec ruby Updated_GUI.rb`.
 - Choose to create the human player or computer player by clicking on buttons.
   + There are two types of computer players: easy and hard.
   + The username cannot be the same as others'.

@@ -7,7 +7,8 @@ module CardModule
 	# This class can also check if the hand has a possible set and check if a given
 	# list of cards create a set.
 	#
-	# @attr_reader hand [Array(Card)] array of the current cards in the hand
+	# @attr_accessor hand [Array(Card)] array of the current cards in the hand
+	# @attr_reader deck [CardSet] CardSet object that represents the current deck
 	#
 	# @author Adam Lechliter
 
@@ -16,7 +17,8 @@ module CardModule
 		@@DEFAULT_HAND_SIZE = 12;
 		@@DEFAULT_DEAL_SIZE = 3;
 
-		attr_reader :hand;
+		attr_accessor :hand;
+		attr_reader :deck;
 
 		# Initializes a new instance of a DisplayCardSet
 		#
@@ -134,7 +136,7 @@ module CardModule
 				# Replace the cards at the given indices with new cards from the deck
 				update_indices = false
 				indices.each do |index|
-					if @deck.remaining_amount > 0
+					if @deck.remaining_amount > 0 && @hand.length <= @@DEFAULT_HAND_SIZE
 						@hand[index].set_index! # sets index to empty index
 						@hand[index] = @deck.deal_card!
 						@hand[index].set_index! index

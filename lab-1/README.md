@@ -1,11 +1,19 @@
+# Versions
+- Main Version: SetGame (console)
+- Extra Credit GUI Version 1: GUI_main (GUI)
+- Extra Credit GUI Version 2: Shoes_GUI.rb (GUI)
 
+The console version of the game does not require any further downloads beyond Ruby. Both GUI versions were created for extra credit and include instructions on how to install the needed downloads and how to run each. 
+
+---
 
 # Usage
 - Console player: `ruby path_to_the_SetGame.rb`
 - Mac GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) ***Java environment required***
 - Windows GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) ***Java environment required***
 - Linux GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases)`java -jar shoes_gui.jar` ***Java environment required***
-- Ruby GUI:`ruby path_to_the_Updated_GUI.rb.rb` ***Ruby TK gem required***
+- Ruby GUI:`bundle exec ruby path_to_the_Updated_GUI.rb` ***Ruby TK gem required***
+  - see README file in the GUI_main for more details
 
 ---
 
@@ -36,8 +44,12 @@
   - Executable on all platform (Java environment required)
   ```
 - ## GUI based on TK `GUI`
+<<<<<<< HEAD
   - @Author Songyuan Wu & Jing Wen
   - [install tk](https://dev.to/kojix2/installing-ruby-tk-on-ubuntu-1d86)
+=======
+  - @Author Songyuan Wu/ Jing Wen
+>>>>>>> cf195b195edd6e0d0ff0b37b5ace9419fabe3c93
   ```
   - Muiltiple player support
   - Hint
