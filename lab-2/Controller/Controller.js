@@ -186,23 +186,6 @@
      clearSelection() {
          this.currentSelection = [];
      }
-<<<<<<< HEAD
-=======
-     /**Given a player name, add that player to the list of current players
-      * 
-      * @param {string} name 
-      */
-     addPlayer(name) {
-         this.currentPlayers.addPlayer(name);
-     }
-     /**Given a player name, remove that player from the list
-      * 
-      * @param {string} name 
-      */
-     removePlayer(name) {
-         this.currentPlayers.deletePlayer(name);
-     }
->>>>>>> 026b56a6f84ba0251ea8ef4e4a1a550aa14467c2
      /** Determine if the selected cards create a set. 
       * If they do, deal a new hand (replace those cards with deal_full_hand(card indices) and clear selection 
       * 
