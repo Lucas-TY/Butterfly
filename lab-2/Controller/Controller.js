@@ -186,6 +186,14 @@
      clearSelection() {
          this.currentSelection = [];
      }
+     /**
+      * Check is the current selection ready for test
+      * 
+      * @returns ture if it's ready to check
+      */
+     slectionCheck() {
+         return this.currentSelection.length === 3;
+     }
      /** Determine if the selected cards create a set. 
       * If they do, deal a new hand (replace those cards with deal_full_hand(card indices) and clear selection 
       * 
