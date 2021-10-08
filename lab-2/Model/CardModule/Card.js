@@ -1,7 +1,7 @@
 /**
  * A class that represents a single card in the game Set.
  * 
- * @member {number} num_shapes - number of shapes on the card
+ * @member {number} numShapes - number of shapes on the card
  * @member {string} shape - type of shape on the card
  * @member {srting} shading - type of shading of the shape
  * @member {string} color - color of the shape

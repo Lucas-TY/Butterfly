@@ -14,20 +14,20 @@ README - Player Module
 
 - Update the properties of the player
 
-  + Properties: player_name, player_score
+  + Properties: playerName, playerScore
   
   + Add the points that the player won or lost
     + If the score is reduced to a negative number, set the score to 0.
       + Example:
-        + playerInstance.score_add(100) --> 100
+        + playerInstance.scoreAdd(100) --> 100
   
   + Update the score of the player to a new score
     + Example:
-      + playerInstance.score_change_to(200) --> 200
+      + playerInstance.scoreChangeTo(200) --> 200
   
   + Update the name of the player to a new name
       + Example:
-          + playerInstance.name_change_to("Jim") --> "Jim"
+          + playerInstance.nameChangeTo("Jim") --> "Jim"
 
 # ComputerPlayer Class
 
@@ -43,19 +43,19 @@ README - Player Module
 
 - Update the properties of the computer player
 
-  + Properties: player_name, player_score
+  + Properties: playerName, playerScore
   
   + Add the points that the computer player won or lost
     + If the score is reduced to a negative number, set the score to 0.
       + Example:
-        + playerInstance.score_add(100) --> 100
+        + playerInstance.scoreAdd(100) --> 100
   + Update the score of the player to a new score
     + Example:
-      + playerInstance.score_change_to(200) --> 200
+      + playerInstance.scoreChangeTo(200) --> 200
   
   + Update the name of the player to a new name
       + Example:
-          + playerInstance.name_change_to("pc_player2") --> "pc_player2"    
+          + playerInstance.nameChangeTo("pc_player2") --> "pc_player2"    
           
 # PlayerSet Class
 
@@ -64,7 +64,7 @@ README - Player Module
 - Initialize the player list which will contain the properties of one or more participating players.
   + Instance variables: 
     + player_list: an array contains the properties of one or more players.
-    + no_of_players: the number of players participating in the game at the same round.
+    + numOfPlayers: the number of players participating in the game at the same round.
 
   + Example:
     + playerListInstance = new PlayerSet()
@@ -72,28 +72,28 @@ README - Player Module
 
 - Public methods:
 
-- add_computer_player(name, win_prob)
+- addComputerPlayer(name, winProb)
   + Purpose: add a computer player to the game.
-- add_player(name) 
+- addPlayer(name) 
   + Purpose: add a new player in the game
 
-- delete_player(name)
+- deletePlayer(name)
   + Purpose: delete a player who is in the game
 
-- players_search(name)
+- playersSearch(name)
   + Purpose: report properties of the player who is in the game.
  
-- reset_all_score()
+- resetAllScores()
   + Purpose: reset all players' score to 0.
 
-- players_score_check(name)
+- playersScoreCheck(name)
   + Purpose: report the score of the specific player.
 
-- players_highest_score()
+- playersHighestScore()
   + Purpose: get the highest score in the game and report it.
 
-- player_exist(name)
+- playerExist(name)
   + Purpose: check whether the specific player is already in the game.
 
-- players_name()
+- playersName()
   + Purpose: report names of all participating players. 
