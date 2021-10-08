@@ -186,19 +186,13 @@
      clearSelection() {
          this.currentSelection = [];
      }
-     /**Given a player name, add that player to the list of current players
+     /**
+      * Check is the current selection ready for test
       * 
-      * @param {string} name 
+      * @returns ture if it's ready to check
       */
-     addPlayer(name) {
-         this.currentPlayers.addPlayer(name);
-     }
-     /**Given a player name, remove that player from the list
-      * 
-      * @param {string} name 
-      */
-     removePlayer(name) {
-         this.currentPlayers.deletePlayer(name);
+     slectionCheck() {
+         return this.currentSelection.length === 3;
      }
      /** Determine if the selected cards create a set. 
       * If they do, deal a new hand (replace those cards with deal_full_hand(card indices) and clear selection 

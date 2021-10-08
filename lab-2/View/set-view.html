@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Set</title>
+    <meta charset="utf-8">
+</head>
+<script type="text/javascript" src="../Model/PlayerModule/Player.js"></script>
+<script type="text/javascript" src="../Model/PlayerModule/ComputerPlayer.js"></script>
+<script type="text/javascript" src="../Model/PlayerModule/PlayerSet.js"></script>
+<script type="text/javascript" src="../Model/CardModule/Card.js"></script>
+<script type="text/javascript" src="../Model/CardModule/CardSet.js"></script>
+<script type="text/javascript" src="../Model/CardModule/DisplaySet.js"></script>
+<script type="text/javascript" src="../Controller/Controller.js"></script>
+<script type="text/javascript" src="set-view.js"></script>
+
+<body>
+    <div id="main_menu">
+        <h1>Main Menu</h1>
+        <p>
+            Select game options and add players to game.
+        <form id="difficulty">
+            <label>Select Difficulty:</label>
+            <input type="radio" id="normal" name="diff" checked>
+            <label for="normal">Normal Shuffle</label>
+            <input type="radio" id="rookie1" name="diff">
+            <label for="rookie1">Rookie Shuffle 1</label>
+            <input type="radio" id="rookie2" name="diff">
+            <label for="rookie2">Rookie Shuffle 2</label>
+        </form>
+        <form>
+            <label for="playername">Enter player name:</label>
+            <input type="text" id="playername">
+            <input type="button" id="addplayer" value="Add Player"
+                onclick="addPlayer(document.getElementById('playername').value)">
+        </form>
+        <button type="button" id="startgame" onclick="startGame()">Start Game</button>
+        </p>
+    </div>
+    <div id="game" hidden>
+        <div id="cards">
+            <table id="cardtable">
+
+            </table>
+        </div>
+        <div id="players">
+            <table id="playertable">
+
+            </table>
+        </div>
+        <button type="button" id="checkset" onclick="setCheck()">Check Set</button>
+    </div>
+
+</body>
+
+</html>
