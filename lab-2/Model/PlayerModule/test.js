@@ -22,7 +22,7 @@ function Test(){
     }
     this.addUser= function(){
         input_text=this.buttons_div.getElementsByTagName("input")[0].value
-        ret=this.playerset.add_player(input_text)
+        ret=this.playerset.addPlayer(input_text)
         if(ret==null)
         {
             console.log("fail!")
@@ -35,7 +35,7 @@ function Test(){
     }
     this.addComputer= function(){
         input_text=this.buttons_div.getElementsByTagName("input")[0].value
-        ret=this.playerset.add_computer_player(input_text,0.1)
+        ret=this.playerset.addComputerPlayer(input_text,0.1)
         if(ret==null)
         {
             console.log("fail!")
@@ -49,49 +49,49 @@ function Test(){
     this.addScore=function()
     {
         input_text=this.buttons_div.getElementsByTagName("input")[0].value
-        if(!this.playerset.player_exist(input_text))
+        if(!this.playerset.playerExist(input_text))
             return 0
         else
         {
-            this.playerset.add_score(input_text,1);
+            this.playerset.addScore(input_text,1);
             this.refresh();
         }
     }
     this.remove_user=function()
     {
         input_text=this.buttons_div.getElementsByTagName("input")[0].value
-        this.playerset.delete_player(input_text)
+        this.playerset.deletePlayer(input_text)
         this.refresh()
     }
     this.resetOne=function()
     {
         input_text=this.buttons_div.getElementsByTagName("input")[0].value
-        this.playerset.players_search(input_text).score_change_to(0)
+        this.playerset.playersSearch(input_text).scoreChangeTo(0)
         this.refresh()
     }
     this.resetAll=function()
     {
-        this.playerset.reset_all_score()
+        this.playerset.resetAllScores()
         this.refresh()
     }
     this.refresh=function(){
         this.players_div.innerHTML = ""
 
-        for(var element of this.playerset.players_list)
+        for(var element of this.playerset.playersList)
         {
             var add = document.createElement("p")
-            if (element.is_human==false)
+            if (element.isHuman==false)
             {
-                add.textContent =element.player_score+"      " +element.player_name+":computer\t"
+                add.textContent =element.playerScore+"      " +element.playerName+":computer\t"
             }
             else
             {
-                add.textContent =element.player_score+"      "+ element.player_name+"        \t"
+                add.textContent =element.playerScore+"      "+ element.playerName+"        \t"
             }
             this.players_div.appendChild(add)
         }
         var add = document.createElement("p")
-        add.textContent="highest score:"+this.playerset.players_highest_score()
+        add.textContent="highest score:"+this.playerset.playersHighestScore()
         this.players_div.appendChild(add)   
     }
 

@@ -93,14 +93,14 @@
       * @param {*} name 
       */
      addPlayer(name) {
-         this.currentPlayers.add_player(name);
+         this.currentPlayers.addPlayer(name);
      }
      /**Given a player name, remove that player from the list
       * 
       * @param {*} name 
       */
      removePlayer(name) {
-         this.currentPlayers.delete_player(name);
+         this.currentPlayers.deletePlayer(name);
      }
      /** Determine if the selected cards create a set. 
       * If they do, deal a new hand (replace those cards with deal_full_hand(card indices) and clear selection 

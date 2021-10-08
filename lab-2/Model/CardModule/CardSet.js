@@ -81,17 +81,17 @@ class CardSet {
     initializeRookieDeck1() {
         this.deck = [];
         let tempDeck = [];
-        let tempShaffle = [];
+        let tempShuffle = [];
         Card.getNumShapeTypes().forEach(function (numShapes) {
             Card.getShapeTypes().forEach(function (shape) {
                 Card.getShadingTypes().forEach(function (shading) {
                     Card.getColorTypes().forEach(function (color) {
-                        tempShaffle.push(new Card(numShapes, shape, shading, color));
+                        tempShuffle.push(new Card(numShapes, shape, shading, color));
                     })
                 })
-                shuffleArray(tempShaffle);
-                tempDeck = tempDeck.concat(tempShaffle);
-                tempShaffle = [];
+                shuffleArray(tempShuffle);
+                tempDeck = tempDeck.concat(tempShuffle);
+                tempShuffle = [];
             })
         });
         this.deck = tempDeck;
@@ -107,18 +107,18 @@ class CardSet {
     initializeRookieDeck2() {
         this.deck = [];
         let tempDeck = [];
-        let tempShaffle = [];
+        let tempShuffle = [];
         Card.getNumShapeTypes().forEach(function (numShapes) {
             Card.getShapeTypes().forEach(function (shape) {
                 Card.getShadingTypes().forEach(function (shading) {
                     Card.getColorTypes().forEach(function (color) {
-                        tempShaffle.push(new Card(numShapes, shape, shading, color));
+                        tempShuffle.push(new Card(numShapes, shape, shading, color));
                     })
                 })
             })
-            shuffleArray(tempShaffle);
-            tempDeck = tempDeck.concat(tempShaffle);
-            tempShaffle = [];
+            shuffleArray(tempShuffle);
+            tempDeck = tempDeck.concat(tempShuffle);
+            tempShuffle = [];
         });
 
         this.deck = tempDeck;
