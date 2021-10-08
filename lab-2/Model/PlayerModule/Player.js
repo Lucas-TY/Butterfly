@@ -9,57 +9,57 @@
  * @author Songyuan Wu & Jing Wen
  */
 
-class Player{
-	/**
-	 * Initializes a new instance of the new player
-	 * 
-	 * @param	{string} name - name of the player
-	 * 
-	 * 
-	 * @returns {Player} a new instance of a player
-	 */
-	constructor(name){
-		this.playerName= name;
-		this.playerScore = 0;
-		this.isHuman = true;
-	}
-	change_to_computer(){
-		this.isHuman = false;
-	}
+class Player {
+    /**
+     * Initializes a new instance of the new player
+     * 
+     * @param	{string} name - name of the player
+     * 
+     * 
+     * @returns {Player} a new instance of a player
+     */
+    constructor(name) {
+        this.playerName = name;
+        this.playerScore = 0;
+        this.isHuman = true;
+    }
+    change_to_computer() {
+        this.isHuman = false;
+    }
 
-	/**
-	 * update the score of the player won or lost.
-	 * 
-	 * @param {number} points - points that the player won or lost.
-	 * @returns {number} the updated score.
-	 */
-	scoreAdd(points){		
-		this.playerScore += points;
-		if (this.playerScore < 0){
-				this.playerScore = 0;
-		}
-		return this.playerScore
-	}
+    /**
+     * update the score of the player won or lost.
+     * 
+     * @param {number} points - points that the player won or lost.
+     * @returns {number} the updated score.
+     */
+    scoreAdd(points) {
+        this.playerScore += points;
+        if (this.playerScore < 0) {
+            this.playerScore = 0;
+        }
+        return this.playerScore
+    }
 
-	/**
-	 * update the score of the player won or lost.
-	 * 
-	 * @param {number} score - the players's new score.
-	 * @returns {number} the new score.
-	 */
-	scoreChangeTo(score){
-		this.playerScore = score;
-		return this.playerScore;
-	}
+    /**
+     * update the score of the player won or lost.
+     * 
+     * @param {number} score - the players's new score.
+     * @returns {number} the new score.
+     */
+    scoreChangeTo(score) {
+        this.playerScore = score;
+        return this.playerScore;
+    }
 
-	/**
-	 * update the name of the player.
-	 * 
-	 * @param {string} name- the players's new name.
-	 * @returns {string} the new name.
-	 */
-	nameChangeTo(name){
-		this.playerName= name;
-		return this.playerName;
-	}
- }
+    /**
+     * update the name of the player.
+     * 
+     * @param {string} name- the players's new name.
+     * @returns {string} the new name.
+     */
+    nameChangeTo(name) {
+        this.playerName = name;
+        return this.playerName;
+    }
+}

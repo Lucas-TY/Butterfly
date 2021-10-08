@@ -18,6 +18,103 @@
          this.currentSelection = [];
      }
      /**
+      * add a computer player to the game.
+      *
+      * @require the the player is not the game
+      * @param {string} name the player's name
+      * @param {number} points points that the player won or lost.
+      * @returns {ComputerPlayer} the player that just added.
+      * @returns {null} if the name is aready exsit.
+      */
+     addComputerPlayer(name, winProb) {
+
+         return this.currentPlayers.addComputerPlayer(name, winProb);
+     }
+     /**
+      * add a human player to the game.
+      *
+      * @require the the player is not the game
+      * @param {string} name the name of the specific player
+      * @returns {Player} the player that just added.
+      * @returns {null} if the name is aready exsit.
+      */
+     addPlayer(name) {
+         return this.currentPlayers.addPlayer(name);
+     }
+     /**
+      * delete a player to the game.
+      *
+      * @require the the player is not the game
+      * @param {string} name the name of the specific player
+      * @returns {Player} the player that just deleted
+      * @returns {null} if player is not in the game
+      */
+     deletePlayer(name) {
+         return this.currentPlayers.deletePlayer(name);
+     }
+     /**
+      * return a specific player's score.
+      *
+      * @require the the player is in the game
+      * @param {string} name the name of the specific player
+      * @returns {Player} that player you are looking for
+      * @returns {null} if the player does not exsit.
+      */
+     playersSearch(name) {
+         return this.currentPlayers.playersSearch(name);
+     }
+     /**
+      * return a specific player's score.
+      *
+      * @param {string} name the name of the specific player
+      * @returns {number} the score of one specific player
+      * @returns {null} if player does not exist.
+      */
+     playersScoreCheck(name) {
+         return this.currentPlayers.playersScoreCheck(name);
+     }
+     /**
+      * display the highest score in this game
+      *
+      * @returns {number} the highest score
+      */
+     playersHighestScore() {
+         return this.currentPlayers.playersHighestScore();
+     }
+     /**
+      * check is the player already in the game
+      *
+      * @param {string} name the name of a specific player
+      * @returns {boolean} true the player is already in the game
+      */
+     playerExist(name) {
+         return this.currentPlayers.playerExist(name);
+     }
+     /**
+      * add the socre to a player
+      *
+      * @param {string} name the name of a specific player
+      * @param {int} score the score to add
+      * @returns {boolean} true the player is already in the game
+      */
+     addScore(name, score) {
+         return this.currentPlayers.addScore(name, score);
+     }
+
+     /**
+      * return a set that contains current players
+      * @returns {Arrary(players)} the current players set
+      */
+     allPlayers() {
+         return this.currentPlayers.playersName();
+     }
+     /**
+      * reset all player's score.
+      */
+     resetAllScores() {
+         this.currentPlayers.resetAllScores();
+     }
+     /**
       * Switch card deck to the default mode
       */
      setLevelDefault() {
