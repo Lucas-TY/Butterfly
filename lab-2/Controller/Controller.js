@@ -88,15 +88,19 @@
      clearSelection() {
          this.currentSelection = [];
      }
-     /**Given a player name, add that player to the list of current players
-      * 
+     /**
+      * Given a player name, add that player to the list of current players.
       * @param {*} name 
-      */
-     addPlayer(name) {
-         this.currentPlayers.addPlayer(name);
-     }
-     /**Given a player name, remove that player from the list
       * 
+      * @returns {Player} The player object if added successfully.
+      * @returns {null} Null if the player could not be added.
+      */
+      addPlayer(name) {
+        let result = this.currentPlayers.addPlayer(name);
+        return result;
+    }
+     /**
+      * Given a player name, remove that player from the list
       * @param {*} name 
       */
      removePlayer(name) {

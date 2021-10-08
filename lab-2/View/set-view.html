@@ -19,27 +19,35 @@
         <h1>Main Menu</h1>
         <p>
             Select game options and add players to game.
-        <form>
+        <form id="difficulty">
             <label>Select Difficulty:</label>
-            <input type="button" id="normal" value="Normal Shuffle" onclick="">
-            <input type="button" id="rookie1" value="Rookie Shuffle 1" onclick="">
-            <input type="button" id="rookie2" value="Rookie Shuffle 2" onclick="">
+            <input type="radio" id="normal" name="diff" checked>
+            <label for="normal">Normal Shuffle</label>
+            <input type="radio" id="rookie1" name="diff">
+            <label for="rookie1">Rookie Shuffle 1</label>
+            <input type="radio" id="rookie2" name="diff">
+            <label for="rookie2">Rookie Shuffle 2</label>
         </form>
         <form>
             <label for="playername">Enter player name:</label>
             <input type="text" id="playername">
-            <input type="button" id="addplayer" value="Add Player" onclick="addPlayer(document.getElementById('playername').value)">
+            <input type="button" id="addplayer" value="Add Player"
+                onclick="addPlayer(document.getElementById('playername').value)">
         </form>
         <button type="button" id="startgame" onclick="startGame()">Start Game</button>
         </p>
     </div>
-    <div id="cards" hidden>
-        <table id="cardtable">
+    <div id="game" hidden>
+        <div id="cards">
+            <table id="cardtable">
 
-        </table>
-    </div>
-    <div id="players" hidden>
-        <p>I exist!</p>
+            </table>
+        </div>
+        <div id="players">
+            <table id="playertable">
+
+            </table>
+        </div>
     </div>
 
 </body>
