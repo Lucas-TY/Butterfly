@@ -14,15 +14,18 @@ class Player {
      * Initializes a new instance of the new player
      * 
      * @param	{string} name - name of the player
-     * 
-     * 
-     * @returns {Player} a new instance of a player
+     *
+     * @returns {Player} a new instance of a Player Object
      */
     constructor(name) {
         this.playerName = name;
         this.playerScore = 0;
         this.isHuman = true;
     }
+
+    /**
+     * change the player to computer player.
+     */
     change_to_computer() {
         this.isHuman = false;
     }
@@ -44,8 +47,8 @@ class Player {
     /**
      * update the score of the player won or lost.
      * 
-     * @param {number} score - the players's new score.
-     * @returns {number} the new score.
+     * @param {number} score - the player's new score.
+     * @returns {number} the new score of the player.
      */
     scoreChangeTo(score) {
         this.playerScore = score;
@@ -55,8 +58,8 @@ class Player {
     /**
      * update the name of the player.
      * 
-     * @param {string} name- the players's new name.
-     * @returns {string} the new name.
+     * @param {string} name- the player's new name.
+     * @returns {string} the new name of the player.
      */
     nameChangeTo(name) {
         this.playerName = name;

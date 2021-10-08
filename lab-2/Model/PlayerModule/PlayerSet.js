@@ -23,9 +23,8 @@ class PlayerSet {
    *
    * @require the the player is not the game
    * @param {string} name the player's name
-   * @param {number} points points that the player won or lost.
-   * @returns {ComputerPlayer} the player that just added.
-   * @returns {null} if the name is aready exsit.
+   * @param {number} winProb wining probability of computer player
+   * @returns {ComputerPlayer|null} the player that just added; null if the name already exists.
    */
   addComputerPlayer(name, winProb) {
     if (this.playerExist(name)) {
@@ -44,8 +43,7 @@ class PlayerSet {
    *
    * @require the the player is not the game
    * @param {string} name the name of the specific player
-   * @returns {Player} the player that just added.
-   * @returns {null} if the name is aready exsit.
+   * @returns {Player|null} the player that just added; null if the name already exists.
    */
   addPlayer(name) {
     if (this.playerExist(name)) {
@@ -63,8 +61,7 @@ class PlayerSet {
    *
    * @require the the player is not the game
    * @param {string} name the name of the specific player
-   * @returns {Player} the player that just deleted
-   * @returns {null} if player is not in the game
+   * @returns {*|null} the player's properties that just deleted; null if the player is not in the game.
    */
   deletePlayer(name) {
     for (var element of this.playersList) {
@@ -91,8 +88,7 @@ class PlayerSet {
    *
    * @require the the player is in the game
    * @param {string} name the name of the specific player
-   * @returns {Player} that player you are looking for
-   * @returns {null} if the player does not exsit.
+   * @returns {*|null} the player's properties you are looking for; null if the player does not exist.
    */
   playersSearch(name) {
     for (var element of this.playersList) {
@@ -116,8 +112,7 @@ class PlayerSet {
    * return a specific player's score.
    *
    * @param {string} name the name of the specific player
-   * @returns {number} the score of one specific player
-   * @returns {null} if player does not exist.
+   * @returns {null|number|*} the score property of one specific player; null if the player does not exist.
    */
   playersScoreCheck(name) {
     for (var element of this.playersList) {
@@ -147,7 +142,7 @@ class PlayerSet {
    * check is the player already in the game
    *
    * @param {string} name the name of a specific player
-   * @returns {boolean} true the player is already in the game
+   * @returns {boolean} whether the player already exists in the game; true if the player is already in the game, false if not.
    */
   playerExist(name) {
     var result = false;
@@ -162,11 +157,11 @@ class PlayerSet {
   }
 
   /**
-   * add the socre to a player
+   * add the score to a player
    *
    * @param {string} name the name of a specific player
    * @param {int} score the score to add
-   * @returns {boolean} true the player is already in the game
+   * @returns {boolean} whether the player already exists in the game; true if the player is already in the game.
    */
   addScore(name, score) {
     var result = false;
@@ -183,10 +178,9 @@ class PlayerSet {
 
 
   /**
-   * check is the player already in the game
+   * report the names of players who are already in the game
    *
-   * @param {string} name the name of a specific player
-   * @returns {boolean} true the player is already in the game
+   * @returns {*} the names of players who are in the game.
    */
   playersName() {
     players = [];
