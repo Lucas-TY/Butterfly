@@ -83,7 +83,6 @@
      }
      /**
       * check is the player already in the game
-      *
       * @param {string} name the name of a specific player
       * @returns {boolean} true the player is already in the game
       */
@@ -94,7 +93,7 @@
       * add the socre to a player
       *
       * @param {string} name the name of a specific player
-      * @param {int} score the score to add
+      * @param {number} score the score to add
       * @returns {boolean} true the player is already in the game
       */
      addScore(name, score) {
@@ -151,6 +150,7 @@
      }
      /**
       * Given a card, add the card to the list of selected cards.
+      * @param {Card} card the card you want to remove
       * @returns {boolean} Return false if the card cannot be added to the selection.
       * @returns {Array(Card)}Return the current selection if the card has been added into selection
       */
@@ -164,6 +164,7 @@
      }
      /**
       * Given a card, remove that card from the list of selected cards (do nothing if that card wasn't selected).
+      * @param {Card} card the card you want to remove
       * @returns {boolean} Return false if cannot find that card in the selection
       * @returns {Card}Return the deleted card if the card has removed from selection
       */
@@ -187,14 +188,14 @@
      }
      /**Given a player name, add that player to the list of current players
       * 
-      * @param {*} name 
+      * @param {string} name 
       */
      addPlayer(name) {
          this.currentPlayers.addPlayer(name);
      }
      /**Given a player name, remove that player from the list
       * 
-      * @param {*} name 
+      * @param {string} name 
       */
      removePlayer(name) {
          this.currentPlayers.deletePlayer(name);
