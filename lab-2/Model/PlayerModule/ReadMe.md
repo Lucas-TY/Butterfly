@@ -75,10 +75,10 @@ README - Player Module
 - addComputerPlayer(name, winProb)
   + Purpose: add a computer player to the game.
 - addPlayer(name) 
-  + Purpose: add a new player in the game
+  + Purpose: add a new player to the game.
 
 - deletePlayer(name)
-  + Purpose: delete a player who is in the game
+  + Purpose: delete a player who is in the game.
 
 - playersSearch(name)
   + Purpose: report properties of the player who is in the game.
@@ -94,6 +94,9 @@ README - Player Module
 
 - playerExist(name)
   + Purpose: check whether the specific player is already in the game.
+
+- addScore(name, score)
+  + Purpose: add the score to a specific player who is already in the game.
 
 - playersName()
   + Purpose: report names of all participating players. 

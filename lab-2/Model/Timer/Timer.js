@@ -4,6 +4,8 @@
  * @param {string} btnTag - Element ID of the timer start button
  * @param {string} secondTag - Element ID of the seconds display element
  * @param {string} minuteTag - Element ID of the minutes display element
+ *
+ * @author Jing Wen & Adam Lechliter
  */
 function Timer(btnTag, secondTag, minuteTag){
 	this.btn = document.getElementById(btnTag);
@@ -12,7 +14,11 @@ function Timer(btnTag, secondTag, minuteTag){
 	this.secondsRunning = 0;
 	this.run = false;
 
-	// count-up the time
+	/**
+	 * Count-up the time.
+	 * Calculate the minute and the second by the secondsRunning.
+	 *
+	 */
 	this.interval = setInterval(() => {
 		if (this.run) {
 			this.secondsRunning += 1;
@@ -21,7 +27,9 @@ function Timer(btnTag, secondTag, minuteTag){
 		}
 	}, 1000);
 
-	// when start timing, change "start" to "pause". 
+	/**
+	 * When start timing, change "start" to "pause".
+	 */
 	this.changeRun = function() {
 		if (this.btn.value == "Start") {
 			this.btn.value = "Pause";
@@ -32,7 +40,9 @@ function Timer(btnTag, secondTag, minuteTag){
 		}
 	}
 
-	// reset the timer.
+	/**
+	 * Reset the timer.
+	 */
 	this.reset = function() {
 		this.btn.value = "Start";
 		this.run = false;
@@ -41,7 +51,11 @@ function Timer(btnTag, secondTag, minuteTag){
 		this.minutes.innerHTML = pad(parseInt(this.secondsRunning / 60));
 	}
 
-	// when this.minutes and this.seconds are single digits respectively, add 0 in front.
+	/**
+	 * when this.minutes and this.seconds are single digits respectively, add 0 in front.
+	 * @param val the value of seconds or minutes needs to be displayed.
+	 * @returns {string} the string value after modifying.
+	 */
 	function pad(val) {
 		var valueString = val + "";
 		if (valueString.length < 2) {
