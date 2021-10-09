@@ -169,9 +169,11 @@ function setCheck() {
     if (guiController.selectionCheck()) {
         let isSet = guiController.isSelectionSet();
         let selected = document.getElementsByName("playerselection");
+        // Get the selected player and uncheck their box.
         for (let i = 0; i < selected.length; i++) {
             if (selected[i].checked) {
                 var player = guiController.currentPlayers.playersList[i].playerName;
+                selected[i].checked = false;
             }
         }
         if (player != null) {
@@ -237,7 +239,7 @@ function giveHint(value) {
     if (value == 0) {
         // Set the card at the returned index to have a red border.
         let cardId = guiController.displaySet.getHint();
-        document.getElementById("cell" + cardId).setAttribute("style", "border: 1px solid red");
+        document.getElementById("cell" + cardId).setAttribute("style", "border: 2px solid red");
         hintButton.value = "1";
         hintButton.innerHTML = "Hint? (1/2)";
     } else if (value == 1) {
@@ -245,7 +247,7 @@ function giveHint(value) {
         // Set each cell that contains a card in the hint to have a red border.
         console.log("card" + set[0].index);
         for (let i = 0; i < set.length; i++) {
-            document.getElementById("cell" + set[i].index).setAttribute("style", "border: 1px solid red");
+            document.getElementById("cell" + set[i].index).setAttribute("style", "border: 2px solid red");
         }
         hintButton.value = "2";
         hintButton.innerHTML = "Hint? (2/2)";
