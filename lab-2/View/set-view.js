@@ -166,17 +166,19 @@ function updatePlayer(player) {
  * @returns void
  */
 function setCheck() {
-    if (guiController.selectionCheck()) {
-        let isSet = guiController.isSelectionSet();
-        let selected = document.getElementsByName("playerselection");
-        // Get the selected player and uncheck their box.
-        for (let i = 0; i < selected.length; i++) {
-            if (selected[i].checked) {
-                var player = guiController.currentPlayers.playersList[i].playerName;
-                selected[i].checked = false;
-            }
+    // Get the selected player and uncheck their box.
+    let selected = document.getElementsByName("playerselection");
+    for (let i = 0; i < selected.length; i++) {
+        if (selected[i].checked) {
+            var player = guiController.currentPlayers.playersList[i].playerName;
+            selected[i].checked = false;
         }
-        if (player != null) {
+    }
+    // If no player was selected, reject the check.
+    if (player != null) {
+        // If the set entered is invalid, reject.
+        if (guiController.selectionCheck()) {
+            let isSet = guiController.isSelectionSet();   
             let hintButton = document.getElementById("hintbutton");
             if (isSet) {
                 guiController.currentPlayers.addScore(player, 3 - parseInt(hintButton.value));
@@ -191,11 +193,12 @@ function setCheck() {
             // Update the hint button
             hintButton.value = "0";
             hintButton.innerHTML = "Hint? (0/2)";
+
         } else {
-            window.alert("A player must be selected!");
+            window.alert("Three cards must be selected!");
         }
     } else {
-        window.alert("Three cards must be selected!");
+        window.alert("A player must be selected!");
     }
 
 
@@ -204,6 +207,11 @@ function setCheck() {
         window.alert("Game over!");
         document.getElementById("game").hidden = true;
         document.getElementById("main_menu").hidden = false;
+
+        // Remove each player from the game.
+        let players = guiController.allPlayers();
+        players.forEach((player) => guiController.deletePlayer(player));
+        console.log(guiController.currentPlayers);
     }
 }
 

@@ -183,9 +183,9 @@ class PlayerSet {
    * @returns {*} the names of players who are in the game.
    */
   playersName() {
-    players = [];
+    let players = [];
     for (var element of this.playersList) {
-      players.concat(element.playerName);
+      players.push(element.playerName);
     }
     return players;
   }
