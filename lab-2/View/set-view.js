@@ -92,6 +92,7 @@ function startGame() {
         window.alert("Error: Must be players in game to start!");
     }
 }
+
 /**
  * Fill in the div for the card table.
  * Fill in the card table with images of cards.
@@ -149,6 +150,7 @@ function rebuildCardTable(hand) {
         table.appendChild(row);
     }
 }
+
 /**
  * 
  * @param {String} player name of the player to update
@@ -159,6 +161,7 @@ function updatePlayer(player) {
     let newScore = document.createTextNode("Score: " + guiController.playersScoreCheck(player));
     playerToUpdate.appendChild(newScore);
 }
+
 /**
  * Get the selected cards and check if they make up a set.
  * If they do, credit the player that is selected.
@@ -178,7 +181,7 @@ function setCheck() {
     if (player != null) {
         // If the set entered is invalid, reject.
         if (guiController.selectionCheck()) {
-            let isSet = guiController.isSelectionSet();   
+            let isSet = guiController.isSelectionSet();
             let hintButton = document.getElementById("hintbutton");
             if (isSet) {
                 guiController.currentPlayers.addScore(player, 3 - parseInt(hintButton.value));
@@ -186,6 +189,7 @@ function setCheck() {
                 let checkboxes = document.getElementsByName("cardcheckbox");
                 checkboxes.forEach(element => element.checked = false);
                 guiController.clearSelection();
+                window.alert("That was not a set!");
             }
             rebuildCardTable(guiController.getHand());
             updatePlayer(player);
@@ -204,12 +208,6 @@ function setCheck() {
 
     // False if game is complete. If false, display the scoreboard.
     if (!guiController.isGameComplete()) {
-        // Clear previous scoreboard if it exists.
-        var board = document.getElementById("endgamescores");
-        while (board.children.length > 0) {
-            board.removeChild(board.firstChild)
-        }
-        
         // Remove each player from the game and attach to scoreboard.
         while (guiController.currentPlayers.numOfPlayers > 0) {
             let player = guiController.playersHighestScore();
@@ -224,12 +222,21 @@ function setCheck() {
     }
 }
 
+/**
+ * Function to handle returning to main menu after displaying scoreboard.
+ */
 function returnToMainMenu() {
     document.getElementById("game").hidden = true;
     document.getElementById("cards").hidden = false;
     document.getElementById("players").hidden = false;
     document.getElementById("scoreboard").hidden = true;
     document.getElementById("main_menu").hidden = false;
+
+    // Clear previous scoreboard.
+    var board = document.getElementById("endgamescores");
+    while (board.children.length > 0) {
+        board.removeChild(board.firstChild)
+    }
 }
 
 /**
@@ -255,6 +262,7 @@ function modifySelection(id) {
         guiController.removeCardFromSelection(hand[checkbox.value]);
     }
 }
+
 /**
  * 
  * @param {String} value the level of hints given
