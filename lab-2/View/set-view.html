@@ -18,7 +18,7 @@
     <div id="main_menu">
         <h1>Main Menu</h1>
         <p>
-            Select game options and add players to game.
+            Welcome to Set! You may play this game with as many players that are available!
         <form id="difficulty">
             <label>Select Difficulty:</label>
             <input type="radio" id="normal" name="diff" checked>
@@ -39,6 +39,8 @@
         </p>
     </div>
     <div id="game" hidden>
+        <p id="cardsleft"></p>
+        <button type="button" id="hintbutton" onclick="giveHint(this.value)" value="0">Hint? (0/2)</button>
         <div id="cards">
             <table id="cardtable">
 

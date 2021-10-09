@@ -46,7 +46,7 @@ function startGame() {
         }
 
         // Hide the main menu.
-        mainMenu.style.display = "none";
+        mainMenu.hidden = true;
 
         let hand = guiController.getHand();
         rebuildCardTable(hand);
@@ -93,7 +93,8 @@ function startGame() {
     }
 }
 /**
- * Fill in the hidden table with images of cards.
+ * Fill in the div for the card table.
+ * Fill in the card table with images of cards.
  * Outer loop creates rows, inner loop fills. 
  * 3 rows, number of cards / 3 columns.
  * Cells accessed from array index (columns)*i + j
@@ -104,6 +105,9 @@ function startGame() {
  * 
  */
 function rebuildCardTable(hand) {
+
+    // Change number of cards left in the deck
+    document.getElementById("cardsleft").innerHTML = "Cards Left in Deck: " + (guiController.displaySet.amountInDeck());
 
     // Bounds for table
     var handSize = hand.length;
@@ -120,6 +124,8 @@ function rebuildCardTable(hand) {
         var row = document.createElement("tr");
         for (let j = 0; j < columns; j++) {
             var cell = document.createElement("td");
+            cell.setAttribute("id", "cell" + (columns * i + j));
+            cell.setAttribute("style", "");
 
             // Create input element and attach attributes
             var inputEle = document.createElement("input");
@@ -168,24 +174,51 @@ function setCheck() {
                 var player = guiController.currentPlayers.playersList[i].playerName;
             }
         }
-        if (isSet) {
-            guiController.currentPlayers.addScore(player, 3);
+        if (player != null) {
+            let hintButton = document.getElementById("hintbutton");
+            if (isSet) {
+                guiController.currentPlayers.addScore(player, 3 - parseInt(hintButton.value));
+            } else {
+                let checkboxes = document.getElementsByName("cardcheckbox");
+                checkboxes.forEach(element => element.checked = false);
+                guiController.clearSelection();
+            }
+            rebuildCardTable(guiController.getHand());
+            updatePlayer(player);
+
+            // Update the hint button
+            hintButton.value = "0";
+            hintButton.innerHTML = "Hint? (0/2)";
         } else {
-            let checkboxes = document.getElementsByName("cardcheckbox");
-            checkboxes.forEach(element => element.checked = false);
-            guiController.clearSelection();
+            window.alert("A player must be selected!");
         }
-        rebuildCardTable(guiController.getHand());
-        updatePlayer(player)
-    }
-    else {
+    } else {
         window.alert("Three cards must be selected!");
+    }
+
+
+    // False if game is complete. If false, return to main menu.
+    if (!guiController.isGameComplete()) {
+        window.alert("Game over!");
+        document.getElementById("game").hidden = true;
+        document.getElementById("main_menu").hidden = false;
     }
 }
 
+/**
+ * Handle adding and removing cards from the selection when a checkbox is clicked.
+ * 
+ * @param {String} id the id of the checkbox that was clicked
+ * 
+ * @returns void
+ */
 function modifySelection(id) {
     let checkbox = document.getElementById(id);
     let hand = guiController.getHand();
+    /* If the box is checked, add it to the selection. If the selection is already
+    full, immediately untoggle the box. If the box is unchecked, just remove the card
+    from the selection.
+    */
     if (checkbox.checked) {
         let result = guiController.addCardToSelection(hand[checkbox.value]);
         if (!result) {
@@ -193,5 +226,30 @@ function modifySelection(id) {
         }
     } else {
         guiController.removeCardFromSelection(hand[checkbox.value]);
+    }
+}
+/**
+ * 
+ * @param {String} value the level of hints given
+ */
+function giveHint(value) {
+    let hintButton = document.getElementById("hintbutton");
+    if (value == 0) {
+        // Set the card at the returned index to have a red border.
+        let cardId = guiController.displaySet.getHint();
+        document.getElementById("cell" + cardId).setAttribute("style", "border: 1px solid red");
+        hintButton.value = "1";
+        hintButton.innerHTML = "Hint? (1/2)";
+    } else if (value == 1) {
+        let set = guiController.displaySet.getSet();
+        // Set each cell that contains a card in the hint to have a red border.
+        console.log("card" + set[0].index);
+        for (let i = 0; i < set.length; i++) {
+            document.getElementById("cell" + set[i].index).setAttribute("style", "border: 1px solid red");
+        }
+        hintButton.value = "2";
+        hintButton.innerHTML = "Hint? (2/2)";
+    } else {
+        window.alert("You have used all of your hints!");
     }
 }
