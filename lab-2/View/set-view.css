@@ -16,10 +16,14 @@ div, form, p {
 
 .cards {
     display: flex;
-    flex-direction: column;
-    flex-grow: 0;
+    flex-direction:column;
     align-content: center;
+    align-items: center;
     justify-content: center;
+}
+
+.cards button {
+    width: fit-content;
 }
 
 .check-set {
@@ -31,6 +35,10 @@ td {
     border-radius: 10px;
     padding: 4px 10px;
     border-width: 100%;
+}
+
+ol li {
+    text-align: center;
 }
 
 .players td {
