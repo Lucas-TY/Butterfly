@@ -39,10 +39,10 @@
         <button type="button" id="startgame" onclick="startGame()">Start Game</button>
         </p>
     </div>
-    <div id="game" hidden>
-        <p id="cardsleft"></p>
-        <button type="button" id="hintbutton" onclick="giveHint(this.value)" value="0">Hint? (0/2)</button>
+    <div id="game" hidden>      
         <div id="cards" class="cards">
+            <p id="cardsleft"></p>
+            <button type="button" id="hintbutton" onclick="giveHint(this.value)" value="0">Hint? (0/2)</button>
             <table id="cardtable">
 
             </table>
@@ -51,8 +51,14 @@
             <table id="playertable">
 
             </table>
+            <button type="button" id="checkset" onclick="setCheck()">Check Set</button>
         </div>
-        <button type="button" id="checkset" class="check-set" onclick="setCheck()">Check Set</button>
+        <div id="scoreboard" hidden>
+            <ol id="endgamescores">
+
+            </ol>
+            <button type="button" onclick="returnToMainMenu()">Return to Main Menu</button>
+        </div>
     </div>
 
 </body>

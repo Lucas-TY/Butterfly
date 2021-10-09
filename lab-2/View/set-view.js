@@ -202,17 +202,34 @@ function setCheck() {
     }
 
 
-    // False if game is complete. If false, return to main menu.
+    // False if game is complete. If false, display the scoreboard.
     if (!guiController.isGameComplete()) {
-        window.alert("Game over!");
-        document.getElementById("game").hidden = true;
-        document.getElementById("main_menu").hidden = false;
-
-        // Remove each player from the game.
-        let players = guiController.allPlayers();
-        players.forEach((player) => guiController.deletePlayer(player));
-        console.log(guiController.currentPlayers);
+        // Clear previous scoreboard if it exists.
+        var board = document.getElementById("endgamescores");
+        while (board.children.length > 0) {
+            board.removeChild(board.firstChild)
+        }
+        
+        // Remove each player from the game and attach to scoreboard.
+        while (guiController.currentPlayers.numOfPlayers > 0) {
+            let player = guiController.playersHighestScore();
+            let eleToAdd = document.createElement("li");
+            eleToAdd.innerHTML = player.playerName + ", Score: " + player.playerScore;
+            guiController.deletePlayer(player.playerName);
+            document.getElementById("endgamescores").appendChild(eleToAdd);
+        }
+        document.getElementById("cards").hidden = true;
+        document.getElementById("players").hidden = true;
+        document.getElementById("scoreboard").hidden = false;
     }
+}
+
+function returnToMainMenu() {
+    document.getElementById("game").hidden = true;
+    document.getElementById("cards").hidden = false;
+    document.getElementById("players").hidden = false;
+    document.getElementById("scoreboard").hidden = true;
+    document.getElementById("main_menu").hidden = false;
 }
 
 /**
