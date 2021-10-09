@@ -57,9 +57,9 @@ function startGame() {
         let scoreRow = document.createElement("tr");
         for (let i = 0; i < numPlayers; i++) {
             let selectionCell = document.createElement("td");
-            selectionCell.setAttribute("style", "border: 1px solid black");
+            selectionCell.setAttribute("class", "players");
             let scoreCell = document.createElement("td");
-            scoreCell.setAttribute("style", "border: 1px solid black");
+            scoreCell.setAttribute("class", "players");
 
             // Create input element and attach attributes
             let inputEle = document.createElement("input");

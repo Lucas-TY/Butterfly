@@ -4,6 +4,7 @@
 <head>
     <title>Set</title>
     <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="set-view.css" media="screen"/>
 </head>
 <script type="text/javascript" src="../Model/PlayerModule/Player.js"></script>
 <script type="text/javascript" src="../Model/PlayerModule/ComputerPlayer.js"></script>
@@ -41,17 +42,17 @@
     <div id="game" hidden>
         <p id="cardsleft"></p>
         <button type="button" id="hintbutton" onclick="giveHint(this.value)" value="0">Hint? (0/2)</button>
-        <div id="cards">
+        <div id="cards" class="cards">
             <table id="cardtable">
 
             </table>
         </div>
-        <div id="players">
+        <div id="players" class="players">
             <table id="playertable">
 
             </table>
         </div>
-        <button type="button" id="checkset" onclick="setCheck()">Check Set</button>
+        <button type="button" id="checkset" class="check-set" onclick="setCheck()">Check Set</button>
     </div>
 
 </body>
