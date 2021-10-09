@@ -208,7 +208,7 @@ function setCheck() {
 
     // False if game is complete. If false, display the scoreboard.
     if (!guiController.isGameComplete()) {
-        document.getElementById("endgamescores").innerHTML = "<h1>Game Over!</h1><p>Final Scores:</p>";
+        document.getElementById("score-title").hidden = false;
         // Remove each player from the game and attach to scoreboard.
         while (guiController.currentPlayers.numOfPlayers > 0) {
             let player = guiController.playersHighestScore();
@@ -231,6 +231,7 @@ function returnToMainMenu() {
     document.getElementById("players").hidden = false;
     document.getElementById("game-objects").hidden = false;
     document.getElementById("scoreboard").hidden = true;
+    document.getElementById("score-title").hidden = true;
     document.getElementById("main_menu").hidden = false;
     document.getElementById("addplayerstatus").innerHTML = "";
     document.getElementById("playertable").innerHTML = "";
