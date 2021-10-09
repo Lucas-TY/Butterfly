@@ -102,11 +102,27 @@
 
      /**
       * return a set that contains current players
+      * @returns {Arrary(String)} the current players set
+      */
+     allPlayersName() {
+         return this.currentPlayers.playersName();
+     }
+     /**
+      * return a set that contains current players
       * @returns {Arrary(players)} the current players set
       */
      allPlayers() {
-         return this.currentPlayers.playersName();
+         return this.currentPlayers.playersList;
      }
+     /**
+      * return the player that his the highest score
+      * 
+      * @returns {Player} the player that has the highest score
+      */
+     playersHighestScore() {
+         return this.currentPlayers.playersHighestScore();
+     }
+
      /**
       * reset all player's score.
       */
