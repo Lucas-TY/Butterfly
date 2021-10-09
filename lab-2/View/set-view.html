@@ -40,18 +40,20 @@
         </p>
     </div>
     <div id="game" hidden>      
-        <div id="cards" class="cards">
-            <p id="cardsleft"></p>
-            <button type="button" id="hintbutton" onclick="giveHint(this.value)" value="0">Hint? (0/2)</button>
-            <table id="cardtable">
+        <div id="game-objects">
+            <div id="cards" class="cards">
+                <p id="cardsleft"></p>
+                <button type="button" id="hintbutton" onclick="giveHint(this.value)" value="0">Hint? (0/2)</button>
+                <table id="cardtable">
 
-            </table>
-        </div>
-        <div id="players" class="players">
-            <table id="playertable">
+                </table>
+            </div>
+            <div id="players" class="players">
+                <table id="playertable">
 
-            </table>
-            <button type="button" class="check-set" id="checkset" onclick="setCheck()">Check Set</button>
+                </table>
+                <button type="button" class="check-set" id="checkset" onclick="setCheck()">Check Set</button>
+            </div>
         </div>
         <div id="scoreboard" hidden>
             <ol id="endgamescores">

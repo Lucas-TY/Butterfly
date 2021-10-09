@@ -37,15 +37,26 @@ td {
     border-width: 100%;
 }
 
-ol li {
-    text-align: center;
-}
-
 .players td {
     border: 1px solid black;
+}
+
+#scoreboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
 }
 
 h1 {
     text-align: center;
     position: relative;
+}
+
+ol {
+    text-align: center;
+}
+
+li {
+    text-align: left;
 }
