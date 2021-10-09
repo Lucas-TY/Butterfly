@@ -74,14 +74,6 @@
          return this.currentPlayers.playersScoreCheck(name);
      }
      /**
-      * display the highest score in this game
-      *
-      * @returns {number} the highest score
-      */
-     playersHighestScore() {
-         return this.currentPlayers.playersHighestScore();
-     }
-     /**
       * check is the player already in the game
       * @param {string} name the name of a specific player
       * @returns {boolean} true the player is already in the game

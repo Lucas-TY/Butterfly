@@ -129,13 +129,13 @@ class PlayerSet {
    * @returns {Player} the Player that has the highest score
    */
   playersHighestScore() {
-    var highest_score;
+    var highestScore = this.playersList[0];
     for (var element of this.playersList) {
-      if (element.playerScore > highest_score) {
-        highest_score = element;
+      if (element.playerScore > highestScore.playerScore) {
+        highestScore = element;
       }
     }
-    return highest_score;
+    return highestScore;
   }
 
   /**
