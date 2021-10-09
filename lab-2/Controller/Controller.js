@@ -102,6 +102,13 @@
 
      /**
       * return a set that contains current players
+      * @returns {Arrary(String)} the current players set
+      */
+     allPlayersName() {
+         return this.currentPlayers.playersName();
+     }
+     /**
+      * return a set that contains current players
       * @returns {Arrary(players)} the current players set
       */
      allPlayers() {
