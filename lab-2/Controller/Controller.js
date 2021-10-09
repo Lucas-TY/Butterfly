@@ -191,7 +191,7 @@
       * 
       * @returns ture if it's ready to check
       */
-     slectionCheck() {
+     selectionCheck() {
          return this.currentSelection.length === 3;
      }
      /** Determine if the selected cards create a set. 

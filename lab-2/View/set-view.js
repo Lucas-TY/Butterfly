@@ -9,13 +9,14 @@ var guiController = new Controller()
  * @returns void
  */
 function addPlayer(playerName) {
-    var result = guiController.addPlayer(playerName);
+    let result = guiController.addPlayer(playerName);
+    let statusLabel = document.getElementById("addplayerstatus");
     document.getElementById("playername").value = "";
+    let str = "Player \'" + playerName + "\' added!";
     if (result == null) {
-        console.log("Player \'" + playerName + "\' is already in the game!");
-    } else {
-        console.log("Player \'" + playerName + "\' added!");
+        str = "Player \'" + playerName + "\' is already in the game!";
     }
+    statusLabel.innerHTML = str;
 }
 
 /**
@@ -52,7 +53,6 @@ function startGame() {
 
         // Build the table of players. One row, n/2 columns.
         let playerTable = document.getElementById("playertable");
-        console.log(playerTable);   
         let selectionRow = document.createElement("tr");
         let scoreRow = document.createElement("tr");
         for (let i = 0; i < numPlayers; i++) {
@@ -76,7 +76,7 @@ function startGame() {
             selectionCell.appendChild(label);
 
             scoreCell.setAttribute("id", guiController.currentPlayers.playersList[i].playerName);
-            let score = document.createTextNode("Score: " + guiController.currentPlayers.playersList[i].playerScore); 
+            let score = document.createTextNode("Score: " + guiController.currentPlayers.playersList[i].playerScore);
             scoreCell.appendChild(score);
 
             selectionRow.appendChild(selectionCell);
@@ -89,7 +89,7 @@ function startGame() {
         game.hidden = false;
 
     } else {
-        console.log("Error: Must be players in game to start!");
+        window.alert("Error: Must be players in game to start!");
     }
 }
 /**
@@ -160,22 +160,27 @@ function updatePlayer(player) {
  * @returns void
  */
 function setCheck() {
-    let isSet = guiController.isSelectionSet();
-    let selected = document.getElementsByName("playerselection");
-    for (let i = 0; i < selected.length; i++) {
-        if (selected[i].checked) {
-            var player = guiController.currentPlayers.playersList[i].playerName;
+    if (guiController.selectionCheck()) {
+        let isSet = guiController.isSelectionSet();
+        let selected = document.getElementsByName("playerselection");
+        for (let i = 0; i < selected.length; i++) {
+            if (selected[i].checked) {
+                var player = guiController.currentPlayers.playersList[i].playerName;
+            }
         }
+        if (isSet) {
+            guiController.currentPlayers.addScore(player, 3);
+        } else {
+            let checkboxes = document.getElementsByName("cardcheckbox");
+            checkboxes.forEach(element => element.checked = false);
+            guiController.clearSelection();
+        }
+        rebuildCardTable(guiController.getHand());
+        updatePlayer(player)
     }
-    if (isSet) {
-        guiController.currentPlayers.addScore(player, 3);
-    } else {
-        let checkboxes = document.getElementsByName("cardcheckbox");
-        checkboxes.forEach(element => element.checked = false);
-        guiController.clearSelection();
+    else {
+        window.alert("Three cards must be selected!");
     }
-    rebuildCardTable(guiController.getHand());
-    updatePlayer(player)
 }
 
 function modifySelection(id) {
@@ -189,5 +194,4 @@ function modifySelection(id) {
     } else {
         guiController.removeCardFromSelection(hand[checkbox.value]);
     }
-    console.log(guiController.currentSelection);
 }
