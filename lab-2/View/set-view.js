@@ -100,7 +100,7 @@ function addHardComputerPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
     let str = "Computer player \'" + playerName + "\' added!";
     if (playerName != null && playerName != "") {
-        let result = guiController.addComputerPlayer(playerName, 0.1);
+        let result = guiController.addComputerPlayer(playerName, 0.01);
         document.getElementById("playername").value = "";
         if (result == null) {
             str = "Player \'" + playerName + "\' is already in the game!";
@@ -159,6 +159,10 @@ function startGame() {
                 inputEle.setAttribute("type", "radio");
                 inputEle.setAttribute("name", "playerselection");
                 inputEle.setAttribute("id", "player" + i);
+                selectionCell.appendChild(inputEle);
+            } else {
+                let inputEle = document.createElement("span");
+                inputEle.setAttribute("name", "playerselection");
                 selectionCell.appendChild(inputEle);
             }
             // Create label and attach attributes and children
@@ -266,7 +270,8 @@ function setCheck() {
     // Get the selected player and uncheck their box.
     let selected = document.getElementsByName("playerselection");
     for (let i = 0; i < selected.length; i++) {
-        if (selected[i].checked) {
+        console.log(selected)
+        if (!!(selected[i].checked)) {
             var player = guiController.currentPlayers.playersList[i].playerName;
             selected[i].checked = false;
         }
