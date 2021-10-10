@@ -269,7 +269,7 @@ function modifySelection(id) {
 }
 
 /**
- * 
+ * Provides a hint to the user based on the current hint level.
  * @param {String} value the level of hints given
  */
 function giveHint(value) {
