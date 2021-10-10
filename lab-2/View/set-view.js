@@ -174,6 +174,7 @@ function startGame() {
 
         //Show the game.
         game.hidden = false;
+        resetHint();
 
     } else {
         window.alert("Error: Must be players in game to start!");
