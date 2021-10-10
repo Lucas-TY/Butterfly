@@ -1,21 +1,36 @@
 // Create a controller instance to handle events
 var guiController = new Controller();
+
 // Create a Timer instance to display the time
-var timer = new Timer("second", "minute");
+var timer = new Timer("second", "minute", () => {
+	//If game is complete(not running), display the scoreboard and stop timer.
+	if (!guiController.isGameRunning()) {
+		endGame();
+	} //else, refresh the displayed card image
+	else {
+		rebuildCardTable(guiController.getHand());
+		resetHint();
+	}
+});
+
 /**
- * Pass the player name to the controller for input.
+ * Pass the player name to the controller for input to add a player
  * 
  * @param {String} playerName
  * 
  * @returns void
  */
-function addPlayer(playerName) {
-    let result = guiController.addPlayer(playerName);
+ function addPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
-    document.getElementById("playername").value = "";
     let str = "Player \'" + playerName + "\' added!";
-    if (result == null) {
-        str = "Player \'" + playerName + "\' is already in the game!";
+    if(playerName != null && playerName != ""){
+        let result = guiController.addPlayer(playerName);
+        document.getElementById("playername").value = "";
+        if (result == null) {
+            str = "Player \'" + playerName + "\' is already in the game!";
+        }
+    } else {
+        str = "Invalid player name!"
     }
     statusLabel.innerHTML = str;
 }
@@ -86,6 +101,7 @@ function startGame() {
 
         //Show the game.
         game.hidden = false;
+        resetHint();
 
     } else {
         window.alert("Error: Must be players in game to start!");
@@ -196,8 +212,7 @@ function setCheck() {
             updatePlayer(player);
 
             // Update the hint button
-            hintButton.value = "0";
-            hintButton.innerHTML = "Hint? (0/2)";
+            resetHint();
 
         } else {
             window.alert("Three cards must be selected!");
@@ -292,6 +307,16 @@ function giveHint(value) {
         window.alert("You have used all of your hints!");
     }
 }
+
+/**
+ * Reset hint button
+ */
+ function resetHint(){
+    let hintBtn = document.getElementById("hintbutton");
+    hintBtn.value = "0";
+    hintBtn.innerHTML = "Hint? (0/2)";
+}
+
 /**
  * Start the timer
  */
@@ -313,4 +338,24 @@ function skip() {
     guiController.clearSelection();
     guiController.skip();
     rebuildCardTable(guiController.getHand());
+}
+
+/**
+ * It will stop the timer and show the scoreboard. It will also hide all
+ * unnecessary elements.
+ */
+ function endGame() {
+    timer.reset();
+    guiController.checker = false;
+    document.getElementById("score-title").hidden = false;
+    // Remove each player from the game and attach to scoreboard.
+    while (guiController.currentPlayers.numOfPlayers > 0) {
+        let player = guiController.playersHighestScore();
+        let eleToAdd = document.createElement("li");
+        eleToAdd.innerHTML = player.playerName + ", Score: " + player.playerScore;
+        guiController.deletePlayer(player.playerName);
+        document.getElementById("endgamescores").appendChild(eleToAdd);
+    }
+    document.getElementById("game-objects").hidden = true;
+    document.getElementById("scoreboard").hidden = false;
 }

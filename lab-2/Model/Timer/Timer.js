@@ -6,12 +6,13 @@
  *
  * @author Jing Wen & Adam Lechliter & Lucas Wu
  */
-function Timer(secondTag, minuteTag) {
+function Timer(secondTag, minuteTag, intervalFunc) {
 	this.seconds = document.getElementById(secondTag);
 	this.minutes = document.getElementById(minuteTag);
 	this.secondsRunning = 0;
 	this.secondsLeft = 75;
 	this.run = false;
+	this.intervalFunc = intervalFunc;
 
 	/**
 	 * Count-up the time.
@@ -28,21 +29,10 @@ function Timer(secondTag, minuteTag) {
 			guiController.skip();
 			//If game is complete(not running), display the scoreboard and stop timer.
 			if (!guiController.isGameRunning()) {
-				document.getElementById("score-title").hidden = false;
-				// Remove each player from the game and attach to scoreboard.
-				while (guiController.currentPlayers.numOfPlayers > 0) {
-					let player = guiController.playersHighestScore();
-					let eleToAdd = document.createElement("li");
-					eleToAdd.innerHTML = player.playerName + ", Score: " + player.playerScore;
-					guiController.deletePlayer(player.playerName);
-					document.getElementById("endgamescores").appendChild(eleToAdd);
-				}
-				timer.reset();
-				document.getElementById("game-objects").hidden = true;
-				document.getElementById("scoreboard").hidden = false;
+				endGame();
 			} //else, refresh the displayed card image
 			else {
-				rebuildCardTable(guiController.getHand());
+				this.intervalFunc();
 			}
 
 		}
