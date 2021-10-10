@@ -20,12 +20,14 @@ setInterval(() => {
 
         for (i = 0; i < players.length; i++) {
             if (!(players[i].isHuman)) {
-                console.log(players[i]);
                 if (players[i].canIWin()) {
+                    console.log(guiController.displaySet.deck);
+                    console.log("adding to " + players[i].playerName);
                     let selected = document.getElementsByName("playerselection");
                     selected.forEach(item => item.checked = false);
                     let checkboxes = document.getElementsByName("cardcheckbox");
                     checkboxes.forEach(element => element.checked = false);
+                    guiController.skip();
                     guiController.clearSelection();
                     players[i].scoreAdd(3);
                     updatePlayer(players[i].playerName);
@@ -98,7 +100,7 @@ function addHardComputerPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
     let str = "Computer player \'" + playerName + "\' added!";
     if (playerName != null && playerName != "") {
-        let result = guiController.addComputerPlayer(playerName, 0.01);
+        let result = guiController.addComputerPlayer(playerName, 0.1);
         document.getElementById("playername").value = "";
         if (result == null) {
             str = "Player \'" + playerName + "\' is already in the game!";
@@ -277,6 +279,7 @@ function setCheck() {
             let hintButton = document.getElementById("hintbutton");
             if (isSet) {
                 guiController.currentPlayers.addScore(player, 3 - parseInt(hintButton.value));
+                console.log("adding to " + player);
             } else {
                 let checkboxes = document.getElementsByName("cardcheckbox");
                 checkboxes.forEach(element => element.checked = false);
