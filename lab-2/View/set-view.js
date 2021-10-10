@@ -270,7 +270,6 @@ function setCheck() {
     // Get the selected player and uncheck their box.
     let selected = document.getElementsByName("playerselection");
     for (let i = 0; i < selected.length; i++) {
-        console.log(selected)
         if (!!(selected[i].checked)) {
             var player = guiController.currentPlayers.playersList[i].playerName;
             selected[i].checked = false;
