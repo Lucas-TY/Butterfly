@@ -2,8 +2,35 @@
 var guiController = new Controller();
 // Create a Timer instance to display the time
 var timer = new Timer("second", "minute");
+//check robot players status each second, and will help robot player to decide whether it will win
+setInterval(() => {
+    if (guiController.checker) {
+        let players = guiController.allPlayers();
+
+        for (i = 0; i < players.length; i++) {
+            if (!(players[i].isHuman)) {
+                console.log(players[i]);
+                if (players[i].canIWin()) {
+                    guiController.skip();
+                    players[i].scoreAdd(3);
+                    updatePlayer(players[i].playerName);
+                    timer.reset();
+                    timer.changeRun();
+                    //If game is complete(not running), display the scoreboard and stop timer.
+                    if (!guiController.isGameRunning()) {
+                        endGame();
+                    } //else, refresh the displayed card image
+                    else {
+                        rebuildCardTable(guiController.getHand());
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}, 1000);
 /**
- * Pass the player name to the controller for input.
+ * Pass the player name to the controller for input to add a player
  * 
  * @param {String} playerName
  * 
@@ -14,6 +41,40 @@ function addPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
     document.getElementById("playername").value = "";
     let str = "Player \'" + playerName + "\' added!";
+    if (result == null) {
+        str = "Player \'" + playerName + "\' is already in the game!";
+    }
+    statusLabel.innerHTML = str;
+}
+/**
+ * Pass the player name to the controller for inputto add a easy mode computer player
+ * 
+ * @param {String} playerName
+ * 
+ * @returns void
+ */
+function addEasyComputerPlayer(playerName) {
+    let result = guiController.addComputerPlayer(playerName, 0.00025);
+    let statusLabel = document.getElementById("addplayerstatus");
+    document.getElementById("playername").value = "";
+    let str = "Computer player \'" + playerName + "\' added!";
+    if (result == null) {
+        str = "Player \'" + playerName + "\' is already in the game!";
+    }
+    statusLabel.innerHTML = str;
+}
+/**
+ * Pass the player name to the controller for inputto add a hard mode computer player
+ * 
+ * @param {String} playerName
+ * 
+ * @returns void
+ */
+function addHardComputerPlayer(playerName) {
+    let result = guiController.addComputerPlayer(playerName, 0.005);
+    let statusLabel = document.getElementById("addplayerstatus");
+    document.getElementById("playername").value = "";
+    let str = "Computer player \'" + playerName + "\' added!";
     if (result == null) {
         str = "Player \'" + playerName + "\' is already in the game!";
     }
@@ -33,6 +94,8 @@ function startGame() {
         // Get div elements
         let mainMenu = document.getElementById("main_menu");
         let game = document.getElementById("game");
+        //switch on the checker
+        guiController.checker = true;
 
         // Determine the difficulty based off the radio button selection.
         let difficultyOptions = document.getElementById("difficulty");
@@ -60,13 +123,14 @@ function startGame() {
             let scoreCell = document.createElement("td");
             scoreCell.setAttribute("class", "players");
 
-            // Create input element and attach attributes
-            let inputEle = document.createElement("input");
-            inputEle.setAttribute("type", "radio");
-            inputEle.setAttribute("name", "playerselection");
-            inputEle.setAttribute("id", "player" + i);
-            selectionCell.appendChild(inputEle);
-
+            // Create input element and attach attributes if it's not a robot player
+            if (guiController.currentPlayers.playersList[i].isHuman) {
+                let inputEle = document.createElement("input");
+                inputEle.setAttribute("type", "radio");
+                inputEle.setAttribute("name", "playerselection");
+                inputEle.setAttribute("id", "player" + i);
+                selectionCell.appendChild(inputEle);
+            }
             // Create label and attach attributes and children
             let label = document.createElement("label");
             label.setAttribute("for", "player" + i);
@@ -156,6 +220,7 @@ function rebuildCardTable(hand) {
  */
 function updatePlayer(player) {
     let playerToUpdate = document.getElementById(player);
+    console.log(playerToUpdate);
     playerToUpdate.removeChild(playerToUpdate.firstChild);
     let newScore = document.createTextNode("Score: " + guiController.playersScoreCheck(player));
     playerToUpdate.appendChild(newScore);
@@ -313,4 +378,23 @@ function skip() {
     guiController.clearSelection();
     guiController.skip();
     rebuildCardTable(guiController.getHand());
+}
+/**
+ * It will stop the timer and show the scoreboard. It will also hide all
+ * unnecessary elements.
+ */
+function endGame() {
+    timer.reset();
+    guiController.checker = false;
+    document.getElementById("score-title").hidden = false;
+    // Remove each player from the game and attach to scoreboard.
+    while (guiController.currentPlayers.numOfPlayers > 0) {
+        let player = guiController.playersHighestScore();
+        let eleToAdd = document.createElement("li");
+        eleToAdd.innerHTML = player.playerName + ", Score: " + player.playerScore;
+        guiController.deletePlayer(player.playerName);
+        document.getElementById("endgamescores").appendChild(eleToAdd);
+    }
+    document.getElementById("game-objects").hidden = true;
+    document.getElementById("scoreboard").hidden = false;
 }

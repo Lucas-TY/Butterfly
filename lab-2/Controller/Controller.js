@@ -3,6 +3,7 @@
   * @member  {DisplayCardSet} displaySet  - the deck of cards and the current hand
   * @member  {PlayerSet} currentPlayers - the list of current players
   * @member  {Array(Card)} currentSelection  - list of indices or card
+  * @member  {boolean} checker  - is the game checking for robot players status?
   * @author Lucas Wu
   */
  class Controller {
@@ -16,6 +17,7 @@
          this.displaySet.initializeHand();
          this.currentPlayers = new PlayerSet();
          this.currentSelection = [];
+         this.checker = false;
      }
      /**
       * add a computer player to the game.

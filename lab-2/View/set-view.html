@@ -27,6 +27,11 @@
             <input type="text" id="playername">
             <input type="button" id="addplayer" value="Add Player"
                 onclick="addPlayer(document.getElementById('playername').value)">
+            <input type="button" id="addcomputerplayer" value="Add Easy Computer Player"
+                onclick="addEasyComputerPlayer(document.getElementById('playername').value)">
+             <input type="button" id="addcomputerplayer" value="Add Hard Computer Player"
+                onclick="addHardComputerPlayer(document.getElementById('playername').value)">
+                
             <label id="addplayerstatus"></label>
         </form>
         <button type="button" id="startgame" >Start Game</button>

@@ -6,22 +6,22 @@
  * @member {number} winProb- wining probability of computer player
  * @member {boolean} isHuman - is human player or computer player
  * 
- * @author Songyuan Wu & Jing Wen
+ * @author Songyuan Wu & Jing Wen & Lucas Wu
  */
 
- class ComputerPlayer {
+class ComputerPlayer {
 	/**
 	 * Initializes a new instance of the new player
 	 *
 	 * @param {string} name - name of the player
-	 *
+	 * @param {number} name - the probabilty that the player can winI
 	 * @returns {ComputerPlayer} a new instance of a ComputerPlayer object
 	 */
-	constructor(name) {
-		this.playerName= name;
+	constructor(name, winProb) {
+		this.playerName = name;
 		this.playerScore = 0;
 		this.isHuman = false;
-		this.winProb= 0.0;
+		this.winProb = winProb;
 	}
 
 	/**
@@ -30,7 +30,7 @@
 	 */
 	canIWin() {
 		var r = Math.random();
-		console.log(this.playerName+ ":" + r + " vs." + this.winProb);
+		console.log(this.playerName + ":" + r + " vs." + this.winProb);
 		if (r < this.winProb) {
 			return true;
 		} else {
@@ -44,7 +44,7 @@
 	 * @param {number} points - points that the player won or lost.
 	 * @returns {number} the updated score.
 	 */
-	 scoreAdd(points) {
+	scoreAdd(points) {
 		this.playerScore += points;
 		if (this.playerScore < 0) {
 			this.playerScore = 0;
@@ -58,7 +58,7 @@
 	 * @param {number} score - the players's new score.
 	 * @returns {number} the new score.
 	 */
-	 scoreChangeTo(score) {
+	scoreChangeTo(score) {
 		this.playerScore = score;
 		return this.playerScore;
 	}
@@ -69,9 +69,8 @@
 	 * @param {string} name- the players's new name.
 	 * @returns {string} the new name.
 	 */
-	 nameChangeTo(name) {
-		this.playerName= name;
+	nameChangeTo(name) {
+		this.playerName = name;
 		return this.playerName;
 	}
 }
-	
