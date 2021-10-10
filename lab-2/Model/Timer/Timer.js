@@ -6,12 +6,13 @@
  *
  * @author Jing Wen & Adam Lechliter & Lucas Wu
  */
-function Timer(secondTag, minuteTag) {
+function Timer(secondTag, minuteTag, intervalFunc) {
 	this.seconds = document.getElementById(secondTag);
 	this.minutes = document.getElementById(minuteTag);
 	this.secondsRunning = 0;
 	this.secondsLeft = 75;
 	this.run = false;
+	this.intervalFunc = intervalFunc;
 
 	/**
 	 * Count-up the time.
@@ -26,13 +27,7 @@ function Timer(secondTag, minuteTag) {
 			checkboxes.forEach(element => element.checked = false);
 			guiController.clearSelection();
 			guiController.skip();
-			//If game is complete(not running), display the scoreboard and stop timer.
-			if (!guiController.isGameRunning()) {
-				endGame();
-			} //else, refresh the displayed card image
-			else {
-				rebuildCardTable(guiController.getHand());
-			}
+			this.intervalFunc()
 
 		}
 
