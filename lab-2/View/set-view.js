@@ -3,14 +3,14 @@ var guiController = new Controller();
 
 // Create a Timer instance to display the time
 var timer = new Timer("second", "minute", () => {
-	//If game is complete(not running), display the scoreboard and stop timer.
-	if (!guiController.isGameRunning()) {
-		endGame();
-	} //else, refresh the displayed card image
-	else {
-		rebuildCardTable(guiController.getHand());
-		resetHint();
-	}
+    //If game is complete(not running), display the scoreboard and stop timer.
+    if (!guiController.isGameRunning()) {
+        endGame();
+    } //else, refresh the displayed card image
+    else {
+        rebuildCardTable(guiController.getHand());
+        resetHint();
+    }
 });
 
 //check robot players status each second, and will help robot player to decide whether it will win
@@ -22,7 +22,11 @@ setInterval(() => {
             if (!(players[i].isHuman)) {
                 console.log(players[i]);
                 if (players[i].canIWin()) {
-                    guiController.skip();
+                    let selected = document.getElementsByName("playerselection");
+                    selected.forEach(item => item.checked = false);
+                    let checkboxes = document.getElementsByName("cardcheckbox");
+                    checkboxes.forEach(element => element.checked = false);
+                    guiController.clearSelection();
                     players[i].scoreAdd(3);
                     updatePlayer(players[i].playerName);
                     timer.reset();
@@ -51,7 +55,7 @@ setInterval(() => {
 function addPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
     let str = "Player \'" + playerName + "\' added!";
-    if(playerName != null && playerName != ""){
+    if (playerName != null && playerName != "") {
         let result = guiController.addPlayer(playerName);
         document.getElementById("playername").value = "";
         if (result == null) {
@@ -72,7 +76,7 @@ function addPlayer(playerName) {
 function addEasyComputerPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
     let str = "Computer player \'" + playerName + "\' added!";
-    if(playerName != null && playerName != ""){
+    if (playerName != null && playerName != "") {
         let result = guiController.addComputerPlayer(playerName, 0.025);
         document.getElementById("playername").value = "";
         if (result == null) {
@@ -93,8 +97,8 @@ function addEasyComputerPlayer(playerName) {
 function addHardComputerPlayer(playerName) {
     let statusLabel = document.getElementById("addplayerstatus");
     let str = "Computer player \'" + playerName + "\' added!";
-    if(playerName != null && playerName != ""){
-        let result = guiController.addComputerPlayer(playerName, 0.1);
+    if (playerName != null && playerName != "") {
+        let result = guiController.addComputerPlayer(playerName, 0.01);
         document.getElementById("playername").value = "";
         if (result == null) {
             str = "Player \'" + playerName + "\' is already in the game!";
@@ -384,7 +388,7 @@ function giveHint(value) {
 /**
  * Reset hint button
  */
-function resetHint(){
+function resetHint() {
     let hintBtn = document.getElementById("hintbutton");
     hintBtn.value = "0";
     hintBtn.innerHTML = "Hint? (0/2)";
