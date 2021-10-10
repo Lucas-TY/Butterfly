@@ -30,7 +30,6 @@ class ComputerPlayer {
 	 */
 	canIWin() {
 		var r = Math.random();
-		console.log(this.playerName + ":" + r + " vs." + this.winProb);
 		if (r < this.winProb) {
 			return true;
 		} else {
