@@ -27,13 +27,8 @@ function Timer(secondTag, minuteTag, intervalFunc) {
 			checkboxes.forEach(element => element.checked = false);
 			guiController.clearSelection();
 			guiController.skip();
-			//If game is complete(not running), display the scoreboard and stop timer.
-			if (!guiController.isGameRunning()) {
-				endGame();
-			} //else, refresh the displayed card image
-			else {
-				this.intervalFunc();
-			}
+			
+			this.intervalFunc();
 
 		}
 
