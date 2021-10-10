@@ -338,6 +338,8 @@ function returnToMainMenu() {
     document.getElementById("main_menu").hidden = false;
     document.getElementById("addplayerstatus").innerHTML = "";
     document.getElementById("playertable").innerHTML = "";
+    resetHint();
+
     // Clear previous scoreboard.
     var board = document.getElementById("endgamescores");
     while (board.children.length > 0) {
