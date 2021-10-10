@@ -1,7 +1,18 @@
 // Create a controller instance to handle events
 var guiController = new Controller();
+
 // Create a Timer instance to display the time
-var timer = new Timer("second", "minute");
+var timer = new Timer("second", "minute", () => {
+	//If game is complete(not running), display the scoreboard and stop timer.
+	if (!guiController.isGameRunning()) {
+		endGame();
+	} //else, refresh the displayed card image
+	else {
+		rebuildCardTable(guiController.getHand());
+		resetHint();
+	}
+});
+
 //check robot players status each second, and will help robot player to decide whether it will win
 setInterval(() => {
     if (guiController.checker) {
@@ -22,6 +33,7 @@ setInterval(() => {
                     } //else, refresh the displayed card image
                     else {
                         rebuildCardTable(guiController.getHand());
+                        resetHint();
                     }
                     break;
                 }
@@ -37,12 +49,16 @@ setInterval(() => {
  * @returns void
  */
 function addPlayer(playerName) {
-    let result = guiController.addPlayer(playerName);
     let statusLabel = document.getElementById("addplayerstatus");
-    document.getElementById("playername").value = "";
     let str = "Player \'" + playerName + "\' added!";
-    if (result == null) {
-        str = "Player \'" + playerName + "\' is already in the game!";
+    if(playerName != null && playerName != ""){
+        let result = guiController.addPlayer(playerName);
+        document.getElementById("playername").value = "";
+        if (result == null) {
+            str = "Player \'" + playerName + "\' is already in the game!";
+        }
+    } else {
+        str = "Invalid player name!"
     }
     statusLabel.innerHTML = str;
 }
@@ -54,12 +70,16 @@ function addPlayer(playerName) {
  * @returns void
  */
 function addEasyComputerPlayer(playerName) {
-    let result = guiController.addComputerPlayer(playerName, 0.00025);
     let statusLabel = document.getElementById("addplayerstatus");
-    document.getElementById("playername").value = "";
     let str = "Computer player \'" + playerName + "\' added!";
-    if (result == null) {
-        str = "Player \'" + playerName + "\' is already in the game!";
+    if(playerName != null && playerName != ""){
+        let result = guiController.addComputerPlayer(playerName, 0.025);
+        document.getElementById("playername").value = "";
+        if (result == null) {
+            str = "Player \'" + playerName + "\' is already in the game!";
+        }
+    } else {
+        str = "Invalid player name!"
     }
     statusLabel.innerHTML = str;
 }
@@ -71,12 +91,16 @@ function addEasyComputerPlayer(playerName) {
  * @returns void
  */
 function addHardComputerPlayer(playerName) {
-    let result = guiController.addComputerPlayer(playerName, 0.005);
     let statusLabel = document.getElementById("addplayerstatus");
-    document.getElementById("playername").value = "";
     let str = "Computer player \'" + playerName + "\' added!";
-    if (result == null) {
-        str = "Player \'" + playerName + "\' is already in the game!";
+    if(playerName != null && playerName != ""){
+        let result = guiController.addComputerPlayer(playerName, 0.1);
+        document.getElementById("playername").value = "";
+        if (result == null) {
+            str = "Player \'" + playerName + "\' is already in the game!";
+        }
+    } else {
+        str = "Invalid player name!"
     }
     statusLabel.innerHTML = str;
 }
@@ -261,8 +285,7 @@ function setCheck() {
             updatePlayer(player);
 
             // Update the hint button
-            hintButton.value = "0";
-            hintButton.innerHTML = "Hint? (0/2)";
+            resetHint();
 
         } else {
             window.alert("Three cards must be selected!");
@@ -357,6 +380,16 @@ function giveHint(value) {
         window.alert("You have used all of your hints!");
     }
 }
+
+/**
+ * Reset hint button
+ */
+function resetHint(){
+    let hintBtn = document.getElementById("hintbutton");
+    hintBtn.value = "0";
+    hintBtn.innerHTML = "Hint? (0/2)";
+}
+
 /**
  * Start the timer
  */
