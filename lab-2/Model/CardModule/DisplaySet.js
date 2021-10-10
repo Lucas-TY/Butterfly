@@ -136,7 +136,6 @@ function DisplayCardSet() {
 		} else {
 			// Replace the cards at the given indices with new cards from the deck
 			let update_indices = false;
-			console.log(indices);
 			indices.forEach((index) => {
 				if (!this.deck.isEmpty() && this.hand.length <= DEFAULT_HAND_SIZE) {
 					this.hand[index].setIndex(); // sets index to empty index

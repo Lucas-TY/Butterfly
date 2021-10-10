@@ -146,7 +146,7 @@
       * Determine if the game has completed based on the hand
       * @returns {boolean} true if it contains a set
       */
-     isGameComplete() {
+     isGameRunning() {
          return this.displaySet.handContainsSet();
      }
      /**
@@ -221,5 +221,16 @@
              this.clearSelection();
          }
          return isSet;
+     }
+     /** 
+      * Skip this round and update displayed cards
+      * 
+      * @returns {boolean} ture if the selected cards create a set
+      */
+     skip() {
+         let selectedIndex = this.displaySet.getSet().map(function index(card) {
+             return card.index;
+         });
+         this.displaySet.dealFullHand(selectedIndex);
      }
  }

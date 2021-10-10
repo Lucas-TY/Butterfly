@@ -1,6 +1,7 @@
 // Create a controller instance to handle events
-var guiController = new Controller()
-
+var guiController = new Controller();
+// Create a Timer instance to display the time
+var timer = new Timer("second", "minute");
 /**
  * Pass the player name to the controller for input.
  * 
@@ -37,11 +38,9 @@ function startGame() {
         let difficultyOptions = document.getElementById("difficulty");
         if (difficultyOptions[0].checked) {
             guiController.setLevelDefault();
-        }
-        else if (difficultyOptions[1].checked) {
+        } else if (difficultyOptions[1].checked) {
             guiController.setLevelRookie1();
-        }
-        else {
+        } else {
             guiController.setLevelRookie2();
         }
 
@@ -192,6 +191,8 @@ function setCheck() {
                 window.alert("That was not a set!");
             }
             rebuildCardTable(guiController.getHand());
+            timer.reset();
+            timer.changeRun();
             updatePlayer(player);
 
             // Update the hint button
@@ -206,8 +207,8 @@ function setCheck() {
     }
 
 
-    // False if game is complete. If false, display the scoreboard.
-    if (!guiController.isGameComplete()) {
+    //If game is complete(not running), display the scoreboard and stop timer.
+    if (!guiController.isGameRunning()) {
         document.getElementById("score-title").hidden = false;
         // Remove each player from the game and attach to scoreboard.
         while (guiController.currentPlayers.numOfPlayers > 0) {
@@ -217,6 +218,7 @@ function setCheck() {
             guiController.deletePlayer(player.playerName);
             document.getElementById("endgamescores").appendChild(eleToAdd);
         }
+        timer.reset();
         document.getElementById("game-objects").hidden = true;
         document.getElementById("scoreboard").hidden = false;
     }
@@ -235,7 +237,6 @@ function returnToMainMenu() {
     document.getElementById("main_menu").hidden = false;
     document.getElementById("addplayerstatus").innerHTML = "";
     document.getElementById("playertable").innerHTML = "";
-
     // Clear previous scoreboard.
     var board = document.getElementById("endgamescores");
     while (board.children.length > 0) {
@@ -282,7 +283,6 @@ function giveHint(value) {
     } else if (value == 1) {
         let set = guiController.displaySet.getSet();
         // Set each cell that contains a card in the hint to have a red border.
-        console.log("card" + set[0].index);
         for (let i = 0; i < set.length; i++) {
             document.getElementById("cell" + set[i].index).setAttribute("style", "border: 2px solid red");
         }
@@ -291,4 +291,26 @@ function giveHint(value) {
     } else {
         window.alert("You have used all of your hints!");
     }
+}
+/**
+ * Start the timer
+ */
+function timerStart() {
+    timer.changeRun();
+}
+/**
+ * Reset the timer
+ */
+function timerReset() {
+    timer.reset();
+}
+/**
+ * Function for set Check button to debug
+ */
+function skip() {
+    let checkboxes = document.getElementsByName("cardcheckbox");
+    checkboxes.forEach(element => element.checked = false);
+    guiController.clearSelection();
+    guiController.skip();
+    rebuildCardTable(guiController.getHand());
 }

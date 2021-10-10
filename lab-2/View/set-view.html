@@ -6,14 +6,7 @@
     <meta charset="utf-8">
     <link type="text/css" rel="stylesheet" href="set-view.css" media="screen"/>
 </head>
-<script type="text/javascript" src="../Model/PlayerModule/Player.js"></script>
-<script type="text/javascript" src="../Model/PlayerModule/ComputerPlayer.js"></script>
-<script type="text/javascript" src="../Model/PlayerModule/PlayerSet.js"></script>
-<script type="text/javascript" src="../Model/CardModule/Card.js"></script>
-<script type="text/javascript" src="../Model/CardModule/CardSet.js"></script>
-<script type="text/javascript" src="../Model/CardModule/DisplaySet.js"></script>
-<script type="text/javascript" src="../Controller/Controller.js"></script>
-<script type="text/javascript" src="set-view.js"></script>
+
 
 <body>
     <div id="main_menu">
@@ -36,7 +29,7 @@
                 onclick="addPlayer(document.getElementById('playername').value)">
             <label id="addplayerstatus"></label>
         </form>
-        <button type="button" id="startgame" onclick="startGame()">Start Game</button>
+        <button type="button" id="startgame" >Start Game</button>
         </p>
     </div>
     <div id="game" hidden>      
@@ -54,6 +47,12 @@
                 </table>
                 <button type="button" class="check-set" id="checkset" onclick="setCheck()">Check Set</button>
             </div>
+            <div id="timer" class="timer">
+                <span>Time left:</span>
+                <span id="minute">00</span>
+                <span>:</span>
+                <span id="second">00</span>
+            </div>
         </div>
         <div id="scoreboard" hidden>
             <div id="score-title" hidden>
@@ -63,10 +62,18 @@
             <ol id="endgamescores">
 
             </ol>
-            <button type="button" onclick="returnToMainMenu()">Return to Main Menu</button>
+            <button type="button" id="returnMain">Return to Main Menu</button>
         </div>
     </div>
-
+    <script type="text/javascript" src="../Model/PlayerModule/Player.js"></script>
+    <script type="text/javascript" src="../Model/PlayerModule/ComputerPlayer.js"></script>
+    <script type="text/javascript" src="../Model/PlayerModule/PlayerSet.js"></script>
+    <script type="text/javascript" src="../Model/CardModule/Card.js"></script>
+    <script type="text/javascript" src="../Model/CardModule/CardSet.js"></script>
+    <script type="text/javascript" src="../Model/CardModule/DisplaySet.js"></script>
+    <script type="text/javascript" src="../Controller/Controller.js"></script>
+    <script type="text/javascript" src="../Model/Timer/Timer.js"></script>
+    <script type="text/javascript" src="set-view.js"></script>
+    <script type="text/javascript" src="../View/eventListener.js"></script>
 </body>
-
 </html>

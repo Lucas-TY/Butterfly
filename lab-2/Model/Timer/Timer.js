@@ -1,41 +1,68 @@
 /**
  * Creates a timer object that displays a timer.
  * 
- * @param {string} btnTag - Element ID of the timer start button
  * @param {string} secondTag - Element ID of the seconds display element
  * @param {string} minuteTag - Element ID of the minutes display element
  *
- * @author Jing Wen & Adam Lechliter
+ * @author Jing Wen & Adam Lechliter & Lucas Wu
  */
-function Timer(btnTag, secondTag, minuteTag){
-	this.btn = document.getElementById(btnTag);
+function Timer(secondTag, minuteTag) {
 	this.seconds = document.getElementById(secondTag);
 	this.minutes = document.getElementById(minuteTag);
 	this.secondsRunning = 0;
+	this.secondsLeft = 75;
 	this.run = false;
 
 	/**
 	 * Count-up the time.
 	 * Calculate the minute and the second by the secondsRunning.
+	 * Update displayed cards if no time left
 	 *
 	 */
 	this.interval = setInterval(() => {
-		if (this.run) {
-			this.secondsRunning += 1;
-			this.seconds.innerHTML = pad(this.secondsRunning % 60);
-			this.minutes.innerHTML = pad(parseInt(this.secondsRunning / 60));
+		if (this.secondsLeft == (this.secondsRunning - 1)) {
+			this.secondsRunning = 0;
+			let checkboxes = document.getElementsByName("cardcheckbox");
+			checkboxes.forEach(element => element.checked = false);
+			guiController.clearSelection();
+			guiController.skip();
+			//If game is complete(not running), display the scoreboard and stop timer.
+			if (!guiController.isGameRunning()) {
+				document.getElementById("score-title").hidden = false;
+				// Remove each player from the game and attach to scoreboard.
+				while (guiController.currentPlayers.numOfPlayers > 0) {
+					let player = guiController.playersHighestScore();
+					let eleToAdd = document.createElement("li");
+					eleToAdd.innerHTML = player.playerName + ", Score: " + player.playerScore;
+					guiController.deletePlayer(player.playerName);
+					document.getElementById("endgamescores").appendChild(eleToAdd);
+				}
+				timer.reset();
+				document.getElementById("game-objects").hidden = true;
+				document.getElementById("scoreboard").hidden = false;
+			} //else, refresh the displayed card image
+			else {
+				rebuildCardTable(guiController.getHand());
+			}
+
 		}
+
+		if (this.run) {
+			this.seconds.innerHTML = pad((this.secondsLeft - this.secondsRunning) % 60);
+			this.minutes.innerHTML = pad(parseInt((this.secondsLeft - this.secondsRunning) / 60));
+			this.secondsRunning += 1;
+		}
+
 	}, 1000);
 
 	/**
-	 * When start timing, change "start" to "pause".
+	 * When Game started, timer start
 	 */
-	this.changeRun = function() {
-		if (this.btn.value == "Start") {
-			this.btn.value = "Pause";
+	this.changeRun = function () {
+		let numPlayers = guiController.currentPlayers.numOfPlayers;
+		if (numPlayers != 0) {
 			this.run = true;
 		} else {
-			this.btn.value = "Start";
 			this.run = false;
 		}
 	}
@@ -43,12 +70,11 @@ function Timer(btnTag, secondTag, minuteTag){
 	/**
 	 * Reset the timer.
 	 */
-	this.reset = function() {
-		this.btn.value = "Start";
-		this.run = false;
+	this.reset = function () {
 		this.secondsRunning = 0;
-		this.seconds.innerHTML = pad(this.secondsRunning % 60);
-		this.minutes.innerHTML = pad(parseInt(this.secondsRunning / 60));
+		this.run = false;
+		this.seconds.innerHTML = pad((this.secondsLeft - this.secondsRunning) % 60);
+		this.minutes.innerHTML = pad(parseInt((this.secondsLeft - this.secondsRunning) / 60));
 	}
 
 	/**
