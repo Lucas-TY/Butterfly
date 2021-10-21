@@ -1,4 +1,4 @@
-# <font color=red>Deadline is October 10 at 11:59pm</font>
+# <font color=red>Deadline is October 31 at 11:59pm</font>
 ---
 
 *** Goal: have the game working by Wednesday ***
