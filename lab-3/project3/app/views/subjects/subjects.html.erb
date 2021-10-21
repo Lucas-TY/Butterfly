@@ -1,0 +1,22 @@
+<h1>show subjects</h1>
+
+<table border="1">
+  <tr>
+    <td>course_id </td>
+    <td>subject_d</td>
+    <td>autoenrolls</td>
+    <td>datetimes(json)</td>
+    <td>elw</td>
+    <td>teacher</td>
+  </tr>
+  <% @subjects.each do |subject| %>
+    <tr>
+      <td>CSE-<%= subject.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.autoenrolls %></td>
+      <td><%= subject.date_time_days %></td>
+      <td><%= subject.elw %></td>
+      <td><%= subject.teacher %></td>
+    </tr>
+  <% end %>
+</table>
