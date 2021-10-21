@@ -34,8 +34,6 @@ Get all the course numbers listed on this page and store it in the file named "c
 + We've transformed and stored course information into the databased created in SQLite and also perform rails to create one basic model and view.
 
 # The remaining parts:
-+ Updating the existing web model and view to display the courses and sections entered in the database as well as much more functions.
-+ 
-+ Adding a login/logout functionality along with its corresponding login page
-+ 
-+ Creating a console view of the application so that it can be run in the console.
+***1) Updating the existing web model and view to display the courses and sections entered in the database as well as much more functions.***
+***2) Adding a login/logout functionality along with its corresponding login page. ***
+***3) Creating a console view of the application so that it can be run in the console. ***
