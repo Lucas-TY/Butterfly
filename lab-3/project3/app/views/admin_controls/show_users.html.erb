@@ -1,0 +1,18 @@
+<h1>Current Users</h1>
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Name</th>
+    <th>Role</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.name %></td>
+      <td><%= user.role %></td>
+      <% if !user.isActive && (user.role == "instructor" || user.role == "admin") %>
+        <td><%= link_to 'verify', '#' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

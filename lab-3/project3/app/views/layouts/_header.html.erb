@@ -1,0 +1,25 @@
+<header class="navbar navbar-sticky-top navbar-light">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-left navbar-text">
+        <% if user_signed_in? %>
+        <li>Welcome <%= current_user.name%>!</li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Home", root_path %></li>
+        <% if user_signed_in? %>
+          <% if current_user.role == "admin" %>
+            <li><%= link_to 'Manage Users', users_path %></li>
+          <% end %>
+          <li><%= link_to 'Sections', courses_path %></li>
+          <li><%= link_to 'Profile', edit_user_registration_path %></li>
+          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Log In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+   </div>
+</header>
