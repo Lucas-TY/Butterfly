@@ -27,8 +27,8 @@ function Timer(secondTag, minuteTag, intervalFunc) {
 			checkboxes.forEach(element => element.checked = false);
 			guiController.clearSelection();
 			guiController.skip();
-			this.intervalFunc()
-
+			
+			this.intervalFunc();
 		}
 
 		if (this.run) {

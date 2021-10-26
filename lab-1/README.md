@@ -1,71 +1,44 @@
-# Versions
-- Main Version: SetGame (console)
-- Extra Credit GUI Version 1: GUI_main (GUI)
-- Extra Credit GUI Version 2: Shoes_GUI.rb (GUI)
-
-The console version of the game does not require any further downloads beyond Ruby. Both GUI versions were created for extra credit and include instructions on how to install the needed downloads and how to run each. 
-
+# <font color=red>Deadline is October 31 at 11:59pm</font>
 ---
 
-# Usage
-- Console player: `ruby path_to_the_SetGame.rb`
-- Mac GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) ***Java environment required***
-- Windows GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases) ***Java environment required***
-- Linux GUI: [Download](https://github.com/cse-3901-sharkey/Butterfly/releases)`java -jar shoes_gui.jar` ***Java environment required***
-- Ruby GUI:`bundle exec ruby path_to_the_Updated_GUI.rb` ***Ruby TK gem required***
-  - see README file in the GUI_main for more details
-
+# (Review) How to create a branch
+## First time
+```
+git clone git@github.com:cse-3901-sharkey/Butterfly.git
+cd Butterfly
+git checkout -b  replaceItWithYourBranchName
+git push --set-upstream origin replaceItWithYourBranchName
+```
+## Next time
+```
+git pull origin main
+git add -A
+git commit -m "replaceItWithYourCommitMessage"
+git push 
+```
 ---
 
-# Modules 
-- ## CardModules 
-  - @Author Adam Lechliter 
-  - [CardModules README](CardModule)
-- ## PlayerModules 
-  - @Author Jing Wen/ Lucas Wu
-  - [PlayerModules README](PlayerModule)
----
-# Game version
-- ## SetGame `Console`
-  - @Author Ben Mathys 
-  - [SetGame README](SetGame\SetRules.txt)
-  ```
-  - Muiltiple player support
-  - Hint
-  ```
-- ## GUI based on Shoes `GUI`
-  - @Author Lucas Wu
-  - [Download](https://github.com/cse-3901-sharkey/Butterfly/releases)
-  - [Source code](Shoes_GUI.rb)
-  ```
-  - Timer
-  - Muiltiple player support
-  - Hint
-  - Executable on all platform (Java environment required)
-  ```
-- ## GUI based on TK `GUI`
-<<<<<<< HEAD
-  - @Author Songyuan Wu & Jing Wen
-  - [install tk](https://dev.to/kojix2/installing-ruby-tk-on-ubuntu-1d86)
-=======
-  - @Author Songyuan Wu/ Jing Wen
->>>>>>> cf195b195edd6e0d0ff0b37b5ace9419fabe3c93
-  ```
-  - Muiltiple player support
-  - Hint
-  - Game level
-  - Robot Player
-  ```
----
-# Other
-- ## CardImages 
-  - @Author Jing Wen
-- ## Statistics
-  - @Author Jing Wen
-- ## Project Manager
-  - Lucas Wu
+# What we've done
+## Web Scraping
++ We've used Ruby to scrape all of course information in the professor's appointed websites, and store all data into the data folder.
++ Used websites information are showed below:
 
+***The link be used to scrape the data:***
+https://courses.osu.edu/psc/csosuct/EMPLOYEE/PUB/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL
 
+***The link be used to find all the CSE courses:***
+https://cse.osu.edu/courses  
+Get all the course numbers listed on this page and store it in the file named "classes".
+
+## Database and basic architecture
++ We've transformed and stored course information into the databased created in SQLite and also perform rails to create one basic model and view.
+
+# The remaining parts:
+***1) Updating the existing web model and view to display the courses and sections entered in the database as well as much more functions. (Lucas Wu)***
+
+***2) Adding a login/logout functionality along with its corresponding login page. (Adam Lechliter)***
+
+***3) Creating a console view of the application so that it can be run in the console. (Ben Mathys)***
 
 
 
