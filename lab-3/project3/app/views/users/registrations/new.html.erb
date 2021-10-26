@@ -18,7 +18,6 @@
     <%= form.select :role, [["administrator (verification required)", :admin], ["instructor (verification required)", :instructor], :student], selected: :student %>
   </div>
   <em>Verification of for administrator and instructor roles must be done by a current administrator. Student view will be available until an administrator verifies your role. </em>
-
   <div class="field">
     <%= form.label :password %>
     <% if @minimum_password_length %>

@@ -5,9 +5,15 @@ class AdminControlsController < ApplicationController
 		@users = User.all
   end
 
-	private def activate_user(user)
-		user.isActive = true
-		user.update
-	end
+  def delete_user
+    @user = User.find(params[:id])
+    @success = !!(@user.destroy)
+  end
+
+  def activate_user
+    @user = User.find(params[:id])
+  	@user.isActive = true
+  	@user.save
+  end
 
 end
