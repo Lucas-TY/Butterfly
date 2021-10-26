@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   get '/users', to: 'admin_controls#show_users'
-  # resources :users, controller: 'admin_controls', only: [:update, :destroy]
   delete '/users/:id', to: 'admin_controls#delete_user', as: :admin_delete
   post '/users/:id', to: 'admin_controls#activate_user', as: :admin_verify
   get '/courses', to: 'subjects#subjects'
