@@ -1,0 +1,17 @@
+<div class="jumbotron jumbotron-fluid">
+    <h1>Home Page</h1>
+    <% if user_signed_in? %>
+        <p>Current User: <%= current_user.name %></p>
+        <p>Role: 
+            <% if !current_user.isActive && current_user.role != 'student'%>
+                student view (waiting on verification for <%= current_user.role %>)
+            <% else %>
+                <%= current_user.role %>
+            <% end %>
+        </p>
+    <% else %>
+        <div class="alert alert-info center">
+            Please log in
+        </div>
+    <% end %>
+</div>
