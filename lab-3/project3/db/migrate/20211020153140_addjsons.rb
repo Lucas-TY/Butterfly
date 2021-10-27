@@ -17,7 +17,9 @@ class Addjsons < ActiveRecord::Migration[6.1]
 
     # all the json files will be process in this part each iteration we process one course
     # if anyone want to change the database  , u can modify the code here
-    Dir.glob("#{__dir__}/result/*").each do |path|
+    file_list=Dir.glob("#{__dir__}/result/*")
+    file_list.sort!
+    file_list.each do |path|
         #do not include the independents
         puts path
         # if independents.include? path.split("/")[-1].split(".")[0]
@@ -60,3 +62,7 @@ class Addjsons < ActiveRecord::Migration[6.1]
     drop_table(:subjects)
   end
 end
+
+
+
+
