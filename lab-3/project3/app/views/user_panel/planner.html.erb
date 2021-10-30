@@ -1,0 +1,57 @@
+<h2>Planner</h2>
+<div>
+<%= form_tag(planner_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search subjects" %>
+  <%= submit_tag "Search" %>
+<% end %>
+</div>
+<div>
+<table border="1">
+  <tr>
+    <td>course_id </td>
+    <td>subject_id</td>
+    <td>autoenrolls</td>
+    <td>datetimes(json)</td>
+    <td>elw</td>
+    <td>teacher</td>
+    <td>select</td>
+  </tr>
+  </div>
+  <div>
+<% @search_result.each do |subject|%>
+<tr>
+     
+      <td>CSE-<%= subject.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.autoenrolls %></td>
+      <td><%= subject.date_time_days %></td>
+      <td><%= subject.elw %></td>
+      <td><%= subject.teacher %></td>
+      
+      
+      <td><%= check_box_tag(:subjects, subject, false, data: {remote: true, method: :put, url: course_update_path(current_user.id) })%></td>
+    </tr>
+  <% end %>
+  <br></br>
+<%if @change%>
+<% @change.each do |subject|%>
+<tr>
+     
+      <td>CSE-<%= subject.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.autoenrolls %></td>
+      <td><%= subject.date_time_days %></td>
+      <td><%= subject.elw %></td>
+      <td><%= subject.teacher %></td>
+    </tr>
+  <% end %>
+  <% end %>
+
+  <%= button_to "add", course_update_path(@user), method: :put %><br />
+
+</div>
+
+<h1>show subjects</h1>
+
+
+ 
