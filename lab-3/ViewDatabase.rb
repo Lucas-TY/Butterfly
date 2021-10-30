@@ -1,7 +1,35 @@
+require 'json'
+
 # Application to allow viewing and updating database from the command line
 #
 # @author Benjamin Mathys
 
+# Print out all the information for the course
+#
+# @param courseNumber [Number] the number of the course to print info for
+# @return
+def course_info(courseNumber)
+
+    if File.exist?("scrapeAndStore/result/#{courseNumber.to_s}.json")
+        puts "Printing info for CSE-#{courseNumber.to_s}...\n"
+        json = JSON.parse(File.read("scrapeAndStore/result/#{courseNumber.to_s}.json"))
+        json.each do |course|
+            course.each do |key,value|
+                if key == "course_id"
+                    puts "\n" # Separate classes by newlines
+                end
+                # Ignore this entry, is more of a "summary"
+                if key != "outer_info" 
+                    puts "#{key} : #{value}"
+                end
+            end
+        end
+    else
+        puts "Course CSE-#{courseNumber.to_s} not offered this semester."
+    end
+    puts "\nEnter anything to continue..."
+    gets
+end
 
 # Returns the value of the input.
 #
@@ -59,14 +87,17 @@ while menuInput != "quit"
     # If checkedInput is "quit", go back to the top
     if checkedInput != "quit"
         if checkedInput == "list"
-            #List out all the information for each class to the console window
+            courseNumbers = File.read("scrapeAndStore/classes").split
+            courseNumbers.each do |course|
+                course_info(course)
+            end
         elsif checkedInput == "update"
             #Scrape and update the db
         elsif checkedInput == "invalid"
             puts "Invalid command. Please enter a valid command."
         else
             #List out all the information for a specific course number
-            puts "Valid course!"
+            course_info(checkedInput)
         end
     end
     puts ""
