@@ -9,7 +9,6 @@ require 'json'
 # @param courseNumber [Number] the number of the course to print info for
 # @return
 def course_info(courseNumber)
-
     if File.exist?("scrapeAndStore/result/#{courseNumber.to_s}.json")
         puts "Printing info for CSE-#{courseNumber.to_s}...\n"
         json = JSON.parse(File.read("scrapeAndStore/result/#{courseNumber.to_s}.json"))
@@ -81,7 +80,7 @@ while menuInput != "quit"
     puts "Enter a command: "
     menuInput = gets.chomp
     puts ""
-
+    # **TODO: Add support for command line args**
     checkedInput = input_check(menuInput)
 
     # If checkedInput is "quit", go back to the top
@@ -92,6 +91,7 @@ while menuInput != "quit"
                 course_info(course)
             end
         elsif checkedInput == "update"
+            # TODO: exec scrape.rb
             #Scrape and update the db
         elsif checkedInput == "invalid"
             puts "Invalid command. Please enter a valid command."
