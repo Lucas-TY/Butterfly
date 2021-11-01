@@ -1,4 +1,4 @@
-<% if current_user.role == 'admin' %>
+<% if current_user.role == 'admin' && current_user.isActive %>
   <h1>Current Users</h1>
   <table class="table table-sm">
     <thead class="thead-light">
