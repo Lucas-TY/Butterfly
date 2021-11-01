@@ -2,13 +2,10 @@
 
 <h3>How to run</h3>
 With no command line arguments : 
-```
-ruby ManageLocalDB.rb
-```
+<pre><code>ruby ManageLocalDB.rb</code></pre>
 With command line arguments : 
-```
-ruby ManageLocalDB.rb command
-```
+<pre><code>ruby ManageLocalDB.rb 'command'</code></pre>
+
 
 <h3>Option 1 - Using command line arguments</h3>
 
