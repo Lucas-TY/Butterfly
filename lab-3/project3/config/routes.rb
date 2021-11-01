@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-  get 'subjects/subjects'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users
+  get '/users', to: 'admin_controls#show_users'
+  delete '/users/:id', to: 'admin_controls#delete_user', as: :admin_delete
+  post '/users/:id', to: 'admin_controls#activate_user', as: :admin_verify
+  get '/courses', to: 'subjects#subjects'
+  get '/welcome', to: 'general_pages#welcome'
+  root to: 'general_pages#home'
 end
