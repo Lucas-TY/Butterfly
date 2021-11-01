@@ -69,36 +69,49 @@ def is_in_db?(courseNumber)
     return inDB
 end
 
+def run_command(command)
+    if command == "list"
+        courseNumbers = File.read("scrapeAndStore/classes").split
+        courseNumbers.each do |course|
+            course_info(course)
+        end
+    elsif command == "update"
+        #Scrape and update the db
+        exec("ruby scrapeAndStore/scrape.rb")
+    elsif command == "invalid"
+        puts "Invalid command. Please enter a valid command."
+    else
+        #List out all the information for a specific course number
+        course_info(command)
+    end
+end
+
 # List out the commands and prompt for input
 menuInput = ""
-while menuInput != "quit" 
-    puts "List of commands: "
-    puts "list : Lists all classes and information in the database"
-    puts "list \'####\' : Lists the information for that class number"
-    puts "update : Update the database with new class information"
-    puts "quit : Exit the application\n"
-    puts "Enter a command: "
-    menuInput = gets.chomp
-    puts ""
-    # **TODO: Add support for command line args**
-    checkedInput = input_check(menuInput)
+if ARGV.length == 0 # Program was started without command line args
+    while menuInput != "quit" 
+        puts "List of commands: "
+        puts "list : Lists all classes and information in the database"
+        puts "list \'####\' : Lists the information for that class number"
+        puts "update : Update the database with new class information"
+        puts "quit : Exit the application\n"
+        puts "Enter a command: "
+        menuInput = gets.chomp
+        puts ""
+        checkedInput = input_check(menuInput)
 
-    # If checkedInput is "quit", go back to the top
-    if checkedInput != "quit"
-        if checkedInput == "list"
-            courseNumbers = File.read("scrapeAndStore/classes").split
-            courseNumbers.each do |course|
-                course_info(course)
-            end
-        elsif checkedInput == "update"
-            # TODO: exec scrape.rb
-            #Scrape and update the db
-        elsif checkedInput == "invalid"
-            puts "Invalid command. Please enter a valid command."
-        else
-            #List out all the information for a specific course number
-            course_info(checkedInput)
+        # If checkedInput is "quit", go back to the top
+        if checkedInput != "quit"
+            run_command(checkedInput)
         end
+        puts ""
     end
-    puts ""
+else # Command line argument entered, use that and exit after.
+    checkedInput = input_check(ARGV[0])
+    # Clear args so that gets call will not try to read from a file
+    # that does not exist.
+    ARGV.clear 
+    if checkedInput != "quit"
+        run_command(checkedInput)
+    end
 end
