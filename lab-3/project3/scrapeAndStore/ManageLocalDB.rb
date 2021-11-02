@@ -71,7 +71,7 @@ end
 
 def run_command(command)
     if command == "list"
-        courseNumbers = File.read("classes").split
+        courseNumbers = File.read("#{__dir__}/classes").split
         courseNumbers.each do |course|
             course_info(course)
         end
