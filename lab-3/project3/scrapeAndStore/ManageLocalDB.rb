@@ -82,7 +82,7 @@ def run_command(command)
         end
     elsif commands[0] == "update"
         #Scrape and update the db
-        if commands.length == 0
+        if commands.length == 1
             exec("ruby scrape.rb")
         else
             exec("ruby scrape.rb #{commands[1]}")
