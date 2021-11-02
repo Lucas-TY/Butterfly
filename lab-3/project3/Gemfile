@@ -19,6 +19,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 gem 'mechanize'
+gem 'pp'
+gem 'json'
 gem 'devise'
 gem 'bootstrap-sass'
 # Use Redis adapter to run Action Cable in production

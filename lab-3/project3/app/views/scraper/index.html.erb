@@ -1,3 +1,8 @@
-<h1>Scraper#scrape</h1>
-<p>Find me in app/views/scraper/scrape.html.erb</p>
-<% %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb update) %>
+<h1>Scraper</h1>
+<p></p>
+<div>
+<%= button_to 'Scrape', scrape_get_path,method: :post%>
+</div>
+<div>
+<%= button_to 'Load', scrape_load_path,method: :post%>
+</div>

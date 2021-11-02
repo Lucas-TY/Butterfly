@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'scraper/' ,to: 'scraper#scrape'
   devise_for :users
   get '/users', to: 'admin_controls#show_users'
   delete '/users/:id', to: 'admin_controls#delete_user', as: :admin_delete
   post '/users/:id', to: 'admin_controls#activate_user', as: :admin_verify
+  get '/scraper' ,to: 'scraper#index' 
+  post '/scraper/scrape' ,to: 'scraper#scrape', as: :scrape_get
+  post '/scraper/load',to: 'scraper#load', as: :scrape_load
   get '/planner' ,to: 'user_panel#planner' 
   put '/planner/:subject' ,to:'user_panel#add' ,as: :add_course
   delete '/planner/:subject' ,to:'user_panel#drop' ,as: :drop_course
