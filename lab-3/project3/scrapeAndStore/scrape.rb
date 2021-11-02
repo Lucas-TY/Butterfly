@@ -17,18 +17,11 @@ class Scrape
 
     def scrape!(page_num)
 
-        # empty result directory
-        FileUtils.rm_rf "#{__dir__}/result"
-        FileUtils.mkdir "#{__dir__}/result"
-        
-        courses_add = []
-
         @page_num = page_num
 
         page_data = @agent.get(generate_url).body
         data = JSON.parse(page_data)
 
-        total_items = data["data"]["totalItems"]
         courses = data["data"]["courses"]
 
         courses.each do |course| 
@@ -91,11 +84,9 @@ class Scrape
             end
 
             file_path = "#{__dir__}/result/#{course_id}.json"
-            if courses_add.include? course_id
+            if File.exists? file_path
                 puts "File already exists"
                 file_path = "#{__dir__}/result/#{course_id}-1.json"
-            else
-                courses_add.push course_id
             end
             json_text = JSON.generate(course_info)
             puts "writing to file..."
@@ -197,11 +188,14 @@ class Scrape
     end
     
 end
+# empty result directory
+FileUtils.rm_rf "#{__dir__}/result"
+FileUtils.mkdir "#{__dir__}/result"
 
 scraper = Scrape.new
 current_page = 1
 
-while current_page < scraper.get_total_pages
+while current_page <= scraper.get_total_pages
     scraper.scrape! current_page
     current_page += 1
 end
