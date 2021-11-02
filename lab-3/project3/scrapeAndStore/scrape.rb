@@ -3,10 +3,10 @@ require 'json'
 
 class Scrape
 
-    def initialize
+    def initialize(term)
         # URL elements to scrape with
         @URL_HEAD = "https://content.osu.edu/v2/classes/search?q=cse&campus=col&p="
-        @URL_FOOTER = "&term=1222&subject=cse&academic-career=ugrd"
+        @URL_FOOTER = "&term=#{term}&subject=cse&academic-career=ugrd"
         @page_num = 1
         #mechanize object
         @agent = Mechanize.new
@@ -200,7 +200,14 @@ FileUtils.rm_rf "#{__dir__}/result"
 FileUtils.mkdir "#{__dir__}/result"
 FileUtils.rm_rf "#{__dir__}/classes"
 
-scraper = Scrape.new
+term = ""
+if (ARGV.length < 1)
+    term = 1222 # default term
+else
+    term = ARGV[0]
+end
+
+scraper = Scrape.new term
 current_page = 1
 
 while current_page <= scraper.get_total_pages
