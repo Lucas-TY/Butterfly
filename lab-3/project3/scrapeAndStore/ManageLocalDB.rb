@@ -9,9 +9,11 @@ require 'json'
 # @param courseNumber [Number] the number of the course to print info for
 # @return
 def course_info(courseNumber)
-    if File.exist?("#{__dir__}/result/#{courseNumber.to_s}.json")
-        puts "Printing info for CSE-#{courseNumber.to_s}...\n"
-        json = JSON.parse(File.read("#{__dir__}/result/#{courseNumber.to_s}.json"))
+    actualCourse = courseNumber.to_s
+    index = 1
+    puts "Printing info for CSE-#{courseNumber.to_s}...\n"
+    while (File.exist?("#{__dir__}/result/#{actualCourse}.json"))
+        json = JSON.parse(File.read("#{__dir__}/result/#{actualCourse}.json"))
         json.each do |course|
             course.each do |key,value|
                 if key == "course_id"
@@ -23,8 +25,8 @@ def course_info(courseNumber)
                 end
             end
         end
-    else
-        puts "Course CSE-#{courseNumber.to_s} not offered this semester."
+        actualCourse = actualCourse.concat("-#{index}")
+        index += 1
     end
     puts "\nEnter anything to continue..."
     gets
@@ -34,20 +36,22 @@ end
 #
 # @param menuInput [String] the input string to check
 # @return [String] the command to use, return "invalid" if command was invalid
-def input_check(menuInput)
+def input_check(menuInput, validTermCodes)
     # Command to return
     command = "invalid"
     # Split the string using spaces
     splitString = menuInput.split()
-    # Command is one word, update command if input is in command list
+    # Command is one word, update command should input be in command list
     if splitString.length == 1
         if menuInput == "list" || menuInput == "update" || menuInput == "quit"
             command = menuInput
         end
-    # Command is multiple words, update command if it is in "list ####" format
+    # Command is multiple words, update command should it be in "list ####" or "update ####" format
     else 
-        if splitString[0] == "list" && is_in_db?(splitString[1])
+        if splitString[0] == "list" && is_in_db?(splitString[1]) # Check list command
             command = splitString[1]
+        elsif splitString[0] == "update" && validTermCodes.index(splitString[1]) # Check update command
+            command = menuInput
         end
     end
     return command
@@ -70,15 +74,20 @@ def is_in_db?(courseNumber)
 end
 
 def run_command(command)
-    if command == "list"
+    commands = command.split
+    if commands[0] == "list" && commands.length == 1
         courseNumbers = File.read("#{__dir__}/classes").split
         courseNumbers.each do |course|
             course_info(course)
         end
-    elsif command == "update"
+    elsif commands[0] == "update"
         #Scrape and update the db
-        exec("ruby scrapeAndStore/scrape.rb")
-    elsif command == "invalid"
+        if commands.length == 0
+            exec("ruby scrape.rb")
+        else
+            exec("ruby scrape.rb #{commands[1]}")
+        end
+    elsif commands[0] == "invalid"
         puts "Invalid command. Please enter a valid command."
     else
         #List out all the information for a specific course number
@@ -88,6 +97,7 @@ end
 
 # List out the commands and prompt for input
 menuInput = ""
+validTermCodes = ["1214", "1218", "1222"]
 if ARGV.length == 0 # Program was started without command line args
     while menuInput != "quit" 
         puts "List of commands: "
@@ -98,7 +108,7 @@ if ARGV.length == 0 # Program was started without command line args
         puts "Enter a command: "
         menuInput = gets.chomp
         puts ""
-        checkedInput = input_check(menuInput)
+        checkedInput = input_check(menuInput, validTermCodes)
 
         # If checkedInput is "quit", go back to the top
         if checkedInput != "quit"
