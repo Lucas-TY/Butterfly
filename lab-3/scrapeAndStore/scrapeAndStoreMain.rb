@@ -1,10 +1,10 @@
-# web scraping and store the data of course info into json files.
-
 require 'mechanize'
 require 'json'
 $id=""
 $state_num=0
 $course_id=ARGV[0]
+# term 1222 represents the spring 2022 semester
+$term=1222
 # $course_id=1110
 puts "scraping CSE #{$course_id}"
 
@@ -42,17 +42,18 @@ end
 class_dict={
   "CLASS_SRCH_WRK2_INSTITUTION$46$"=>1,
   "CLASS_SRCH_WRK2_INSTITUTION$31$"=>"OSUSI",
-  'CLASS_SRCH_WRK2_STRM$35$' =>  1222,
+  'CLASS_SRCH_WRK2_STRM$35$' =>  $term,
   'SSR_CLSRCH_WRK_CAMPUS$0' =>  "COL",
   'SSR_CLSRCH_WRK_SUBJECT_SRCH$1' =>  "CSE",
   'SSR_CLSRCH_WRK_CATALOG_NBR$2' =>  $course_id,
   'SSR_CLSRCH_WRK_SSR_OPEN_ONLY$chk$4' =>  "N",
-  'SSR_CLSRCH_WRK_ACAD_CAREER$3' =>  "",
+  'SSR_CLSRCH_WRK_ACAD_CAREER$3' =>  "UGRD",
 }
 
 $agent = Mechanize.new
 page=$agent.get("https://courses.osu.edu/psc/csosuct/EMPLOYEE/PUB/c/COMMUNITY_ACCESS.CLASS_SEARCH.GBL")
 $id=page.at("#ICSID").values[3]
+
 
 data=generate_data("CLASS_SRCH_WRK2_SSR_PB_CLASS_SRCH")
 data.update(class_dict)
