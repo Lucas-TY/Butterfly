@@ -86,7 +86,11 @@ class Scrape
             file_path = "#{__dir__}/result/#{course_id}.json"
             if File.exists? file_path
                 puts "File already exists"
-                file_path = "#{__dir__}/result/#{course_id}-1.json"
+                file_index = 0
+                while File.exists? file_path
+                    file_index += 1
+                    file_path = "#{__dir__}/result/#{course_id}-#{file_index}.json"
+                end
             else
                 classes_path = "#{__dir__}/classes"
                 if !(File.file? classes_path)
