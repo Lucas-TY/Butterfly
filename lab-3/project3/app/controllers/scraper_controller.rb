@@ -1,10 +1,10 @@
 require 'json'
 require 'pp'
+require 'fileutils'
 
 class ScraperController < ApplicationController
   def scrape
     %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb update)
-    puts "hi"
     render:index
   end
   def load
@@ -39,7 +39,7 @@ class ScraperController < ApplicationController
           if sub['components']=='Laboratory Required, Lecture Required'
               current_subject_id=sub['subject_number']
               # type=sub['outer_info'][1].split("-")[1]
-              if sub['outer_info'][1].include? "LEC"
+              if sub['outer_info'][1].include? "Lecture"
                   finding_lab=sub
                   sub["auto_enrolls"]=[]
               else
