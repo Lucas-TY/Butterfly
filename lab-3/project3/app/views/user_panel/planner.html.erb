@@ -1,0 +1,83 @@
+<h1>Planner</h1>
+<div>
+<%= form_tag(planner_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search subjects" %>
+  <%= submit_tag "Search" %>
+<% end %>
+</div>
+<div>
+
+<% if @search_result %>
+<h2>Search result</h2>
+<table border="1">
+  <tr>
+    <td>course_id </td>
+    <td>subject_id</td>
+    <td>autoenrolls</td>
+    <td>datetimes(json)</td>
+    <td>elw</td>
+    <td>teacher</td>
+    <td>select</td>
+  </tr>
+  </div>
+  <div>
+<% @search_result.each do |subject|%>
+<tr>
+     
+      <td>CSE-<%= subject.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.autoenrolls %></td>
+      <td><%= subject.date_time_days %></td>
+      <td><%= subject.elw %></td>
+      <td><%= subject.teacher %></td>
+      
+      <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
+      
+      
+     
+    </tr>
+<% end %>
+
+</table>
+<% end %>
+<% if @courses %>
+<h2>Your courses</h2>
+<table border="1">
+<tr>
+    <td>course_id </td>
+    <td>subject_id</td>
+    <td>autoenrolls</td>
+    <td>datetimes(json)</td>
+    <td>elw</td>
+    <td>teacher</td>
+    <td>select</td>
+  </tr>
+  </div>
+  <div>
+<% @courses.each do |subject|%>
+<tr>
+     
+      <td>CSE-<%= subject.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.autoenrolls %></td>
+      <td><%= subject.date_time_days %></td>
+      <td><%= subject.elw %></td>
+      <td><%= subject.teacher %></td>
+      <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
+      
+     
+    </tr>
+  <% end %>
+
+</table>
+  <% end %>
+
+
+
+
+</div>
+
+
+
+
+ 
