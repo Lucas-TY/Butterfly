@@ -59,7 +59,7 @@ end
 # @return [Boolean] true if in DB, false otherwise
 def is_in_db?(courseNumber)
     inDB = false
-    courseNumbers = File.read("classes").split
+    courseNumbers = File.read("#{__dir__}/classes").split
     i = 0
     # Update inDB if given course number matches an entry in the course file
     while !inDB && i < courseNumbers.length

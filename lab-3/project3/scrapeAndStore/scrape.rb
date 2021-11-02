@@ -87,6 +87,13 @@ class Scrape
             if File.exists? file_path
                 puts "File already exists"
                 file_path = "#{__dir__}/result/#{course_id}-1.json"
+            else
+                classes_path = "#{__dir__}/classes"
+                if !(File.file? classes_path)
+                    File.open(classes_path, "w"){ |file| file.write "#{course_id}\n" }
+                else
+                    File.open(classes_path, "a"){ |file| file.write "#{course_id}\n" }
+                end
             end
             json_text = JSON.generate(course_info)
             puts "writing to file..."
@@ -191,6 +198,7 @@ end
 # empty result directory
 FileUtils.rm_rf "#{__dir__}/result"
 FileUtils.mkdir "#{__dir__}/result"
+FileUtils.rm_rf "#{__dir__}/classes"
 
 scraper = Scrape.new
 current_page = 1
