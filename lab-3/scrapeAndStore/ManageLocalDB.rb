@@ -9,9 +9,9 @@ require 'json'
 # @param courseNumber [Number] the number of the course to print info for
 # @return
 def course_info(courseNumber)
-    if File.exist?("scrapeAndStore/result/#{courseNumber.to_s}.json")
+    if File.exist?("result/#{courseNumber.to_s}.json")
         puts "Printing info for CSE-#{courseNumber.to_s}...\n"
-        json = JSON.parse(File.read("scrapeAndStore/result/#{courseNumber.to_s}.json"))
+        json = JSON.parse(File.read("result/#{courseNumber.to_s}.json"))
         json.each do |course|
             course.each do |key,value|
                 if key == "course_id"
@@ -59,7 +59,7 @@ end
 # @return [Boolean] true if in DB, false otherwise
 def is_in_db?(courseNumber)
     inDB = false
-    courseNumbers = File.read("scrapeAndStore/classes").split
+    courseNumbers = File.read("classes").split
     i = 0
     # Update inDB if given course number matches an entry in the course file
     while !inDB && i < courseNumbers.length
@@ -71,13 +71,13 @@ end
 
 def run_command(command)
     if command == "list"
-        courseNumbers = File.read("scrapeAndStore/classes").split
+        courseNumbers = File.read("classes").split
         courseNumbers.each do |course|
             course_info(course)
         end
     elsif command == "update"
         #Scrape and update the db
-        exec("ruby scrapeAndStore/scrape.rb")
+        exec("ruby scrape.rb")
     elsif command == "invalid"
         puts "Invalid command. Please enter a valid command."
     else
