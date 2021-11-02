@@ -9,9 +9,10 @@
                 <%= current_user.role %>
             <% end %>
         </p>
-    <% else %>
-        <div class="alert alert-info center">
-            Please log in
-        </div>
     <% end %>
 </div>
+<% if !user_signed_in? %>
+    <div class="alert alert-info center">
+        Please log in
+    </div>
+<% end %>
