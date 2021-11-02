@@ -9,9 +9,9 @@ require 'json'
 # @param courseNumber [Number] the number of the course to print info for
 # @return
 def course_info(courseNumber)
-    if File.exist?("result/#{courseNumber.to_s}.json")
+    if File.exist?("#{__dir__}/result/#{courseNumber.to_s}.json")
         puts "Printing info for CSE-#{courseNumber.to_s}...\n"
-        json = JSON.parse(File.read("result/#{courseNumber.to_s}.json"))
+        json = JSON.parse(File.read("#{__dir__}/result/#{courseNumber.to_s}.json"))
         json.each do |course|
             course.each do |key,value|
                 if key == "course_id"
