@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'scraper/' ,to: 'scraper#scrape'
   devise_for :users
   get '/users', to: 'admin_controls#show_users'
   delete '/users/:id', to: 'admin_controls#delete_user', as: :admin_delete
