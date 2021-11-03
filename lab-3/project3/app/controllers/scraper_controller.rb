@@ -3,8 +3,19 @@ require 'pp'
 require 'fileutils'
 
 class ScraperController < ApplicationController
-  def scrape
-    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb update)
+  def scrape_SU21
+    @semester=1214
+    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb update #{@semester})
+    render:index
+  end
+  def scrape_AU21
+    @semester=1218 
+    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb update #{@semester} )
+    render:index
+  end
+  def scrape_SP21
+    @semester=1222 
+    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb update #{@semester})
     render:index
   end
   def load

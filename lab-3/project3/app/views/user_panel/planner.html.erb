@@ -1,7 +1,7 @@
 <h1>Planner</h1>
 <div>
 <%= form_tag(planner_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search subjects" %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
   <%= submit_tag "Search" %>
 <% end %>
 </div>
@@ -26,6 +26,7 @@
   <div>
 <% @search_result.each do |subject|%>
 <tr>
+
       <td>CSE-<%= subject.course_id %> </td>
       <td><%= subject.subject_id %></td>
       <td><%= subject.units_range %></td>
@@ -35,8 +36,11 @@
       <td><%= subject.instruct_mode %></td>
       <td><%= subject.enrld_wait %></td>
       <td><%= subject.open_status %></td>
+      
       <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
       
+      
+     
     </tr>
 <% end %>
 
@@ -61,7 +65,7 @@
   <div>
 <% @courses.each do |subject|%>
 <tr>
-     
+
       <td>CSE-<%= subject.course_id %> </td>
       <td><%= subject.subject_id %></td>
       <td><%= subject.units_range %></td>
@@ -73,13 +77,14 @@
       <td><%= subject.open_status %></td>
       <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
       
+     
     </tr>
   <% end %>
+
 </table>
   <% end %>
+
+
+
+
 </div>
-
-
-
-
- 
