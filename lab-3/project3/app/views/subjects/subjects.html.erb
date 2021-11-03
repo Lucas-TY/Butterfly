@@ -2,21 +2,27 @@
 
 <table border="1">
   <tr>
-    <td>Course_ID </td>
-    <td>Class_Number</td>
-    <td>(autoenrolls)</td>
-    <td>Meeting Information</td>
-    <td>Enrld/Limit/Wait</td>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
     <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
   </tr>
   <% @subjects.each do |subject| %>
     <tr>
       <td>CSE-<%= subject.course_id %> </td>
       <td><%= subject.subject_id %></td>
-      <td><%= subject.autoenrolls %></td>
-      <td> <pre><%= @date_times[subject.subject_id] %></pre>  </td>
-      <td><%= subject.elw %></td>
-      <td><%= subject.teacher %></td>
+      <td><%= subject.units_range %></td>
+      <td><%= subject.days_times %></td>
+      <td><%= subject.room %></td>
+      <td><%= subject.instructor %></td>
+      <td><%= subject.instruct_mode %></td>
+      <td><%= subject.enrld_wait %></td>
+      <td><%= subject.open_status %></td>
     </tr>
   <% end %>
 </table>

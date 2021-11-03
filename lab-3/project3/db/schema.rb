@@ -15,10 +15,13 @@ ActiveRecord::Schema.define(version: 2021_10_25_211252) do
   create_table "subjects", force: :cascade do |t|
     t.string "course_id"
     t.string "subject_id"
-    t.string "autoenrolls"
-    t.string "date_time_days"
-    t.string "elw"
-    t.string "teacher"
+    t.string "open_status"
+    t.string "units_range"
+    t.string "instruct_mode"
+    t.string "days_times"
+    t.string "room"
+    t.string "enrld_wait"
+    t.string "instructor"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
