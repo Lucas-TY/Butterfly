@@ -49,14 +49,14 @@ class ScraperController < ApplicationController
       end
       puts "hi"
       subs.each do |sub|
-          days=text=JSON.generate(sub["date_times"])
+          days=sub["date_times"][0][0]
           temp_elw="#{sub["enroll_total"]}/#{sub["wait_list_total"]}"
           teachers=sub["date_times"][0][2]
           Subject.create(course_id:sub["course_id"],
                         subject_id:sub["subject_number"],
                         units_range:sub["units_range"],
                         days_times:days,
-                        room:sub["location"],
+                        room:sub["date_times"][0][1],
                         enrld_wait:temp_elw,
                         instruct_mode:sub["instruct_mode"],
                         open_status:sub["open_status"],
