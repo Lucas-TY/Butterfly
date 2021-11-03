@@ -1,11 +1,15 @@
-<h1>Scraper</h1>
-<p></p>
+<% if current_user.role == 'admin' && current_user.isActive %>
+    <h1>Scraper</h1>
+    <p></p>
 
-<div>
-<%= button_to 'Scrape SU21', scrape_get_SU21_path,method: :post%>
-<%= button_to 'Scrape AU21', scrape_get_AU21_path,method: :post%>
-<%= button_to 'Scrape SP22', scrape_get_SP22_path,method: :post%>
-</div>
-<div>
-<%= button_to 'Load', scrape_load_path,method: :post%>
-</div>
+    <div>
+    <%= button_to 'Scrape SU21', scrape_get_SU21_path,method: :post%>
+    <%= button_to 'Scrape AU21', scrape_get_AU21_path,method: :post%>
+    <%= button_to 'Scrape SP22', scrape_get_SP22_path,method: :post%>
+    </div>
+    <div>
+    <%= button_to 'Load', scrape_load_path,method: :post%>
+    </div>
+<% else %>
+    <h1>Access Denied.</h1>
+<% end %>
