@@ -126,11 +126,7 @@ if ARGV.length == 0 # Program was started without command line args
         puts ""
     end
 else # Command line argument entered, use that and exit after.
-<<<<<<< HEAD
     checkedInput = input_check(ARGV[0], validTermCodes)
-=======
-    checkedInput = input_check(ARGV[0],validTermCodes)
->>>>>>> origin/main
     # Clear args so that gets call will not try to read from a file
     # that does not exist.
     ARGV.clear 
