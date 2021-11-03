@@ -1,8 +1,16 @@
 require 'mechanize'
 require 'json'
 
+# A class that defines a scraper object. The scraper takes is intialized with a specific term
+# to scrape course information from the site http://classes.osu.edu/
+#
+# @author Adam Lechliter and Jing Wen
 class Scrape
 
+    # Initializes a new instance of a Scrape
+	#
+    # @param term [Number] term id to scrape data for
+	# @return [Scrape] a new instance of Scrape
     def initialize(term)
         # URL elements to scrape with
         @URL_HEAD = "https://content.osu.edu/v2/classes/search?q=cse&campus=col&p="
@@ -15,6 +23,10 @@ class Scrape
 
     end
 
+    # Scrapes data for each course on the current page and generates a json file
+    # for each course to store the scraped data.
+	#
+    # @param page_num [Number] page number to scrape data from
     def scrape!(page_num)
 
         @page_num = page_num
@@ -31,6 +43,7 @@ class Scrape
 
             course_info = []
 
+            # collect course/section information
             sections = course["sections"]
             count = 1
             sections.each do |section|
@@ -83,10 +96,12 @@ class Scrape
                 count += 1
             end
 
+            # save course information to a json file
             file_path = "#{__dir__}/result/#{course_id}.json"
             if File.exists? file_path
                 puts "File already exists"
                 file_index = 0
+                # if the course file already exists, append a number to the end of the file name
                 while File.exists? file_path
                     file_index += 1
                     file_path = "#{__dir__}/result/#{course_id}-#{file_index}.json"
@@ -106,14 +121,24 @@ class Scrape
 
     end
 
+    # Returns the total amount of pages to scrape
+	#
+	# @return [Number] total number of pages
     def get_total_pages
         @total_pages
     end
 
+    # Generates the url (api call) to scrape data from
+    #
+    # @return [String] generated URL
     private def generate_url
         "#{@URL_HEAD}#{@page_num}#{@URL_FOOTER}"
     end
 
+    # Generates a string of the active days for the course
+	#
+    # @param meeting [JSON] json object that contains the meeting information
+	# @return [String] a list of the active days
     private def get_day(meeting)
         active_days = ""
         days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
@@ -127,7 +152,10 @@ class Scrape
         active_days
     end
 
-    # create a day time object
+    # Creates a day time object
+    #
+    # @param meeting [JSON] json object that contains the meeting information
+	# @return [String] a list of the active days with their corresponding times
     private def get_daytime(meetings)
         daytime = ""
         days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
@@ -140,7 +168,10 @@ class Scrape
         daytime
     end
 
-    # get rooms for each meeting
+    # Gets the rooms for each meeting
+    #
+    # @param meetings [Array(JSON)] list of meetings with their information
+	# @return [String] a list of rooms
     private def get_rooms(meetings)
         rooms = ""
         meetings.each do |meeting|
@@ -149,6 +180,11 @@ class Scrape
         rooms
     end
 
+  
+    # Gets a list of all the instructors for a meeting
+    #
+    # @param meeting [JSON] json object that contains the meeting information
+	# @return [Array] a list of the instructors
     private def get_meeting_instructor(meeting)
         instructors = []
         meeting["instructors"].each do |instructor|
@@ -161,7 +197,10 @@ class Scrape
         instructors
     end
 
-    # get a list of instructors
+    # get a list of instructors for multiple meetings
+    #
+    # @param meetings [Array(JSON)] list of meetings with their information
+	# @return [String] a list of instructors
     private def get_instructors(meetings)
         instructors = []
         meetings.each do |meeting|
@@ -170,7 +209,10 @@ class Scrape
         instructors.join
     end
 
-    # get a list of the date and time information for each meeting
+    # Get a list of the date and time information for each meeting
+    #
+    # @param meetings [Array(JSON)] list of meetings with their information
+	# @return [String] a list of date and time information
     private def get_datetime(meetings)
         info = []
         meetings.each do |meeting|
@@ -189,7 +231,10 @@ class Scrape
         info
     end
 
-    # get enrollment info
+    # Get enrollment info
+    #
+    # @param attributes [Array(JSON)] list of attributes with their information
+	# @return [String] a list of enrollment information
     private def get_enroll(attributes)
         results = []
         attributes.each do |attrib|
@@ -199,11 +244,13 @@ class Scrape
     end
     
 end
+
 # empty result directory
 FileUtils.rm_rf "#{__dir__}/result"
 FileUtils.mkdir "#{__dir__}/result"
 FileUtils.rm_rf "#{__dir__}/classes"
 
+# use the command line argument for the term if provided
 term = ""
 if (ARGV.length < 1)
     term = 1222 # default term
@@ -211,6 +258,7 @@ else
     term = ARGV[0]
 end
 
+# scrape each available page
 scraper = Scrape.new term
 current_page = 1
 
