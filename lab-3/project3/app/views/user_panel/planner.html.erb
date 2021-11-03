@@ -11,30 +11,32 @@
 <h2>Search result</h2>
 <table border="1">
   <tr>
-    <td>course_id </td>
-    <td>subject_id</td>
-    <td>autoenrolls</td>
-    <td>datetimes(json)</td>
-    <td>elw</td>
-    <td>teacher</td>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
     <td>select</td>
   </tr>
   </div>
   <div>
 <% @search_result.each do |subject|%>
 <tr>
-     
       <td>CSE-<%= subject.course_id %> </td>
       <td><%= subject.subject_id %></td>
-      <td><%= subject.autoenrolls %></td>
-      <td><%= subject.date_time_days %></td>
-      <td><%= subject.elw %></td>
-      <td><%= subject.teacher %></td>
-      
+      <td><%= subject.units_range %></td>
+      <td><%= subject.days_times %></td>
+      <td><%= subject.room %></td>
+      <td><%= subject.instructor %></td>
+      <td><%= subject.instruct_mode %></td>
+      <td><%= subject.enrld_wait %></td>
+      <td><%= subject.open_status %></td>
       <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
       
-      
-     
     </tr>
 <% end %>
 
@@ -44,12 +46,15 @@
 <h2>Your courses</h2>
 <table border="1">
 <tr>
-    <td>course_id </td>
-    <td>subject_id</td>
-    <td>autoenrolls</td>
-    <td>datetimes(json)</td>
-    <td>elw</td>
-    <td>teacher</td>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
     <td>select</td>
   </tr>
   </div>
@@ -59,22 +64,19 @@
      
       <td>CSE-<%= subject.course_id %> </td>
       <td><%= subject.subject_id %></td>
-      <td><%= subject.autoenrolls %></td>
-      <td><%= subject.date_time_days %></td>
-      <td><%= subject.elw %></td>
-      <td><%= subject.teacher %></td>
+      <td><%= subject.units_range %></td>
+      <td><%= subject.days_times %></td>
+      <td><%= subject.room %></td>
+      <td><%= subject.instructor %></td>
+      <td><%= subject.instruct_mode %></td>
+      <td><%= subject.enrld_wait %></td>
+      <td><%= subject.open_status %></td>
       <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
       
-     
     </tr>
   <% end %>
-
 </table>
   <% end %>
-
-
-
-
 </div>
 
 
