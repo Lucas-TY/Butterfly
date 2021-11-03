@@ -57,7 +57,7 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
 <ul>
 <li>1214 : SU21</li>
 <li>1218 : AU21</li>
-<li>1222 : SP21 - Specified by default if no param given</li>
+<li>1222 : SP22 - Specified by default if no param given</li>
 
 <h3>Option 2 - Using the in-program menu</h3>
   <h4>Scrape data</h4>
