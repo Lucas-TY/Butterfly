@@ -88,9 +88,9 @@ def run_command(command)
         #Fork the re-scraping so that the main program doesn't quit out.
         pid = Process.fork do
             if commands.length == 1
-                exec("ruby scrape.rb")
+                exec("ruby #{__dir__}/scrape.rb")
             else
-                exec("ruby scrape.rb #{commands[1]}")
+                exec("ruby #{__dir__}/scrape.rb #{commands[1]}")
             end
         end
         #Wait for child to exit so that menu input comes after scraping
