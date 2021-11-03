@@ -32,9 +32,6 @@
 + After data has been scraped, select the "load" button to load the scrapped data into the database (this can take up to 30 seconds)
 
 ---
-# Adding/Removing User Course Selections
-
----
 
 <h1>Using the command line database</h1>
 
@@ -64,9 +61,10 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
 
 <h3>Option 2 - Using the in-program menu</h3>
   <h4>Scrape data</h4>
-<li> (Admin only) clike scrape, and then clike the the semester that you want to scrape, then clike load to load those data into database</li>
+<li> (Admin only) click scrape, and then click the the semester that you want to scrape, then click load to load those data into database</li>
+---
   <h4>add/delete course(project 4 part)</h4>
-  <li> clike planner, then input the course that you are looking for. You can clike on add or drop to change your courses</li>
+  <li> click planner, then input the course that you are looking for. You can click on add or drop to change your courses</li>
 
 
 Program also supports entering commands from a built-in menu. Command list is provided upon running.
