@@ -63,7 +63,10 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
 <li>1222 : SP21 - Specified by default if no param given</li>
 
 <h3>Option 2 - Using the in-program menu</h3>
+  <h4>Scrape data</h4>
 <li> (Admin only) clike scrape, and then clike the the semester that you want to scrape, then clike load to load those data into database</li>
+  <h4>add/delete course(project 4 part)</h4>
+  <li> clike planner, then input the course that you are looking for. You can clike on add or drop to change your courses</li>
 
 
 Program also supports entering commands from a built-in menu. Command list is provided upon running.
