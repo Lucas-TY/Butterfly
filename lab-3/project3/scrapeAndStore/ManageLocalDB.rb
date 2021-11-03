@@ -83,9 +83,9 @@ def run_command(command)
     elsif commands[0] == "update"
         #Scrape and update the db
         if commands.length == 1
-            exec("ruby scrape.rb")
+            exec("ruby scrapeAndStore/scrape.rb")
         else
-            exec("ruby scrape.rb #{commands[1]}")
+            exec("ruby sscrapeAndStore/crape.rb #{commands[1]}")
         end
     elsif commands[0] == "invalid"
         puts "Invalid command. Please enter a valid command."
@@ -108,7 +108,7 @@ if ARGV.length == 0 # Program was started without command line args
         puts "Enter a command: "
         menuInput = gets.chomp
         puts ""
-        checkedInput = input_check(menuInput, validTermCodes)
+        checkedInput = input_check(menuInput,validTermCodes)
 
         # If checkedInput is "quit", go back to the top
         if checkedInput != "quit"
@@ -117,7 +117,7 @@ if ARGV.length == 0 # Program was started without command line args
         puts ""
     end
 else # Command line argument entered, use that and exit after.
-    checkedInput = input_check(ARGV[0])
+    checkedInput = input_check(ARGV[0],validTermCodes)
     # Clear args so that gets call will not try to read from a file
     # that does not exist.
     ARGV.clear 
