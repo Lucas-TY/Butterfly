@@ -7,7 +7,7 @@ require 'json'
 # Print out all the information for the course
 #
 # @param courseNumber [Number] the number of the course to print info for
-# @return
+# @return void
 def course_info(courseNumber)
     actualCourse = courseNumber.to_s
     index = 1
@@ -72,7 +72,10 @@ def is_in_db?(courseNumber)
     end
     return inDB
 end
-
+# Runs the given command from command line or from menu
+#
+# @param command [String] the command to run
+# @return void
 def run_command(command)
     commands = command.split
     if commands[0] == "list" && commands.length == 1
@@ -82,11 +85,16 @@ def run_command(command)
         end
     elsif commands[0] == "update"
         #Scrape and update the db
-        if commands.length == 1
-            exec("ruby scrape.rb")
-        else
-            exec("ruby scrape.rb #{commands[1]}")
+        #Fork the re-scraping so that the main program doesn't quit out.
+        pid = Process.fork do
+            if commands.length == 1
+                exec("ruby scrape.rb")
+            else
+                exec("ruby scrape.rb #{commands[1]}")
+            end
         end
+        #Wait for child to exit so that menu input comes after scraping
+        Process.waitpid(pid)
     elsif commands[0] == "invalid"
         puts "Invalid command. Please enter a valid command."
     else
@@ -103,7 +111,8 @@ if ARGV.length == 0 # Program was started without command line args
         puts "List of commands: "
         puts "list : Lists all classes and information in the database"
         puts "list \'####\' : Lists the information for that class number"
-        puts "update : Update the database with new class information"
+        puts "update : Update the database with latest term class information"
+        puts "update \'xxxx\' : Update the database with specific term class info"
         puts "quit : Exit the application\n"
         puts "Enter a command: "
         menuInput = gets.chomp
@@ -117,7 +126,7 @@ if ARGV.length == 0 # Program was started without command line args
         puts ""
     end
 else # Command line argument entered, use that and exit after.
-    checkedInput = input_check(ARGV[0])
+    checkedInput = input_check(ARGV[0], validTermCodes)
     # Clear args so that gets call will not try to read from a file
     # that does not exist.
     ARGV.clear 
