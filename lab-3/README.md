@@ -14,7 +14,7 @@
 + While creating an account, you must choose your role (student, instructor, or administrator)
   + Instructors and administrators must be verified by a current admin before they have access to role specific features
   + The default view of both roles will be the student view until verified.
-+ To create a default admin account (the initial administrator to the database), you must add them throught the command line
++ To create a default admin account (the initial administrator to the database), you must add them through the command line
   + Open the rails console: <code>rails console</code>
   + Enter the following command (replace [ ] with user chosen values): 
   <br>
