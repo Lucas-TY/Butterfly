@@ -6,6 +6,7 @@
 + Next, you might need to run <code>rails db:migrate</code> before your first time running the server
 + Finally, run the command <code>rails s</code> to start the web server.
   + To access the website, now go to <link>http://localhost:3000/</link> in a browser of your choice (recommended: chrome)
+  + If you run into an issue when running the server for the first time where the application.js file is not found, you need to run rails webpacker:install.
 
 ---
 
@@ -62,7 +63,9 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
 <h3>Option 2 - Using the in-program menu</h3>
   <h4>Scrape data</h4>
 <li> (Admin only) click scrape, and then click the the semester that you want to scrape, then click load to load those data into database</li>
----
+
+  ---
+  
   <h4>add/delete course(project 4 part)</h4>
   <li> click planner, then input the course that you are looking for. You can click on add or drop to change your courses</li>
 
