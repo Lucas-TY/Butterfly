@@ -63,7 +63,14 @@ class ScraperController < ApplicationController
           days=sub["date_times"][0][0]
           temp_elw="#{sub["enroll_total"]}/#{sub["wait_list_total"]}"
           teachers=sub["date_times"][0][2]
-          Subject.create(course_id:sub["course_id"],
+
+          course = Course.find_by course_id: sub["course_id"]
+
+          if !course
+            course = Course.create course_id: sub["course_id"]
+          end
+
+          section = Subject.create(
                         subject_id:sub["subject_number"],
                         units_range:sub["units_range"],
                         days_times:days,
@@ -71,7 +78,11 @@ class ScraperController < ApplicationController
                         enrld_wait:temp_elw,
                         instruct_mode:sub["instruct_mode"],
                         open_status:sub["open_status"],
-                        instructor:teachers)
+                        instructor:teachers
+          );
+          
+          # Link the section to the course 
+          course.sections << section
       end
   
   end

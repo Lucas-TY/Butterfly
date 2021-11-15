@@ -26,7 +26,7 @@
 <% @search_result.each do |subject|%>
 <tr>
 
-      <td>CSE-<%= subject.course_id %> </td>
+      <td>CSE-<%= subject.course.course_id %> </td>
       <td><%= subject.subject_id %></td>
       <td><%= subject.units_range %></td>
       <td><%= subject.days_times %></td>
@@ -50,7 +50,7 @@
 <% @change.each do |subject|%>
 <tr>
 
-      <td>CSE-<%= subject.course_id %> </td>
+      <td>CSE-<%= subject.course.course_id %> </td>
       <td><%= subject.subject_id %></td>
       <td><%= subject.units_range %></td>
       <td><%= subject.days_times %></td>
