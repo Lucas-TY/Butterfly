@@ -78,7 +78,7 @@ class ScraperController < ApplicationController
                         enrld_wait:temp_elw,
                         instruct_mode:sub["instruct_mode"],
                         open_status:sub["open_status"],
-                        instructor:teachers
+                        listed_instructor:teachers
           );
           
           # Link the section to the course 

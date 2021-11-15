@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_211112) do
+ActiveRecord::Schema.define(version: 2021_11_15_213909) do
 
   create_table "applications", force: :cascade do |t|
     t.string "availability"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2021_11_15_211112) do
     t.string "days_times"
     t.string "room"
     t.string "enrld_wait"
-    t.string "instructor"
+    t.string "listed_instructor"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "course_id"
