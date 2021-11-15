@@ -1,0 +1,35 @@
+<% if current_user.role == 'admin' && current_user.isActive %>
+  <h1>Current Users</h1>
+  <table class="table table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.name %></td>
+          <td><%= user.role %></td>
+          <% if !user.isActive && (user.role == "instructor" || user.role == "admin") %>
+            <td><%= link_to 'verify', admin_verify_path(user), method: :update %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <td>
+            <% if user != current_user %>
+              <%= link_to "Delete", admin_delete_path(user), method: :delete, data: { confirm: "Confirm Deletion" } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h1>Access Denied.</h1>
+<% end %>

@@ -1,0 +1,6 @@
+<% if @success %>
+    <h1><%= @user.name %> was deleted!</h1>
+<% else %>
+    <h1>Error: could not delete <%= @user.name%></h1>
+<% end %>
+<%= link_to "Return to page", :back %>

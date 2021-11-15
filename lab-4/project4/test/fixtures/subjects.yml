@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: MyString
+  subject_id: MyString
+  autoenrolls: MyString
+  date_time_days: MyString
+  elw: MyString
+  teacher: MyString
+
+two:
+  course_id: MyString
+  subject_id: MyString
+  autoenrolls: MyString
+  date_time_days: MyString
+  elw: MyString
+  teacher: MyString

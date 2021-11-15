@@ -1,0 +1,28 @@
+<h1>CSE Courses</h1>
+
+<table border="1">
+  <tr>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
+  </tr>
+  <% @subjects.each do |subject| %>
+    <tr>
+      <td>CSE-<%= subject.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.units_range %></td>
+      <td><%= subject.days_times %></td>
+      <td><%= subject.room %></td>
+      <td><%= subject.instructor %></td>
+      <td><%= subject.instruct_mode %></td>
+      <td><%= subject.enrld_wait %></td>
+      <td><%= subject.open_status %></td>
+    </tr>
+  <% end %>
+</table>
