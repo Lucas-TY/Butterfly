@@ -2,7 +2,7 @@
 <em> All commands shown are demonstrating how to run the command line arguments while inside the project3 directory </em>
 
 # Accessing the web view
-+ While in the project3 folder, first run the command <code>bundle install</code> to install all of the necessary gems
++ While in the project4 folder, first run the command <code>bundle install --without production</code> to install all of the necessary gems
 + Next, you might need to run <code>rails db:migrate</code> before your first time running the server
 + Finally, run the command <code>rails s</code> to start the web server.
   + To access the website, now go to <link>http://localhost:3000/</link> in a browser of your choice (recommended: chrome)
