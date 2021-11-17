@@ -13,12 +13,18 @@ class UserTest < ActiveSupport::TestCase
 
   test "user1 should be linked to student" do
     @user1.student = @student
+    @user1.save!
+
     assert @user1.student == @student
+    assert @student.user == @user1
   end
 
   test "user2 should be linked to an instructor" do
     @user2.instructor = @instructor
+    @user2.save!
+
     assert @user2.instructor == @instructor
+    assert @instructor.user == @user2
   end
 
   test "user3 should no be linked to either a student or an instructor" do

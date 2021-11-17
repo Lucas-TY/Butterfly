@@ -44,10 +44,6 @@ ActiveRecord::Schema.define(version: 2021_11_15_213909) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
     t.integer "subject_id"
-    t.integer "grader_id"
-    t.integer "section_id"
-    t.index ["grader_id"], name: "index_grading_assignments_on_grader_id"
-    t.index ["section_id"], name: "index_grading_assignments_on_section_id"
     t.index ["student_id"], name: "index_grading_assignments_on_student_id"
     t.index ["subject_id"], name: "index_grading_assignments_on_subject_id"
   end

@@ -2,7 +2,8 @@ require "test_helper"
 
 class ApplicationTest < ActiveSupport::TestCase
   def setup
-    @student = Student.create
+    @user = User.create email: "email@email.com", name: "Test Student", password: "password"
+    @student = Student.create user: @user
     @application = Application.create
   end
 
@@ -14,6 +15,8 @@ class ApplicationTest < ActiveSupport::TestCase
     @student.applications << @application
 
     assert_not @student.applications.empty?
+    assert @student.applications.find @application.id
+    assert @application.student == @student
   end
 
 end

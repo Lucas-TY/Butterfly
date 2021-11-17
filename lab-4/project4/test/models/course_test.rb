@@ -3,8 +3,8 @@ require "test_helper"
 class CourseTest < ActiveSupport::TestCase
 
   def setup
-    @section = Subject.create
     @course = Course.create
+    @section = Subject.create
   end
 
   test "course should initially contain no sections" do

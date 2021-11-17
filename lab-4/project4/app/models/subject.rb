@@ -5,7 +5,7 @@ class Subject < ApplicationRecord
     has_many :plans
     has_many :users, through: :plans
     has_many :grading_assignments
-    has_many :graders, class_name: 'Student', through: :grading_assignments
+    has_many :graders, class_name: 'Student', through: :grading_assignments, foreign_key: "student_id"
     
     def self.search(search)
         @result

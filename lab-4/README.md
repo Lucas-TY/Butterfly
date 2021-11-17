@@ -1,16 +1,51 @@
-## OSU CSE Course Web Scraper (Copied from Project 3)
+# OSU CSE Grading Assignment Web Application
+
+## Developers: How to use the database
++ *see documentation on the database's relationships and schema design*
++ When saving an object to the database, make sure that all of the required foreign keys are added to the object
+  + <code>has_many</code>: use the <code> << </code> operator to add an object to the list of foreign keys of another.
+    + example: 
+    ```
+      @user = User.create email: "email@email.com", name: "Test Student", password: "password"
+      @student = Student.create user: @user
+      @application = Application.create
+
+      @student.applications << @application
+    ```
+  + <code>has_one</code>: use the <code> = </code> operator to link a single object to the foreign keys of another.
+    + example:
+    ```
+      @user = User.create! email: "user1@email.com", password: "123456", name: "user"
+      @instructor = Instructor.create
+      @user.instructor = @instructor
+    ```
+  + ignore the grading_assignments and taken_courses members (they are used to link models that have many-to-many relationships. Instead, use the member with the :through option to add these relationships)
+    + example: 
+    ```
+      @user = User.create email: "email3@email.com", name: "Test Student", password: "password"
+      @course = Course.create
+      @student = Student.create user: @user
+      @section = Subject.create course: @course
+
+      @student.sections << @section
+    ```
+  + *see tests for examples on how to link objects to foreign keys*
+
+---
+
+# OSU CSE Course Web Scraper (Copied from Project 3)
 <em> All commands shown are demonstrating how to run the command line arguments while inside the project3 directory </em>
 
-# Accessing the web view
+## Accessing the web view
 + While in the project4 folder, first run the command <code>bundle install --without production</code> to install all of the necessary gems
 + Next, you might need to run <code>rails db:migrate</code> before your first time running the server
 + Finally, run the command <code>rails s</code> to start the web server.
   + To access the website, now go to <link>http://localhost:3000/</link> in a browser of your choice (recommended: chrome)
-  + If you run into an issue when running the server for the first time where the application.js file is not found, you need to run rails webpacker:install.
+  + If you run into an issue when running the server for the first time where the application.js file is not found, you need to run: <code>rails webpacker:install.</code>
 
 ---
 
-# Handling Users
+## Handling Users
 + Users can be created through the web view by clicking the "Sign Up" link in the navigation bar.
 + While creating an account, you must choose your role (student, instructor, or administrator)
   + Instructors and administrators must be verified by a current admin before they have access to role specific features
@@ -26,7 +61,7 @@
 
 
 ---
-# Scraping Data from the web
+## Scraping Data from the web
 + Only verified admins have the ability to scrape new course information into the database
 + When loged in as an admin, you can access the navigation link "Scraper"
 + To first scrape new information, select the "scrape" button (this process should only take a few seconds)
