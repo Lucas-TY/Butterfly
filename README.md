@@ -1,4 +1,5 @@
-# <font color=red>Deadline is October 31 at 11:59pm</font>
+# <font color=red>Beta deadline is December 4 at 11:59pm (Midnight)</font>
+# <font color=red>Full release deadline is December 10 at 12:00pm (Noon)</font>
 ---
 
 # (Review) How to create a branch
@@ -17,9 +18,9 @@ git commit -m "replaceItWithYourCommitMessage"
 git push 
 ```
 ---
-
-# What we've done
-## Web Scraping
+# From Project 3
+## What we've done
+### Web Scraping
 + We've used Ruby to scrape all of course information in the professor's appointed websites, and store all data into the data folder. 
 + Used websites information are showed below:
 
@@ -30,12 +31,26 @@ https://courses.osu.edu/psc/csosuct/EMPLOYEE/PUB/c/COMMUNITY_ACCESS.CLASS_SEARCH
 https://cse.osu.edu/courses  
 Get all the course numbers listed on this page and store it in the file named "classes".
 
-## Database and basic architecture
-+ We've transformed and stored course information into the databased created in SQLite and also perform rails to create one basic model and view.
+---
+# Project 4
+## Critical Features (See assignment page for details) 
+<h4>Implement By December 1:</h4>
 
-# The remaining parts:
-***1) Updating the existing web model and view to display the courses and sections entered in the database as well as much more functions. (Lucas Wu)***
+***1) Application Submission. Assigned: TBD***
 
-***2) Adding a login/logout functionality along with its corresponding login page. (Adam Lechliter)***
+***2) Administrator Interface. Assigned: TBD***
 
-***3) Creating a console view of the application so that it can be run in the console. (Ben Mathys)***
+***3) Available Course/Sections. Assigned: TBD***
+
+***4) External Data Sources. Assigned: TBD***
+
+***5) Recommendation Submission. Assigned: TBD***
+
+## Extensions (See assignment page for details)
+<h4>Implement after critical features are complete and tested</h4>
+
+***1) Applicant Preferences. Assigned: TBD***
+
+***2) Evaluation. Assigned: TBD***
+
+***3) Optimal Mathcing. Assigned: TBD***

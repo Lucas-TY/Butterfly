@@ -10,15 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_25_211252) do
+ActiveRecord::Schema.define(version: 2021_10_27_153140) do
+
+  create_table "plans", force: :cascade do |t|
+    t.integer "subject_id"
+    t.integer "user_id"
+    t.datetime "add_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["subject_id"], name: "index_plans_on_subject_id"
+    t.index ["user_id"], name: "index_plans_on_user_id"
+  end
 
   create_table "subjects", force: :cascade do |t|
     t.string "course_id"
     t.string "subject_id"
-    t.string "autoenrolls"
-    t.string "date_time_days"
-    t.string "elw"
-    t.string "teacher"
+    t.string "open_status"
+    t.string "units_range"
+    t.string "instruct_mode"
+    t.string "days_times"
+    t.string "room"
+    t.string "enrld_wait"
+    t.string "instructor"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
