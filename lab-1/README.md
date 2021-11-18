@@ -28,7 +28,7 @@ The console version of the game does not require any further downloads beyond Ru
 # Game version
 - ## SetGame `Console`
   - @Author Ben Mathys 
-  - [SetGame README](SetGame\SetRules.txt)
+  - [SetGame README](SetGame\README.md)
   ```
   - Muiltiple player support
   - Hint
