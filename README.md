@@ -36,21 +36,19 @@ Get all the course numbers listed on this page and store it in the file named "c
 ## Critical Features (See assignment page for details) 
 <h4>Implement By December 1:</h4>
 
-***1) Application Submission. Assigned: TBD***
+***1) Application Submission. Assigned: Jing Wen***
 
-***2) Administrator Interface. Assigned: TBD***
+***2) Administrator Interface. Assigned: Songyuan Wu***
 
-***3) Available Course/Sections. Assigned: TBD***
+***3) Available Course/Sections. Assigned: Adam Lechliter***
 
-***4) External Data Sources. Assigned: TBD***
-
-***5) Recommendation Submission. Assigned: TBD***
+***4) Recommendation Submission. Assigned: Lucas Wu***
 
 ## Extensions (See assignment page for details)
 <h4>Implement after critical features are complete and tested</h4>
 
 ***1) Applicant Preferences. Assigned: TBD***
 
-***2) Evaluation. Assigned: TBD***
+***2) Evaluation. Assigned: Ben Mathys***
 
-***3) Optimal Mathcing. Assigned: TBD***
+***3) Optimal Matching. Assigned: TBD***
