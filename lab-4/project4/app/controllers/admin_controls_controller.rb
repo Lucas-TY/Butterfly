@@ -13,7 +13,14 @@ class AdminControlsController < ApplicationController
   def activate_user
     @user = User.find(params[:id])
   	@user.isActive = true
-  	@user.save
+    if @user.role == "instructor"
+      @instructor = Instructor.create
+      @user.instructor = @instructor
+      @instructor.user = @user
+      @instructor.save!
+      puts @instructor
+    end
+  	@user.save!
   end
 
 end
