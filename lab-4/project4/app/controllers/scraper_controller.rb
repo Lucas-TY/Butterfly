@@ -3,29 +3,39 @@ require 'pp'
 require 'fileutils'
 
 class ScraperController < ApplicationController
+  
   def scrape_SU21
     @semester=1214
     %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
     render:index
   end
+
   def scrape_AU21
     @semester=1218 
     %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
     render:index
   end
+
   def scrape_SP22
     @semester=1222 
     %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
     render:index
   end
+
+  def scrape
+
+  end
+
   def load
     down()
     loader()
     render:index
   end
+
   def index
     
   end
+
   private def loader
   # puts Dir.glob("#{__dir__}/result/*")
   independents=["2193","4193","4998","4998H","4999","4999H","6193","6999","8998","8999"]
