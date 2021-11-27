@@ -1,0 +1,42 @@
+<% if semester %>
+    <h1>CSE Courses for <%= semester %></h1>
+<% else %>
+    <h1> Select a Semester to Display Courses/Sections </h1>
+<% end %>
+
+<%= render partial: "semesters/semester_select", 
+  locals: {
+    semester_list: @semester_list,
+    submit_text: "Display Semester",
+    path: show_semester_path,
+    method: :get
+  } %>
+
+<table border="1">
+  <tr>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
+    <td>Semester</td>
+  </tr>
+  <% @subjects.each do |subject| %>
+    <tr>
+      <td>CSE-<%= subject.course.course_id %> </td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.units_range %></td>
+      <td><%= subject.days_times %></td>
+      <td><%= subject.room %></td>
+      <td><%= subject.listed_instructor %></td>
+      <td><%= subject.instruct_mode %></td>
+      <td><%= subject.enrld_wait %></td>
+      <td><%= subject.open_status %></td>
+      <td><%= subject.semester.description%></td>
+    </tr>
+  <% end %>
+</table>

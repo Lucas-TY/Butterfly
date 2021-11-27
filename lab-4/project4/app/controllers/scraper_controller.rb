@@ -4,48 +4,47 @@ require 'fileutils'
 
 class ScraperController < ApplicationController
   
-  def scrape_SU21
-    @semester=1214
-    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
-    render:index
-  end
-
-  def scrape_AU21
-    @semester=1218 
-    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
-    render:index
-  end
-
-  def scrape_SP22
-    @semester=1222 
-    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
-    render:index
-  end
-
   def scrape
-
+    @semester = selected_semester_params
+    # scrape information for semester
+    %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
+    #redirect_to action: :index, notice: "Finished scrapping #{@semester}!"
   end
 
   def load
-    down()
-    loader()
-    render:index
+    @semester = selected_semester_params
+    down @semester
+    loader selected_semester_params
+    redirect_to action: :index, notice: "Finished loading #{@semester}!"
   end
 
   def index
-    
+    @semester_list = []
+    Semester.all.each do |semester|
+      @semester_list << [semester.description, semester.code]
+    end
   end
 
-  private def loader
-  # puts Dir.glob("#{__dir__}/result/*")
-  independents=["2193","4193","4998","4998H","4999","4999H","6193","6999","8998","8999"]
+  private def selected_semester_params
+    params.require(:selection).require(:semester)
+  end
 
-  # all the json files will be process in this part each iteration we process one course
-  # if anyone want to change the database  , u can modify the code here
-  checker=File.join("**","scrapeAndStore","result","*.json")
-  file_list=Dir.glob(checker)
-  file_list.sort!
-  file_list.each do |path|
+  private def loader(semester_code)
+    # puts Dir.glob("#{__dir__}/result/*")
+    independents=["2193","4193","4998","4998H","4999","4999H","6193","6999","8998","8999"]
+
+    semester = Semester.find_by code: semester_code
+
+    if !semester 
+      semester = Semester.create code: 0000, description: "Missing Semester"
+    end
+
+    # all the json files will be process in this part each iteration we process one course
+    # if anyone want to change the database  , u can modify the code here
+    checker=File.join("**","scrapeAndStore","result","*.json")
+    file_list=Dir.glob(checker)
+    file_list.sort!
+    file_list.each do |path|
       #do not include the independents
       puts path
       # if independents.include? path.split("/")[-1].split(".")[0]
@@ -70,36 +69,44 @@ class ScraperController < ApplicationController
       end
       puts "hi"
       subs.each do |sub|
-          days=sub["date_times"][0][0]
-          temp_elw="#{sub["enroll_total"]}/#{sub["wait_list_total"]}"
-          teachers=sub["date_times"][0][2]
+        days=sub["date_times"][0][0]
+        temp_elw="#{sub["enroll_total"]}/#{sub["wait_list_total"]}"
+        teachers=sub["date_times"][0][2]
 
-          course = Course.find_by course_id: sub["course_id"]
+        course = Course.find_by course_id: sub["course_id"]
 
-          if !course
-            course = Course.create course_id: sub["course_id"]
-          end
+        if !course
+          course = Course.create course_id: sub["course_id"]
+        end
 
-          section = Subject.create(
-                        subject_id:sub["subject_number"],
-                        units_range:sub["units_range"],
-                        days_times:days,
-                        room:sub["date_times"][0][1],
-                        enrld_wait:temp_elw,
-                        instruct_mode:sub["instruct_mode"],
-                        open_status:sub["open_status"],
-                        listed_instructor:teachers
-          );
-          
-          # Link the section to the course 
-          course.sections << section
+        section = Subject.create(
+                      subject_id:sub["subject_number"],
+                      units_range:sub["units_range"],
+                      days_times:days,
+                      room:sub["date_times"][0][1],
+                      enrld_wait:temp_elw,
+                      instruct_mode:sub["instruct_mode"],
+                      open_status:sub["open_status"],
+                      listed_instructor:teachers,
+                      semester: semester,
+                      course: course
+        );
+        
+        # Link the section to the course 
+        course.sections << section
+        course.save
+
+        semester.sections << section
+        semester.save
       end
-  
+    end
+  end
+
+  private def down semester_code
+    semester = Semester.find_by code: semester_code
+    if semester
+      Subject.where(semester: semester).destroy_all
+    end
   end
   
-end
-private def down
-  ActiveRecord::Base.connection.truncate("subjects")
-  ActiveRecord::Base.connection.truncate("plans")
-end
 end

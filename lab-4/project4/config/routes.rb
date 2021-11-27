@@ -12,17 +12,16 @@ Rails.application.routes.draw do
   post '/semesters', to: 'admin_controls#create_semester'
   delete '/semesters/:id', to: 'admin_controls#delete_semester', as: :delete_semester
   # scraper routes
-  get '/scraper' ,to: 'scraper#index' 
-  post '/scraper/scrapeSU21' ,to: 'scraper#scrape_SU21', as: :scrape_get_SU21
-  post '/scraper/scrapeAU21' ,to: 'scraper#scrape_AU21', as: :scrape_get_AU21
-  post '/scraper/scrapeSP22' ,to: 'scraper#scrape_SP22', as: :scrape_get_SP22
+  get '/scraper', to: 'scraper#index'
+  post '/scraper', to: 'scraper#scrape'
   post '/scraper/load',to: 'scraper#load', as: :scrape_load
   # planner routes
   get '/planner' ,to: 'user_panel#planner' 
-  put '/planner/:subject' ,to:'user_panel#add' ,as: :add_course
-  delete '/planner/:subject' ,to:'user_panel#drop' ,as: :drop_course
-  # courses/sections routes
+  put '/planner/:subject' ,to:'user_panel#add', as: :add_course
+  delete '/planner/:subject' ,to:'user_panel#drop', as: :drop_course
+  # courses/sections/subjects routes
   get '/courses', to: 'subjects#subjects'
+  get '/courses/semester', to: 'subjects#show_semester', as: :show_semester
   # general routes
   get '/welcome', to: 'general_pages#welcome'
   root to: 'general_pages#home'

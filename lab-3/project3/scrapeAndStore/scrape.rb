@@ -237,8 +237,10 @@ class Scrape
 	# @return [String] a list of enrollment information
     private def get_enroll(attributes)
         results = []
-        attributes.each do |attrib|
-            results.push attrib["description"]
+        if !(!!attributes)
+            attributes.each do |attrib|
+                results.push attrib["description"]
+            end
         end
         results.join
     end
