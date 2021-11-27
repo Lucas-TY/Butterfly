@@ -23,7 +23,7 @@ class StudentApplicationController < ApplicationController
             if student.applications.where(course_interest:course.course_id).empty?
                 @application=Application.new(
                   student:student,
-                  availability:"True",
+                  availability:"",
                   course_interest:course.course_id,
                   semester:"2022 Spring"
                 )

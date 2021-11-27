@@ -2,6 +2,8 @@
 <%= form_tag(add_appliction_path, :method => "post", id: "add-form") do %>
   Availability
   <br>
+  (Hint: just enter your available times on weekdays, such as Mon 1pm-5pm, Tue 10am-1pm)
+  <br>
   <%= hidden_field_tag   :id,  @application.id  %>
   <%= text_field_tag :availability, params[:availability], value: @application.availability %>
   <br>
