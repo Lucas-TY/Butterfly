@@ -1,0 +1,48 @@
+<h2>Application Page</h2>
+
+<div>
+
+<% if @subjects||@course%>
+<table border="1">
+  <tr>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
+    <td>select</td>
+  </tr>
+    </div>
+  <div>
+  <% @taken_courses.each do |course|%>
+    <% course.sections.each_with_index do |subject,index|%>
+      <tr>
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.units_range %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.enrld_wait %></td>
+          <td><%= subject.open_status %></td>
+          <% if index==0 %>
+              <td rowspan=<%= course.sections.length %> > <a href="<%= edit_appliction_path(subject) %>">edit</a> </td>
+          <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+<% end %>
+
+
+
+  <br>
+
+
+<%# <h1>Application Submit</h1>
+ %>
+

@@ -1,0 +1,79 @@
+<h2>Manage Application Page</h2>
+
+<h3>Assigned Applications</h3>
+<table border="1">
+  <tr>
+    <td>Course_id</td>
+    <td>Subject_id</td>
+    <td>Student_id</td>
+    <td>Email</td>
+    <td>Student_name</td>
+    <td>Days_Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+  </tr>
+  <% @assigned_data.each do |one_assigned| %>
+    <% student=one_assigned["student"] %>
+    <% subject=one_assigned["subject"] %>
+    <tr>
+      <td> <%= subject.course.course_id %> </td>
+      <td> <%= subject.subject_id %> </td>
+      <td> <%= student.id %> </td>
+      <td> <%= student.user.email %> </td>
+      <td> <%= student.user.name %> </td>
+      <td> <%= subject.days_times %> </td>
+      <td> <%= subject.room %> </td>
+      <td> <%= subject.listed_instructor %> </td>
+    </tr>
+
+  <% end %>
+</table>
+<h3>Waiting Applications</h3>
+<% @data.each do |one_data|%>
+  <table border="1">
+    <tr>
+      <td>Student id</td>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Interested Course</td>
+      <td>Availability</td>
+      <td>Semester</td>
+    </tr>
+    <tr>
+      <td> <%= one_data["application"].student.id%> </td>
+      <td> <%= one_data["application"].student.user.name%> </td>
+      <td> <%= one_data["application"].student.user.email%> </td>
+      <td> <%= one_data["application"].course_interest%> </td>
+      <td> <%= one_data["application"].availability%> </td>
+      <td> <%= one_data["application"].semester%> </td>
+    </tr>
+  </table>
+  <table border="1">
+    <tr>
+      <td>Course ID </td>
+      <td>Class Number</td>
+      <td>Unit</td>
+      <td>Days&Times</td>
+      <td>Room</td>
+      <td>Instructor</td>
+      <td>Instruction Mode</td>
+      <td>Enrld / Wait</td>
+      <td>Status</td>
+      <td>Assign</td>
+    </tr>
+    <% one_data["subjects"].each do |subject,index|%>
+      <tr>
+        <td>CSE-<%= subject.course.course_id %> </td>
+        <td><%= subject.subject_id %></td>
+        <td><%= subject.units_range %></td>
+        <td><%= subject.days_times %></td>
+        <td><%= subject.room %></td>
+        <td><%= subject.listed_instructor %></td>
+        <td><%= subject.instruct_mode %></td>
+        <td><%= subject.enrld_wait %></td>
+        <td><%= subject.open_status %></td>
+        <td> <a href="<%= assign_application_path(one_data["application"],subject) %>">Assign</a> </td>
+      </tr>
+    <% end %>
+  </table>
+<%end%>

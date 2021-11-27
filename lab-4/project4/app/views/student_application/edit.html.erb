@@ -1,0 +1,17 @@
+<h2>Application Edit</h2>
+<%= form_tag(add_appliction_path, :method => "post", id: "add-form") do %>
+  Availability
+  <br>
+  <%= hidden_field_tag   :id,  @application.id  %>
+  <%= text_field_tag :availability, params[:availability], value: @application.availability %>
+  <br>
+  Course Interest
+  <br>
+  <%= text_field_tag :course_interest, params[:course_interest], value: @application.course_interest %>
+  <br>
+  Semester
+  <br>
+  <%= text_field_tag :semester, params[:semester], value: @application.semester %>
+  <br>
+  <%= submit_tag "Submit application" %>
+<% end %>

@@ -14,6 +14,7 @@ class InstructorTest < ActiveSupport::TestCase
     @instructor.save!
     assert @user1.instructor == @instructor
     assert_not !!(@user1.student)
+    assert Instructor.find @instructor.id
   end
 
   test "instructor should be able to have sections" do

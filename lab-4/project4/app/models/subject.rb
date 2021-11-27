@@ -10,7 +10,8 @@ class Subject < ApplicationRecord
     def self.search(search)
         @result
         if search
-            @result=self.where(course_id: search).or(self.where(subject_id: search))
+            # change here because the origin one can only search the index(like 1 2 3 4) but not "id"(like 1111) of course
+            @result=Subject.joins(:course).where("course.course_id":search).or(self.where(subject_id: search))
             if @result=={}
                 @result=self.where(subject_id: search)
             end

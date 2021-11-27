@@ -37,7 +37,7 @@
       <td><%= subject.enrld_wait %></td>
       <td><%= subject.open_status %></td>
       
-      <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
+      <td><%= link_to 'Add', add_subject_path(subject),method: :put%></td>
       
       
      
@@ -75,7 +75,7 @@
       <td><%= subject.instruct_mode %></td>
       <td><%= subject.enrld_wait %></td>
       <td><%= subject.open_status %></td>
-      <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
+      <td><%= link_to 'Drop', drop_subject_path(subject),method: :delete%></td>
       
      
     </tr>
