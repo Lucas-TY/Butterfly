@@ -12,7 +12,8 @@
     method: :get
   } %>
 
-<table border="1">
+<table class="table table-sm table-bordered">
+  <thead class="thead-light">
   <tr>
     <td>Course ID </td>
     <td>Class Number</td>
@@ -25,9 +26,17 @@
     <td>Status</td>
     <td>Semester</td>
   </tr>
+  </thead>
+  <tbody>
   <% @subjects.each do |subject| %>
+    <% if @current_course != subject.course %>
+      <tr class="bg-primary">
+        <th colspan="10" class="text-left"><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
+      </tr>
+      <% @current_course = subject.course %>
+    <% end %>
     <tr>
-      <td>CSE-<%= subject.course.course_id %> </td>
+      <td>CSE-<%= subject.course.course_id %></td>
       <td><%= subject.subject_id %></td>
       <td><%= subject.units_range %></td>
       <td><%= subject.days_times %></td>
@@ -39,4 +48,5 @@
       <td><%= subject.semester.description%></td>
     </tr>
   <% end %>
+  </tbody>
 </table>

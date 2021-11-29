@@ -13,6 +13,7 @@ class SubjectsController < ApplicationController
     else
       @subjects = @semester.sections
     end
+    @current_course = nil
     options_setup
   end
 
