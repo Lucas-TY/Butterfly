@@ -27,4 +27,20 @@ module SubjectsHelper
         "#{count} #{units}"
     end
 
+    # Calculates the number of grading positions left for a section
+    # @param section [Subject] section to calculate number of graders left needed for
+	# @return [Number] the number of graders left needed for a section
+    def count_open_grading_positions(section)
+        num_positions = 0
+        if section
+            num_positions = section.num_graders_required - section.graders.length
+        end
+        num_positions
+    end
+
+    # Checks if the current user is a verified admin or instructor
+    # @return [Boolean] true if the user is verified as an admin or an instructor
+    def is_verified?
+        (current_user.role == 'admin' || current_user.role == "instructor") && current_user.isActive
+    end
 end

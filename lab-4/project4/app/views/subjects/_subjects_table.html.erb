@@ -25,13 +25,16 @@
     <td>Enrld / Wait</td>
     <td>Status</td>
     <td>Semester</td>
+    <% if is_verified? %>
+    <td> Grading Positions Open </td>
+    <% end %>
   </tr>
   </thead>
   <tbody>
   <% @subjects.each do |subject| %>
     <% if @current_course != subject.course %>
       <tr class="bg-primary">
-        <th colspan="10" class="text-left"><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
+        <th colspan="11" class="text-left"><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
       </tr>
       <% @current_course = subject.course %>
     <% end %>
@@ -46,6 +49,9 @@
       <td><%= subject.enrld_wait %></td>
       <td><%= subject.open_status %></td>
       <td><%= subject.semester.description%></td>
+      <% if is_verified? %>
+      <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

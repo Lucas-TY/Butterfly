@@ -3,6 +3,7 @@ require 'pp'
 require 'fileutils'
 
 class ScraperController < ApplicationController
+  before_action :authenticate_user!
   
   def scrape
     @semester = selected_semester_params
@@ -30,26 +31,18 @@ class ScraperController < ApplicationController
   end
 
   private def loader(semester_code)
-    # puts Dir.glob("#{__dir__}/result/*")
-    independents=["2193","4193","4998","4998H","4999","4999H","6193","6999","8998","8999"]
-
+    # Find the selected semester
     semester = Semester.find_by code: semester_code
-
     if !semester 
       semester = Semester.create code: 0000, description: "Missing Semester"
     end
 
     # all the json files will be process in this part each iteration we process one course
-    # if anyone want to change the database  , u can modify the code here
     checker=File.join("**","scrapeAndStore","result","*.json")
     file_list=Dir.glob(checker)
     file_list.sort!
     file_list.each do |path|
-      #do not include the independents
       puts path
-      # if independents.include? path.split("/")[-1].split(".")[0]
-      #     next
-      # end
       json=File.read(path)
       subs = JSON.parse(json)
       # parse lec and lab relationship
@@ -58,7 +51,6 @@ class ScraperController < ApplicationController
           sub["auto_enrolls"]=[]
           if sub['components']=='Laboratory Required, Lecture Required'
               current_subject_id=sub['subject_number']
-              # type=sub['outer_info'][1].split("-")[1]
               if sub['outer_info'][1].include? "Lecture"
                   finding_lab=sub
                   sub["auto_enrolls"]=[]
@@ -67,41 +59,43 @@ class ScraperController < ApplicationController
               end
           end
       end
-      puts "hi"
       subs.each do |sub|
         days=sub["date_times"][0][0]
         temp_elw="#{sub["enroll_total"]}/#{sub["wait_list_total"]}"
         teachers=sub["date_times"][0][2]
 
+        # Find the corresponding course, add the course if it does not yet exist
         course = Course.find_by course_id: sub["course_id"]
-
         if !course
           course = Course.create course_id: sub["course_id"]
         end
 
+        # Create the section
         section = Subject.create(
-                      subject_id:sub["subject_number"],
-                      units_range:sub["units_range"],
-                      days_times:days,
-                      room:sub["date_times"][0][1],
-                      enrld_wait:temp_elw,
-                      instruct_mode:sub["instruct_mode"],
-                      open_status:sub["open_status"],
-                      listed_instructor:teachers,
-                      semester: semester,
-                      course: course
+          subject_id:sub["subject_number"],
+          units_range:sub["units_range"],
+          days_times:days,
+          room:sub["date_times"][0][1],
+          enrld_wait:temp_elw,
+          instruct_mode:sub["instruct_mode"],
+          open_status:sub["open_status"],
+          listed_instructor:teachers,
+          semester: semester,
+          course: course,
+          num_graders_required: 1
         );
         
         # Link the section to the course 
         course.sections << section
         course.save
-
+        # Link the section to the semester
         semester.sections << section
         semester.save
       end
     end
   end
 
+  # remove all of the subjects for the given semester from the databse
   private def down semester_code
     semester = Semester.find_by code: semester_code
     if semester

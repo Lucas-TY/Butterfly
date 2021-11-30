@@ -3,7 +3,7 @@
     + submit_text (text that appears over the submit button) 
     + path (path to the contoller method)
     + method (HTTP Request method) %>
-    
+<% if semester_list.length > 0 %>
 <div>
   <%= form_for :selection, url: path, method: method do |form| %>
   <%= form.label :semester %>
@@ -11,3 +11,7 @@
   <%= form.submit submit_text %>
 <% end %>
 </div>
+<% else %>
+<p> Please first add a semester <p>
+<%= link_to 'Go to semesters page', semesters_path, method: :get%>
+<% end %>
