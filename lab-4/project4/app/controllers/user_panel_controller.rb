@@ -1,21 +1,32 @@
 class UserPanelController < ApplicationController
   def planner
-    @user=current_user
-    @courses=@user.subjects
-    @search_result=Subject.search(params[:search])
-    if @search_result
-      puts "hi"
+    options_setup
+    @user = current_user
+    @courses = @user.subjects
+
+    @search_result = []
+    # Semester.where(code: selected_semester_params).each do |semester|
+    #   @search_result << semester.sections.find_by(course_id: params[:search])
+    # end
+    if !params[:semester]
+      flash.now[:alert] = "Error"
+    end
+    if params[:search] != ""
+      @search_result = Subject.search(params[:search]).select{|section| section.semester.code == params[:semester]}
     end
   end
 
   def add
+    options_setup
     @user=current_user
     @user.subjects<<Subject.find(params[:subject])
     @courses=@user.subjects
     @user.save
     render:planner
   end
+
   def drop
+    options_setup
     @user=current_user
     @current_course=@user.subjects
     @current_course.delete(params[:subject])
@@ -23,6 +34,13 @@ class UserPanelController < ApplicationController
     @courses=@user.subjects
     @user.save
     render:planner
+  end
+
+  private def options_setup
+    @semester_list = []
+    Semester.all.each do |semester|
+      @semester_list << [semester.description, semester.code]
+    end
   end
   
 end

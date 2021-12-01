@@ -2,6 +2,8 @@
 <div>
   <%= form_tag(planner_path, :method => "get", id: "search-form") do %>
     <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
+    <%= label_tag :semester %>
+    <%= select_tag :semester, options_for_select(@semester_list)%>
     <%= submit_tag "Search" %>
   <% end %>
 </div>
@@ -53,6 +55,7 @@
         <td>Instruction Mode</td>
         <td>Enrld / Wait</td>
         <td>Status</td>
+        <td>Semester</td>
         <td colspan="2" >select</td>
       </tr>
       </div>
@@ -69,6 +72,7 @@
           <td><%= subject.instruct_mode %></td>
           <td><%= subject.enrld_wait %></td>
           <td><%= subject.open_status %></td>
+          <td><%= subject.semester.description %></td>
           <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
           <td><%= link_to 'Manage', recommendations_path(:section=>subject.course.course_id),method: :get%></td>
         
