@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<% if current_user.role == 'instructor' && current_user.isActive %>
+  <h1>Recommendation from professor</h1>
+    <table class="table table-sm table-bordered">
+  <thead class="thead-light">
+     <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Section</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%student=@recommendation.student.user%>
+        <tr>
+          <td><%= student.name %></td>
+          <td><%= student.id %></td>
+          <td><%= student.email %></td>
+    </tbody>
+  </table>
+<% else %>
+  <h1>Access Denied.</h1>
+<% end %>
+<%= link_to 'Edit', edit_recommendation_path(id: @recommendation,section: @section)  %> |
+<%= link_to 'Back', recommendations_path(section: @section)  %>

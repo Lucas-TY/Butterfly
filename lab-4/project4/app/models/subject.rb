@@ -9,13 +9,10 @@ class Subject < ApplicationRecord
     has_many :graders, class_name: 'Student', through: :grading_assignments, foreign_key: "student_id"
     
     def self.search(search)
-        @result
+        @result=[]
         if search
-            @result=self.where(course_id: search).or(self.where(subject_id: search))
-            if @result=={}
-                @result=self.where(subject_id: search)
-            end
-            if @result=={}
+            @result=Subject.joins(:course).where(course: { course_id: search })
+            if @result==[]
                 @result=self.where(teacher: search)
             end
         end

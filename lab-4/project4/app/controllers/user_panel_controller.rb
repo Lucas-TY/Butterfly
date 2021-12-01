@@ -3,7 +3,9 @@ class UserPanelController < ApplicationController
     @user=current_user
     @courses=@user.subjects
     @search_result=Subject.search(params[:search])
-    puts "hi"
+    if @search_result
+      puts "hi"
+    end
   end
 
   def add

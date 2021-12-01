@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :recommendations
+  
   # users routes
   devise_for :users
   get '/users', to: 'admin_controls#show_users'
