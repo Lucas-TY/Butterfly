@@ -74,8 +74,9 @@
           <td><%= subject.open_status %></td>
           <td><%= subject.semester.description %></td>
           <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
-          <td><%= link_to 'Manage', recommendations_path(:section=>subject.course.course_id),method: :get%></td>
-        
+          <% if current_user.role == "instructor" && current_user.isActive %>
+            <td><%= link_to 'Manage', recommendations_path(:section=>subject.course.course_id),method: :get%></td>
+          <% end %>
         </tr>
       <% end %>
     </table>

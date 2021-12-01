@@ -14,9 +14,14 @@ class UserPanelController < ApplicationController
   def add
     options_setup
     @user=current_user
-    @user.subjects<<Subject.find(params[:subject])
-    @courses=@user.subjects
+    section = Subject.find(params[:subject])
+    @user.subjects << section
+    @courses = @user.subjects
+    if @user.role == "student" && !@user.student.courses.exists?(section.course.id)
+      @user.student.courses << section.course
+    end
     @user.save
+    @user.student.save
     render:planner
   end
 
