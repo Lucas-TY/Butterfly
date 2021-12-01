@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_173015) do
+ActiveRecord::Schema.define(version: 2021_11_29_224648) do
 
   create_table "applications", force: :cascade do |t|
     t.string "availability"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2021_11_26_173015) do
     t.integer "course_id"
     t.integer "instructor_id"
     t.integer "semester_id"
+    t.integer "num_graders_required"
     t.index ["course_id"], name: "index_subjects_on_course_id"
     t.index ["instructor_id"], name: "index_subjects_on_instructor_id"
     t.index ["semester_id"], name: "index_subjects_on_semester_id"
