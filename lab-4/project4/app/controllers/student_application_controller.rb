@@ -9,6 +9,9 @@ class StudentApplicationController < ApplicationController
         student=@user.student
         taken_courses=student.courses
         
+        if taken_courses.length < 1
+            flash.now[:notice] = "You need to add a course to your list of courses taken before beginning an application. You may only apply for courses you have previously taken."
+        end
         
         if !@semester
             @subjects = []
