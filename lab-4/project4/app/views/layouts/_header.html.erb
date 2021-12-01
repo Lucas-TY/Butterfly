@@ -16,7 +16,7 @@
             <li><%= link_to "Scraper", scraper_path %></li>
           <% end %>
           <% if current_user.role == "student" && current_user.isActive %>
-            <li><%= link_to 'Application', application_path %></li>
+            <li><%= link_to 'Application', show_application_path %></li>
           <% end %>
           <li><%= link_to "Add courses", planner_path %></li>
           <li><%= link_to 'Sections', courses_path %></li>

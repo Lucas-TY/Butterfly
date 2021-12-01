@@ -22,8 +22,10 @@ Rails.application.routes.draw do
   # courses/sections/subjects routes
   get '/courses', to: 'subjects#subjects'
   get '/courses/semester', to: 'subjects#show_semester', as: :show_semester
+  get '/courses/changeposition/', to: 'subjects#change_position', as: :change_position
+  get '/courses/changeposition/apply', to: 'subjects#apply_change_position', as: :apply_position
   # application
-  get '/application' , to: 'student_application#application'
+  get '/application/show/' , to: 'student_application#application' , as: :show_application
   get '/application/:subject(/:application)' , to: 'student_application#edit' , as: :edit_appliction
   post '/application/add' , to: 'student_application#add' , as: :add_appliction
   delete '/application/:application' , to: 'student_application#destory' , as: :drop_appliction

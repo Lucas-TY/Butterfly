@@ -2,25 +2,36 @@
 
 <div>
 
-<% if @subjects||@course%>
-<table border="1">
-  <tr>
-    <td>Course ID </td>
-    <td>Class Number</td>
-    <td>Unit</td>
-    <td>Days&Times</td>
-    <td>Room</td>
-    <td>Instructor</td>
-    <td>Instruction Mode</td>
-    <td>Enrld / Wait</td>
-    <td>Status</td>
-    <td>select</td>
-  </tr>
-    </div>
-  <div>
-  <% @taken_courses.each do |course|%>
-    <% course.sections.each_with_index do |subject,index|%>
+  <% if @subjects||@course%>
+    <table border="1">
       <tr>
+        <td>Course ID </td>
+        <td>Class Number</td>
+        <td>Unit</td>
+        <td>Days&Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Enrld / Wait</td>
+        <td>Status</td>
+        <td>select</td>
+      </tr>
+    </div>
+    <div>
+      <% @taken_courses.each do |course|%>
+        <% can_apply=true %>
+        <% course.sections.each do |subject| %>
+          <% if (current_user.student.sections.include? subject) %>
+            <% can_apply=false %>
+          <% end %>
+        <% end %>
+        <% course.sections.each_with_index do |subject,index|%>
+          <% if (current_user.student.sections.include? subject) %>
+            <tr style="background-color:green">
+          <%else%>
+            <tr>
+          <% end %>
+
           <td>CSE-<%= subject.course.course_id %> </td>
           <td><%= subject.subject_id %></td>
           <td><%= subject.units_range %></td>
@@ -31,18 +42,43 @@
           <td><%= subject.enrld_wait %></td>
           <td><%= subject.open_status %></td>
           <% if index==0 %>
+            <% if can_apply  %>
               <td rowspan=<%= course.sections.length %> > <a href="<%= edit_appliction_path(subject) %>">edit</a> </td>
+            <% else %>
+              <td rowspan=<%= course.sections.length %> > √ </td>
+            <% end %>
           <% end %>
-      </tr>
-    <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+      </table>
   <% end %>
-<% end %>
 
-
+  <% if !@applications.empty? %>
+    <h2>Your Applications</h2>
+    <table border="1">
+      <tr>
+        <td>Availability</td>
+        <td>Course Interest</td>
+        <td>Semester</td>
+        <td>Edit</td>
+        <td>Cancel</td>
+      </tr>
+      <% @applications.each do |application| %>
+        <tr>
+          <td><%= application.availability %></td>
+          <td><%= application.course_interest %></td>
+          <td><%= application.semester %></td>
+          <td> <a href="<%= edit_appliction_path(0,application) %>">edit</a> </td>
+          <td> <%= link_to 'cancel', drop_appliction_path(application),method: :delete%> </td>
+        </tr>
+      <%end%>
+    </table>
+  <% end %>
 
   <br>
 
 
 <%# <h1>Application Submit</h1>
- %>
+%>
 

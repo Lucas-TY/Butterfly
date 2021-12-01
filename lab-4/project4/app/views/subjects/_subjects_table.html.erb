@@ -26,6 +26,7 @@
     <td>Semester</td>
     <% if is_verified? %>
       <td> Grading Positions Open </td>
+      <td> Change Positions </td>
     <% end %>
   </tr>
   </thead>
@@ -50,6 +51,8 @@
       <td><%= subject.semester.description%></td>
       <% if is_verified? %>
         <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+        <td><a href=<%=change_position_path({"subject":subject.id,"semester_code":@semester_code})%> >change</a></td>
+
       <% end %>
     </tr>
   <% end %>

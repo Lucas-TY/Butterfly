@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_29_224648) do
+ActiveRecord::Schema.define(version: 2021_12_01_131118) do
 
   create_table "applications", force: :cascade do |t|
     t.string "availability"
     t.string "course_interest"
-    t.string "semester"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "student_id"
+    t.integer "semester_id"
+    t.string "contact_info"
+    t.string "closed"
+    t.index ["semester_id"], name: "index_applications_on_semester_id"
     t.index ["student_id"], name: "index_applications_on_student_id"
   end
 

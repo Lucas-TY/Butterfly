@@ -4,16 +4,22 @@
   <br>
   (Hint: just enter your available times on weekdays, such as Mon 1pm-5pm, Tue 10am-1pm)
   <br>
-  <%= hidden_field_tag   :id,  @application.id  %>
-  <%= text_field_tag :availability, params[:availability], value: @application.availability %>
+  <%= hidden_field_tag  :id,   @application.id  %>
+  <%= text_field_tag :availability,  @application.availability %>
   <br>
   Course Interest
   <br>
-  <%= text_field_tag :course_interest, params[:course_interest], value: @application.course_interest %>
+  <%= hidden_field_tag :course_interest,  @application.course_interest %> 
+  <%= text_field_tag :course_interest_show,  @application.course_interest , disabled:true %>
   <br>
   Semester
   <br>
-  <%= text_field_tag :semester, params[:semester], value: @application.semester %>
+  <%= text_field_tag :semester_text,  @application.semester.description  , disabled:true %>
   <br>
+  <%= hidden_field_tag :semester,  @application.semester.id %>  
+
+  Condact Info
+  <br>
+  <%= text_field_tag :contact_info,  @application.contact_info  %>
   <%= submit_tag "Submit application" %>
 <% end %>
