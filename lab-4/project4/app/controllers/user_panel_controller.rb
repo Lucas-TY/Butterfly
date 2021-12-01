@@ -31,6 +31,10 @@ class UserPanelController < ApplicationController
     @current_course=@user.subjects
     @current_course.delete(params[:subject])
     @user.subjects=@current_course
+    section = Subject.find(params[:subject])
+    if @user.role == "student" && @user.student.courses.exists?(section.course.id)
+      @user.student.courses.delete section.course
+    end
     @courses=@user.subjects
     @user.save
     render:planner

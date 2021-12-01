@@ -1,7 +1,7 @@
 <% if @semester %>
-  <h1>Application for <%= @semester.description %></h1>
+  <h1>Applications for <%= @semester.description %></h1>
 <% else %>
-  <h1> Select a Semester to Display Courses/Sections to Application! </h1>
+  <h1> Select a Semester to Display Courses/Sections to Apply! </h1>
 <% end %>
 <%= render partial: "semesters/semester_select",
            locals: {
