@@ -1,39 +1,41 @@
-<h2>Sign up</h2>
+<div class="container">
+  <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= form.label :email %><br />
-    <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field">
+      <%= form.label :email %><br />
+      <%= form.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %><br />
-    <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+    <div class="field">
+      <%= form.label :name %><br />
+      <%= form.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :role %><br />
-    <%= form.select :role, [["administrator (verification required)", :admin], ["instructor (verification required)", :instructor], :student], selected: :student %>
-  </div>
-  <em>Verification of for administrator and instructor roles must be done by a current administrator. Student view will be available until an administrator verifies your role. </em>
-  <div class="field">
-    <%= form.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= form.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= form.label :role %><br />
+      <%= form.select :role, [["administrator (verification required)", :admin], ["instructor (verification required)", :instructor], :student], selected: :student %>
+    </div>
+    <em>Verification of for administrator and instructor roles must be done by a current administrator. Student view will be available until an administrator verifies your role. </em>
+    <div class="field">
+      <%= form.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= form.password_field :password, autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :password_confirmation %><br />
-    <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= form.label :password_confirmation %><br />
+      <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= form.submit "Sign up" %>
+    </div>
+  <% end %>
 
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+</div>
