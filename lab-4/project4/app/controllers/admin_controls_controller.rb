@@ -1,20 +1,20 @@
 class AdminControlsController < ApplicationController
-	before_action :authenticate_user!
+  before_action :authenticate_user!
 
   # User Actions
 
   def show_users
-		@users = User.all
+    @users = User.all
   end
 
   def delete_user
     @user = User.find(params[:id])
     @success = !!(@user.destroy)
   end
-  
+
   def activate_user
     @user = User.find(params[:id])
-  	@user.isActive = true
+    @user.isActive = true
     if @user.role == "instructor"
       @instructor = Instructor.create
       @user.instructor = @instructor
@@ -22,9 +22,9 @@ class AdminControlsController < ApplicationController
       @instructor.save!
       puts @instructor
     end
-  	@user.save!
+    @user.save!
   end
-  
+
   # Semester Actions
 
   def show_semesters
@@ -34,7 +34,7 @@ class AdminControlsController < ApplicationController
   def new_semester
     @semester = Semester.new
   end
-  
+
   def edit_semester
     @semester = Semester.find(params[:id])
     if !@semester

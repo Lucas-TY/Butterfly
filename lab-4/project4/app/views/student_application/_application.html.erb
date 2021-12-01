@@ -1,0 +1,105 @@
+<% if @semester %>
+  <h1>Application for <%= @semester.description %></h1>
+<% else %>
+  <h1> Select a Semester to Display Courses/Sections to Application! </h1>
+<% end %>
+<%= render partial: "semesters/semester_select",
+           locals: {
+             semester_list: @semester_list,
+             submit_text: "Display Semester",
+             path: show_application_path,
+             method: :get
+           } %>
+<% if !(@applications.empty?) %>
+  <h2>Your Applications</h2>
+  <table border="1" class="table table-sm table-bordered">
+    <tr>
+      <td>Availability</td>
+      <td>Course Interest</td>
+      <td>Semester</td>
+      <td>Condact Info</td>
+      <td>Edit</td>
+      <td>Cancel</td>
+    </tr>
+    <% @applications.each do |application| %>
+      <tr>
+        <td><%= application.availability %></td>
+        <td><%= application.course_interest %></td>
+        <td><%= application.semester.description %></td>
+        <td><%= application.contact_info %></td>
+        <%if application.closed=="True" %>
+          <td>Accepted</td>
+          <td>Accepted </td>
+        <%else%>
+          <td> <a href="<%= edit_appliction_path(0,application) %>">edit</a> </td>
+          <td> <%= link_to 'cancel', drop_appliction_path(application,{code:@semester.code}),method: :delete%> </td>
+        <%end%>
+      </tr>
+    <%end%>
+  </table>
+  <% end %>
+
+
+
+
+<table class="table table-sm table-bordered">
+  <thead class="thead-light">
+  <tr>
+    <td>Course ID </td>
+    <td>Class Number</td>
+    <td>Unit</td>
+    <td>Days&Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+    <td>Instruction Mode</td>
+    <td>Enrld / Wait</td>
+    <td>Status</td>
+    <td>Semester</td>
+    <td>Submit</td>
+    <% if is_verified? %>
+      <td> Grading Positions Open </td>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% @subjects.each do |subject| %>
+    <% if @current_course != subject.course %>
+        <% can_apply=true %>
+        <%  subject.course.sections.where(semester:@semester).each do |subject| %>
+            <% if (current_user.student.sections.include? subject) %>
+              <% can_apply=false %>
+            <% end %>
+        <% end %>
+      <tr class="bg-primary">
+        <% if can_apply  %>
+            <th colspan="10" class="text-left"><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
+            <th style="background-color:white"  > <a href="<%= edit_appliction_path(subject) %>">submit</a> </th>
+        <% else %>
+            <th colspan="10" class="text-left" style="background-color:green" ><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
+            <th style="background-color:white"  > <p style="color:green;" >√</p> </th>
+        <% end %>
+      </tr>
+      <% @current_course = subject.course %>
+    <% end %>
+    <% if (current_user.student.sections.include? subject) %>
+      <tr style="background-color:gray">
+    <%else%>
+      <tr>
+    <%end%>
+      <td>CSE-<%= subject.course.course_id %></td>
+      <td><%= subject.subject_id %></td>
+      <td><%= subject.units_range %></td>
+      <td><%= subject.days_times %></td>
+      <td><%= subject.room %></td>
+      <td><%= subject.listed_instructor %></td>
+      <td><%= subject.instruct_mode %></td>
+      <td><%= subject.enrld_wait %></td>
+      <td><%= subject.open_status %></td>
+      <td><%= subject.semester.description%></td>
+      <% if is_verified? %>
+        <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -18,12 +18,21 @@ Rails.application.routes.draw do
   post '/scraper/load',to: 'scraper#load', as: :scrape_load
   get '/scraper/loading/:code',to: 'scraper#load_loading_screen', as: :scrape_loading
   # planner routes
-  get '/planner' ,to: 'user_panel#planner' 
+  get '/planner' ,to: 'user_panel#planner'
   put '/planner/:subject' ,to:'user_panel#add', as: :add_course
   delete '/planner/:subject' ,to:'user_panel#drop', as: :drop_course
   # courses/sections/subjects routes
   get '/courses', to: 'subjects#subjects'
   get '/courses/semester', to: 'subjects#show_semester', as: :show_semester
+  get '/courses/changeposition/', to: 'subjects#change_position', as: :change_position
+  get '/courses/changeposition/apply', to: 'subjects#apply_change_position', as: :apply_position
+  # application
+  get '/application/show/' , to: 'student_application#application' , as: :show_application
+  get '/application/:subject(/:application)' , to: 'student_application#edit' , as: :edit_appliction
+  post '/application/add' , to: 'student_application#add' , as: :add_appliction
+  delete '/application/:application' , to: 'student_application#destory' , as: :drop_appliction
+  get "/admin/application", to: 'admin_application#show'
+  get "/admin/application/:application/:subject", to: 'admin_application#assign' , as: :assign_application
   # general routes
   get '/welcome', to: 'general_pages#welcome'
   root to: 'general_pages#home'

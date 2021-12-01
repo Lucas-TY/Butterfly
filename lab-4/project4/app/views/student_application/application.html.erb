@@ -1,0 +1,6 @@
+<% if !@semester %>
+  <%= render partial: "student_application/application", locals: {semester: nil} %>
+<%else%>
+  <%= render partial: "student_application/application", locals: {semester: @semester.description} %>
+<% end %>
+
