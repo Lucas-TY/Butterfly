@@ -1,9 +1,9 @@
 <h1>Planner</h1>
 <div>
-<%= form_tag(planner_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
-  <%= submit_tag "Search" %>
-<% end %>
+  <%= form_tag(planner_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
+    <%= submit_tag "Search" %>
+  <% end %>
 </div>
 <div>
 
@@ -77,11 +77,45 @@
      
     </tr>
   <% end %>
+  <% if @courses %>
+    <h2>Your courses</h2>
+    <table border="1">
+      <tr>
+        <td>Course ID </td>
+        <td>Class Number</td>
+        <td>Unit</td>
+        <td>Days&Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Enrld / Wait</td>
+        <td>Status</td>
+        <td>select</td>
+      </tr>
+    </div>
+    <div>
+      <% @courses.each do |subject|%>
+        <tr>
 
-</table>
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.units_range %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.enrld_wait %></td>
+          <td><%= subject.open_status %></td>
+          <td><%= link_to 'Drop', drop_subject_path(subject),method: :delete%></td>
+
+
+        </tr>
+      <% end %>
+
+      </table>
   <% end %>
 
 
 
 
-</div>
+  </div>

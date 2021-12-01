@@ -18,5 +18,8 @@ class Subject < ApplicationRecord
         end
         @result
     end
-      
+    puts @result
+    @result
+  end
+
 end

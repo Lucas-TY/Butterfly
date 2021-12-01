@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_131118) do
     t.datetime "remember_created_at"
     t.string "name"
     t.string "role"
+    t.string "operating_course"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "isActive"
