@@ -6,79 +6,8 @@
   <% end %>
 </div>
 <div>
-
-<% if @search_result %>
-<h2>Search result</h2>
-<table border="1">
-  <tr>
-    <td>Course ID </td>
-    <td>Class Number</td>
-    <td>Unit</td>
-    <td>Days&Times</td>
-    <td>Room</td>
-    <td>Instructor</td>
-    <td>Instruction Mode</td>
-    <td>Enrld / Wait</td>
-    <td>Status</td>
-    <td>select</td>
-  </tr>
-  </div>
-  <div>
-<% @search_result.each do |subject|%>
-<tr>
-     
-      <td>CSE-<%= subject.course.course_id %> </td>
-      <td><%= subject.subject_id %></td>
-      <td><%= subject.units_range %></td>
-      <td><%= subject.days_times %></td>
-      <td><%= subject.room %></td>
-      <td><%= subject.listed_instructor %></td>
-      <td><%= subject.instruct_mode %></td>
-      <td><%= subject.enrld_wait %></td>
-      <td><%= subject.open_status %></td>   
-      <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
-    </tr>
-<% end %>
-
-</table>
-<% end %>
-<% if @courses %>
-<h2>Your courses</h2>
-<table border="1">
-<tr>
-    <td>Course ID </td>
-    <td>Class Number</td>
-    <td>Unit</td>
-    <td>Days&Times</td>
-    <td>Room</td>
-    <td>Instructor</td>
-    <td>Instruction Mode</td>
-    <td>Enrld / Wait</td>
-    <td>Status</td>
-    <td colspan="2" >select</td>
-  </tr>
-  </div>
-  <div>
-<% @courses.each do |subject|%>
-<tr>
-
-      <td>CSE-<%= subject.course.course_id %> </td>
-      <td><%= subject.subject_id %></td>
-      <td><%= subject.units_range %></td>
-      <td><%= subject.days_times %></td>
-      <td><%= subject.room %></td>
-      <td><%= subject.listed_instructor %></td>
-      <td><%= subject.instruct_mode %></td>
-      <td><%= subject.enrld_wait %></td>
-      <td><%= subject.open_status %></td>
-      <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
-      <td><%= link_to 'Manage', recommendations_path(:section=>subject.course.course_id),method: :get%></td>
-
-     
-    </tr>
-  <% end %>
-  <% if @courses %>
-    <h2>Your courses</h2>
+  <% if @search_result %>
+    <h2>Search result</h2>
     <table border="1">
       <tr>
         <td>Course ID </td>
@@ -92,11 +21,45 @@
         <td>Status</td>
         <td>select</td>
       </tr>
-    </div>
-    <div>
+      </div>
+      <div>
+    <% @search_result.each do |subject|%>
+    <tr>
+        
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.units_range %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.enrld_wait %></td>
+          <td><%= subject.open_status %></td>   
+          <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
+        </tr>
+    <% end %>
+    </table>
+  <% end %>
+  <% if @courses %>
+    <h2>Your courses</h2>
+    <table border="1">
+    <tr>
+        <td>Course ID </td>
+        <td>Class Number</td>
+        <td>Unit</td>
+        <td>Days&Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Enrld / Wait</td>
+        <td>Status</td>
+        <td colspan="2" >select</td>
+      </tr>
+      </div>
+      <div>
       <% @courses.each do |subject|%>
         <tr>
-
+    
           <td>CSE-<%= subject.course.course_id %> </td>
           <td><%= subject.subject_id %></td>
           <td><%= subject.units_range %></td>
@@ -106,16 +69,11 @@
           <td><%= subject.instruct_mode %></td>
           <td><%= subject.enrld_wait %></td>
           <td><%= subject.open_status %></td>
-          <td><%= link_to 'Drop', drop_subject_path(subject),method: :delete%></td>
-
-
+          <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
+          <td><%= link_to 'Manage', recommendations_path(:section=>subject.course.course_id),method: :get%></td>
+        
         </tr>
       <% end %>
-
-      </table>
+    </table>
   <% end %>
-
-
-
-
-  </div>
+</div>
