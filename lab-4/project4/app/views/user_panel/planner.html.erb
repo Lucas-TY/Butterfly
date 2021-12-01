@@ -26,7 +26,7 @@
   <div>
 <% @search_result.each do |subject|%>
 <tr>
-
+     
       <td>CSE-<%= subject.course.course_id %> </td>
       <td><%= subject.subject_id %></td>
       <td><%= subject.units_range %></td>
@@ -55,10 +55,7 @@
     <td>Unit</td>
     <td>Days&Times</td>
     <td>Room</td>
-    <td>Instructor</td>
-    <td>Instruction Mode</td>
-    <td>Enrld / Wait</td>
-    <td>Status</td>
+    <td>Instructor</set_recommendation
     <td>select</td>
   </tr>
   </div>
@@ -76,7 +73,8 @@
       <td><%= subject.enrld_wait %></td>
       <td><%= subject.open_status %></td>
       <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
-      
+      <td><%= link_to 'Manage', recommendations_path(:section=>subject.course.course_id),method: :get%></td>
+
      
     </tr>
   <% end %>
