@@ -9,14 +9,16 @@ class ScraperController < ApplicationController
     @semester = selected_semester_params
     # scrape information for semester
     %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
-    #redirect_to action: :index, notice: "Finished scrapping #{@semester}!"
+    flash[:notice] = "Finished scraping #{@semester}!"
+    redirect_to action: :index
   end
 
   def load
     @semester = selected_semester_params
     down @semester
     loader selected_semester_params
-    redirect_to action: :index, notice: "Finished loading #{@semester}!"
+    flash[:notice] = "Finished loading #{@semester}!"
+    redirect_to action: :index
   end
 
   def index

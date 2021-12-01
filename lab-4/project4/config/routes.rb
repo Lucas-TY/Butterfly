@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/scraper', to: 'scraper#index'
   post '/scraper', to: 'scraper#scrape'
   post '/scraper/load',to: 'scraper#load', as: :scrape_load
+  get '/scraper/loading/:code',to: 'scraper#load_loading_screen', as: :scrape_loading
   # planner routes
   get '/planner' ,to: 'user_panel#planner' 
   put '/planner/:subject' ,to:'user_panel#add', as: :add_course
