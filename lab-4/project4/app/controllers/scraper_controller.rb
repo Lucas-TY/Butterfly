@@ -4,7 +4,7 @@ require 'fileutils'
 
 class ScraperController < ApplicationController
   before_action :authenticate_user!
-  
+
   def scrape
     @semester = selected_semester_params
     # scrape information for semester
@@ -33,7 +33,7 @@ class ScraperController < ApplicationController
   private def loader(semester_code)
     # Find the selected semester
     semester = Semester.find_by code: semester_code
-    if !semester 
+    if !semester
       semester = Semester.create code: 0000, description: "Missing Semester"
     end
 
@@ -48,16 +48,16 @@ class ScraperController < ApplicationController
       # parse lec and lab relationship
       finding_lab=''
       subs.each do |sub|
-          sub["auto_enrolls"]=[]
-          if sub['components']=='Laboratory Required, Lecture Required'
-              current_subject_id=sub['subject_number']
-              if sub['outer_info'][1].include? "Lecture"
-                  finding_lab=sub
-                  sub["auto_enrolls"]=[]
-              else
-                  finding_lab["auto_enrolls"].append(current_subject_id)
-              end
+        sub["auto_enrolls"]=[]
+        if sub['components']=='Laboratory Required, Lecture Required'
+          current_subject_id=sub['subject_number']
+          if sub['outer_info'][1].include? "Lecture"
+            finding_lab=sub
+            sub["auto_enrolls"]=[]
+          else
+            finding_lab["auto_enrolls"].append(current_subject_id)
           end
+        end
       end
       subs.each do |sub|
         days=sub["date_times"][0][0]
@@ -84,8 +84,8 @@ class ScraperController < ApplicationController
           course: course,
           num_graders_required: 1
         );
-        
-        # Link the section to the course 
+
+        # Link the section to the course
         course.sections << section
         course.save
         # Link the section to the semester
@@ -102,5 +102,5 @@ class ScraperController < ApplicationController
       Subject.where(semester: semester).destroy_all
     end
   end
-  
+
 end

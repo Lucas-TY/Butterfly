@@ -1,16 +1,15 @@
 <% if semester %>
-    <h1>CSE Courses for <%= semester %></h1>
+  <h1>CSE Courses for <%= semester %></h1>
 <% else %>
-    <h1> Select a Semester to Display Courses/Sections </h1>
+  <h1> Select a Semester to Display Courses/Sections </h1>
 <% end %>
-
-<%= render partial: "semesters/semester_select", 
-  locals: {
-    semester_list: @semester_list,
-    submit_text: "Display Semester",
-    path: show_semester_path,
-    method: :get
-  } %>
+<%= render partial: "semesters/semester_select",
+           locals: {
+             semester_list: @semester_list,
+             submit_text: "Display Semester",
+             path: show_semester_path,
+             method: :get
+           } %>
 
 <table class="table table-sm table-bordered">
   <thead class="thead-light">
@@ -26,7 +25,8 @@
     <td>Status</td>
     <td>Semester</td>
     <% if is_verified? %>
-    <td> Grading Positions Open </td>
+      <td> Grading Positions Open </td>
+      <td> Change Positions </td>
     <% end %>
   </tr>
   </thead>
@@ -50,7 +50,9 @@
       <td><%= subject.open_status %></td>
       <td><%= subject.semester.description%></td>
       <% if is_verified? %>
-      <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+        <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+        <td><a href=<%=change_position_path({"subject":subject.id,"semester_code":@semester_code})%> >change</a></td>
+
       <% end %>
     </tr>
   <% end %>

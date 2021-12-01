@@ -1,0 +1,12 @@
+<h1>Input New Positions</h1>
+<%= form_tag(apply_position_path, :method => "get", id: "add-form") do %>
+  <%= hidden_field_tag  :subject_id,   @subject.id  %>
+  <%= hidden_field_tag  :semester_code,   @semester_code  %>
+  
+  <br>
+  New Position
+  <br>
+  <%= text_field_tag :position,  @subject.num_graders_required %>
+  <br>
+  <%= submit_tag "Submit" %>
+<% end %>
