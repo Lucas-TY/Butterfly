@@ -1,0 +1,28 @@
+<% if current_user.role == 'admin' && current_user.isActive %>
+  <h1>Semesters</h1>
+
+  <span><%= link_to 'Add Semester', semesters_new_path, method: :get %></span>
+
+  <table class="table table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th>Semester Code</th>
+        <th>Semester Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @semesters.each do |semester| %>
+        <tr>
+          <td><%= semester.code %></td>
+          <td><%= semester.description %></td>
+          <td><%= link_to 'Update', edit_semester_path(semester.id), method: :get %></td>
+          <td><%= link_to "Delete", delete_semester_path(semester.id), method: :delete, data: { confirm: "Are you sure you want to delete semester #{semester.code}?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h1>Access Denied.</h1>
+<% end %>
