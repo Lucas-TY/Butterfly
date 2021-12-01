@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # associations
+  has_one :operating
   has_many :plans
   has_many :subjects, through: :plans
   has_one :student, required: false, :dependent => :destroy

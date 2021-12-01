@@ -5,6 +5,7 @@ class RecommendationsController < ApplicationController
   # GET /recommendations or /recommendations.json
   def index
 
+    
     @recommendations = Recommendation.all
     @student_list=Student.all
     @student_list = []
@@ -21,7 +22,6 @@ class RecommendationsController < ApplicationController
   # GET /recommendations/new
   def new
     @recommendation = Recommendation.new
-    @recommendation.section=$current_course
   end
 
   # GET /recommendations/1/edit
@@ -31,6 +31,7 @@ class RecommendationsController < ApplicationController
   # POST /recommendations or /recommendations.json
   def create
     @recommendation = Recommendation.new(recommendation_params)
+    @recommendation.section=params[:operating]
     respond_to do |format|
       if @recommendation.save
         format.html { redirect_to @recommendation,section: @section, notice: "Recommendation was successfully created." }
@@ -74,9 +75,9 @@ class RecommendationsController < ApplicationController
     def recommendation_params
       recommendation=params.require(:recommendation)
       selected={}
-      selected[:instructor]=Instructor.first
+      selected[:instructor]=current_user.instructor
       selected[:student]=User.find(params.require(:recommendation).require(:selection)).student
-      selected[:section]
+      selected[:section]="1222"
       selected
     end
   private def selected_student_params

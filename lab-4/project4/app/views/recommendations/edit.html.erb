@@ -8,8 +8,8 @@
         student_list: @student_list,
         recommendation: @recommendation,
         submit_text: "submit recommendation",
-        path: "/recommendations/#{params[:id]}/edit",
-        method: :get
+        path: "/recommendations/#{params[:operating]}/#{@recommendation.id}",
+        method: :put
       } %>
 <%= link_to 'Show', @recommendation %> |
 <%= link_to 'Back', recommendations_path %>

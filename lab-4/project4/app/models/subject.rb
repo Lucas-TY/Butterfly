@@ -16,7 +16,6 @@ class Subject < ApplicationRecord
                 @result=self.where(teacher: search)
             end
         end
-        puts @result
         @result
     end
       

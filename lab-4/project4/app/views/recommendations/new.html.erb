@@ -9,7 +9,7 @@
         student_list: @student_list,
         recommendation: @recommendation,
         submit_text: "submit recommendation",
-        path: "/recommendations",
+        path: "/recommendations/#{params[:operating]}",
         method: :post,
         section: @section
       } %>
