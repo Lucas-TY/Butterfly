@@ -5,12 +5,7 @@ class UserPanelController < ApplicationController
     @courses = @user.subjects
 
     @search_result = []
-    # Semester.where(code: selected_semester_params).each do |semester|
-    #   @search_result << semester.sections.find_by(course_id: params[:search])
-    # end
-    if !params[:semester]
-      flash.now[:alert] = "Error"
-    end
+
     if params[:search] != ""
       @search_result = Subject.search(params[:search]).select{|section| section.semester.code == params[:semester]}
     end
