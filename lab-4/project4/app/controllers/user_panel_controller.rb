@@ -19,9 +19,9 @@ class UserPanelController < ApplicationController
     @courses = @user.subjects
     if @user.role == "student" && !@user.student.courses.exists?(section.course.id)
       @user.student.courses << section.course
+      @user.student.save
     end
     @user.save
-    @user.student.save
     render:planner
   end
 
