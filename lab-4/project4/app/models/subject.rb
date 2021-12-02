@@ -10,11 +10,12 @@ class Subject < ApplicationRecord
     
     def self.search(search)
         @result=[]
+        @search=search
         if search
-            @result=Subject.joins(:course).where(course: { course_id: search })
-            if @result==[]
-                @result=self.where(teacher: search)
-            end
+            @result=Subject.joins(:course).where(course: { course_id: @search })
+            @result|=Subject.where( listed_instructor: @search)
+            @result|=Subject.where( subject_id: @search)
+            
         end
         @result
     end
