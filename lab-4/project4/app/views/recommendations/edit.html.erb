@@ -11,5 +11,5 @@
         path: "/recommendations/#{params[:operating]}/#{@recommendation.id}",
         method: :put
       } %>
-<%= link_to 'Show', @recommendation %> |
+ <td><%= link_to 'Show', "/recommendations/#{params[:operating]}/#{@recommendation.id}"%></td>
 <%= link_to 'Back', recommendations_path %>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :recommendations, path: "recommendations/:operating", defaults: {operating: "1222"}
+  resources :recommendations, path: "recommendations/:operating"
   # users routes
   devise_for :users
   get '/users', to: 'admin_controls#show_users'

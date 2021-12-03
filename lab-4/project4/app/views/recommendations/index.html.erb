@@ -11,7 +11,7 @@
     </thead>
  
   <tbody>
-    <% @show=@recommendations.where(:instructor=>current_user.instructor,:section=>params[:operating])%>
+    <% @show=@recommendations.where(:instructor=>current_user.instructor,:subject=>Subject.find_by(:subject_id=>params[:operating]))%>
     <%if @show%>
     <%@show.each do |recommendation| %>
       <tr>
@@ -20,10 +20,10 @@
           <td><%= student.name %></td>
           <td><%= student.id %></td>
           <td><%= student.email %></td>
-          <td><%= recommendation.section %></td>
-        <td><%= link_to 'Show', "recommendation/#{recommendation.id}" %></td>
+          <td><%= recommendation.subject_id %></td>
+        <td><%= link_to 'Show', "/recommendations/#{params[:operating]}/#{recommendation.id}" %></td>
         <td><%= link_to 'Edit', edit_recommendation_path(id: recommendation.id) %></td>
-        <td><%= link_to 'Destroy', recommendation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', "/recommendations/#{params[:operating]}/#{recommendation.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
     <%end%>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Recommendation', new_recommendation_path(section: @section) %>
+<%= link_to 'New Recommendation', new_recommendation_path %>

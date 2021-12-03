@@ -31,10 +31,9 @@ class RecommendationsController < ApplicationController
   # POST /recommendations or /recommendations.json
   def create
     @recommendation = Recommendation.new(recommendation_params)
-    @recommendation.section=params[:operating]
     respond_to do |format|
       if @recommendation.save
-        format.html { redirect_to @recommendation,section: @section, notice: "Recommendation was successfully created." }
+        format.html { redirect_to recommendations_path(@recommendation),id: @recommendation.id, notice: "Recommendation was successfully created." }
         format.json { render :show, status: :created, location: @recommendation }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -77,7 +76,7 @@ class RecommendationsController < ApplicationController
       selected={}
       selected[:instructor]=current_user.instructor
       selected[:student]=User.find(params.require(:recommendation).require(:selection)).student
-      selected[:section]="1222"
+      selected[:subject]=(Subject.find_by(subject_id: params[:operating]))
       selected
     end
   private def selected_student_params
@@ -89,3 +88,4 @@ class RecommendationsController < ApplicationController
       selection
   end
 end
+

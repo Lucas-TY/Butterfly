@@ -1,7 +1,6 @@
 <%= form_with(model: recommendation,url:path ,local: true,method: method ) do |form| %>
    <%= form.label :selection %>
   <%= form.select :selection, student_list%>
-<input name="section" value="<%= params[:section=>@section] %>" type="hidden">
    <div class="actions">
   <%= form.submit submit_text %>
   </div>
