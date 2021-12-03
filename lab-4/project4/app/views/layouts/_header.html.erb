@@ -12,10 +12,11 @@
           <% if current_user.role == "admin" && current_user.isActive %>
             <li><%= link_to 'Manage Users', users_path %></li>
             <li><%= link_to 'Manage Application', admin_application_path %></li>
+            <li><%= link_to 'Manage Recommandation', show_recommendation_path %></li>
             <li><%= link_to 'Manage Semesters', semesters_path %></li>
             <li><%= link_to "Scraper", scraper_path %></li>
           <% end %>
-          <% if current_user.role == "student" && current_user.isActive %>
+          <% if current_user.role == "student" %>
             <li><%= link_to 'Application', show_application_path %></li>
           <% end %>
           <li><%= link_to "Add courses", planner_path %></li>

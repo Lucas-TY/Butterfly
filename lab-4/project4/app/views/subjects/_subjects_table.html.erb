@@ -34,7 +34,7 @@
   <% @subjects.each do |subject| %>
     <% if @current_course != subject.course %>
       <tr class="bg-primary">
-        <th colspan="11" class="text-left"><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
+        <th colspan="12" class="text-left"><%= subject.course.course_id %> - <%= disp_section_count(subject.course, subject.semester, "section") %></th>
       </tr>
       <% @current_course = subject.course %>
     <% end %>

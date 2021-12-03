@@ -4,19 +4,21 @@ require 'fileutils'
 
 class ScraperController < ApplicationController
   before_action :authenticate_user!
-
+  
   def scrape
     @semester = selected_semester_params
     # scrape information for semester
     %x(bin/rails runner  ./scrapeAndStore/ManageLocalDB.rb "update #{@semester}")
-    #redirect_to action: :index, notice: "Finished scrapping #{@semester}!"
+    flash[:notice] = "Finished scraping #{@semester}!"
+    redirect_to action: :index
   end
 
   def load
     @semester = selected_semester_params
     down @semester
     loader selected_semester_params
-    redirect_to action: :index, notice: "Finished loading #{@semester}!"
+    flash[:notice] = "Finished loading #{@semester}!"
+    redirect_to action: :index
   end
 
   def index
@@ -33,7 +35,7 @@ class ScraperController < ApplicationController
   private def loader(semester_code)
     # Find the selected semester
     semester = Semester.find_by code: semester_code
-    if !semester
+    if !semester 
       semester = Semester.create code: 0000, description: "Missing Semester"
     end
 

@@ -1,6 +1,6 @@
 class SubjectsController < ApplicationController
   before_action :authenticate_user!
-
+  
   def subjects
     @subjects = []
     options_setup
@@ -30,6 +30,7 @@ class SubjectsController < ApplicationController
     semester_code=params[:semester_code]
     redirect_to show_semester_path({selection:{semester:semester_code}})
   end
+  
   private def options_setup
     @semester_list = []
     Semester.all.each do |semester|

@@ -1,0 +1,15 @@
+<h1>Editing Recommendation</h1>
+  <%@student_list = []%>
+  <% Student.all.each do |student|%>
+  <%@student_list << [student.user.name,student.user.id]%>
+  <%end%>
+  <%= render partial:'form', 
+      locals: {
+        student_list: @student_list,
+        recommendation: @recommendation,
+        submit_text: "submit recommendation",
+        path: "/recommendations/#{params[:operating]}/#{@recommendation.id}",
+        method: :put
+      } %>
+ <td><%= link_to 'Show', "/recommendations/#{params[:operating]}/#{@recommendation.id}"%></td>
+<%= link_to 'Back', recommendations_path %>

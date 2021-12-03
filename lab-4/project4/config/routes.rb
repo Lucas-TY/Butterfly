@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :recommendations, path: "recommendations/:operating"
   # users routes
   devise_for :users
   get '/users', to: 'admin_controls#show_users'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   get '/scraper', to: 'scraper#index'
   post '/scraper', to: 'scraper#scrape'
   post '/scraper/load',to: 'scraper#load', as: :scrape_load
+  get '/scraper/loading/:code',to: 'scraper#load_loading_screen', as: :scrape_loading
   # planner routes
   get '/planner' ,to: 'user_panel#planner'
   put '/planner/:subject' ,to:'user_panel#add', as: :add_course
@@ -31,7 +33,14 @@ Rails.application.routes.draw do
   delete '/application/:application' , to: 'student_application#destory' , as: :drop_appliction
   get "/admin/application", to: 'admin_application#show'
   get "/admin/application/:application/:subject", to: 'admin_application#assign' , as: :assign_application
+  delete "/admin/application/:application", to: 'admin_application#reject' , as: :reject_application
+  
+  # recommendation
+  get "/admin/recommandation", to: "admin_recommendation#show_recommendation" , as: :show_recommendation
+  put "/admin/recommandation/assign",  to:  "admin_recommendation#assigned_recommendation" , as: :assign_recommendation
+  delete "/admin/recommandation/reject", to: "admin_recommendation#reject_recommendation",  as: :reject_recommendation
   # general routes
   get '/welcome', to: 'general_pages#welcome'
   root to: 'general_pages#home'
+
 end

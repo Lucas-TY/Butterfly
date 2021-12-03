@@ -1,6 +1,6 @@
 <h2>Manage Application Page</h2>
 <% if @semester %>
-  <h1>Application for semester <%= @semester.description %></h1>
+  <h1>Applications for semester <%= @semester.description %></h1>
 <% else %>
   <h1> Select a Semester to Display Courses/Sections </h1>
 <% end %>
@@ -51,14 +51,27 @@
         <td>Interested Course</td>
         <td>Availability</td>
         <td>Semester</td>
+        <td>Reject</td>
       </tr>
       <tr>
         <td> <%= one_data["application"].student.id%> </td>
         <td> <%= one_data["application"].student.user.name%> </td>
         <td> <%= one_data["application"].contact_info%> </td>
         <td> <%= one_data["application"].course_interest%> </td>
-        <td> <%= one_data["application"].availability%> </td>
+        <td>
+          <% (0..4).each do |day| %>
+            <div  style="width:100%;height:12px;">
+              <%(0..11).each do |hour|%>
+                <% if one_data["application"].availability[day*12+hour]=="0" %>
+                  <div class="block" style="text-align:center;color:black; float:left;height:6px;width:12px;font-size: 4px; margin:2px"> <%= (hour+8) %> </div>
+                <%else%>
+                  <div class="block" style="text-align:center;color:#009933; float:left;height:6px;width:12px;font-size: 4px;  margin:2px" > <%=(hour+8) %> </div>
+                <%end%>
+              <%end%>
+            </div>
+          <%end%>
         <td> <%= one_data["application"].semester.description%> </td>
+        <td> <%= link_to 'reject', reject_application_path(one_data["application"],{code:@semester.code}),method: :delete%> </td>
       </tr>
     </table>
     <table class="table table-sm table-bordered">

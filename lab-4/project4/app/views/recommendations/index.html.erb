@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+<h1>Recommendations</h1>
+<table class="table table-sm table-bordered">
+  <thead class="thead-light">
+     <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Section</th>
+      </tr>
+    </thead>
+ 
+  <tbody>
+    <% @show=@recommendations.where(:instructor=>current_user.instructor,:subject=>Subject.find_by(:subject_id=>params[:operating]))%>
+    <%if @show%>
+    <%@show.each do |recommendation| %>
+      <tr>
+      <%student=recommendation.student.user%>
+        
+          <td><%= student.name %></td>
+          <td><%= student.id %></td>
+          <td><%= student.email %></td>
+          <td><%= recommendation.subject_id %></td>
+        <td><%= link_to 'Show', "/recommendations/#{params[:operating]}/#{recommendation.id}" %></td>
+        <td><%= link_to 'Edit', edit_recommendation_path(id: recommendation.id) %></td>
+        <td><%= link_to 'Destroy', "/recommendations/#{params[:operating]}/#{recommendation.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    <%end%>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recommendation', new_recommendation_path %>

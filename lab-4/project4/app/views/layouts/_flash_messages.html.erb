@@ -1,0 +1,11 @@
+<div class="container center">
+    <% flash.each do |type, message| %>
+        <%if type == :notice%>
+            <p class="alert alert-success"><%= message %></p>
+        <% elsif type == :alert%>
+            <p class="alert alert-warning"><%= message %></p>
+        <% else %>
+            <p class="alert alert-info"><%= message %></p>
+        <% end %>
+    <% end %>
+</div>
