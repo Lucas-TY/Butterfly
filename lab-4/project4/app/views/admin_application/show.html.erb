@@ -1,0 +1,101 @@
+<h2>Manage Application Page</h2>
+<% if @semester %>
+  <h1>Applications for semester <%= @semester.description %></h1>
+<% else %>
+  <h1> Select a Semester to Display Courses/Sections </h1>
+<% end %>
+<%= render partial: "semesters/semester_select",
+           locals: {
+             semester_list: @semester_list,
+             submit_text: "Display Semester",
+             path: admin_application_path,
+             method: :get
+           } %>
+
+<h3>Assigned Applications</h3>
+<table  class="table table-sm table-bordered">
+  <tr>
+    <td>Course_id</td>
+    <td>Subject_id</td>
+    <td>Student_id</td>
+    <td>Contact_info</td>
+    <td>Student_name</td>
+    <td>Days_Times</td>
+    <td>Room</td>
+    <td>Instructor</td>
+  </tr>
+  <% @assigned_data.each do |one_assigned| %>
+    <% student=one_assigned["student"] %>
+    <% subject=one_assigned["subject"] %>
+    <tr>
+      <td> <%= subject.course.course_id %> </td>
+      <td> <%= subject.subject_id %> </td>
+      <td> <%= student.id %> </td>
+      <td> <%= student.applications.where(semester:@semester).find_by(course_interest:subject.course.course_id).contact_info %> </td>
+      <td> <%= student.user.name %> </td>
+      <td> <%= subject.days_times %> </td>
+      <td> <%= subject.room %> </td>
+      <td> <%= subject.listed_instructor %> </td>
+    </tr>
+
+  <% end %>
+</table>
+<h3>Waiting Applications</h3>
+<% @data.each do |one_data|%>
+  <div style="border:1px solid #000; padding:20px 3px 1px 3px; ">
+    <table class="table table-sm table-bordered">
+      <tr>
+        <td>Student id</td>
+        <td>Name</td>
+        <td>Contact Info</td>
+        <td>Interested Course</td>
+        <td>Availability</td>
+        <td>Semester</td>
+      </tr>
+      <tr>
+        <td> <%= one_data["application"].student.id%> </td>
+        <td> <%= one_data["application"].student.user.name%> </td>
+        <td> <%= one_data["application"].contact_info%> </td>
+        <td> <%= one_data["application"].course_interest%> </td>
+        <td> <%= one_data["application"].availability%> </td>
+        <td> <%= one_data["application"].semester.description%> </td>
+      </tr>
+    </table>
+    <table class="table table-sm table-bordered">
+      <tr>
+        <td>Course ID </td>
+        <td>Class Number</td>
+        <td>Unit</td>
+        <td>Days&Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Enrld / Wait</td>
+        <td>Status</td>
+        <td>Semester</td>
+        <td>Grading Positions</td>
+        <td>Assign</td>
+      </tr>
+      <% one_data["subjects"].each do |subject,index|%>
+        <tr>
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.units_range %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.enrld_wait %></td>
+          <td><%= subject.open_status %></td>
+          <td><%= subject.semester.description %></td>
+          <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+          <% if count_open_grading_positions(subject)<=0%>
+            <td></td>
+          <%else%>
+            <td> <a href="<%= assign_application_path(one_data["application"],subject) %>">Assign</a> </td>
+          <%end%>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<%end%>

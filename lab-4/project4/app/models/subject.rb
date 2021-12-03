@@ -1,7 +1,7 @@
 class Subject < ApplicationRecord
     # associations
     belongs_to :course
-    belongs_to :semester, required: false
+    belongs_to :semester, required: true
     belongs_to :instructor, required: false
     has_many :plans
     has_many :recommendations

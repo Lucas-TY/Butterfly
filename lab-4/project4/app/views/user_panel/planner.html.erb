@@ -1,88 +1,84 @@
 <h1>Planner</h1>
 <div>
-<%= form_tag(planner_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
-  <%= submit_tag "Search" %>
-<% end %>
+  <%= form_tag(planner_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
+    <%= label_tag :semester %>
+    <%= select_tag :semester, options_for_select(@semester_list)%>
+    <%= submit_tag "Search" %>
+  <% end %>
 </div>
 <div>
-
-<% if @search_result %>
-<h2>Search result</h2>
-<table border="1">
-  <tr>
-    <td>Course ID </td>
-    <td>Class Number</td>
-    <td>Unit</td>
-    <td>Days&Times</td>
-    <td>Room</td>
-    <td>Instructor</td>
-    <td>Instruction Mode</td>
-    <td>Enrld / Wait</td>
-    <td>Status</td>
-    <td>select</td>
-  </tr>
-  </div>
-  <div>
-<% @search_result.each do |subject|%>
-<tr>
-     
-      <td>CSE-<%= subject.course.course_id %> </td>
-      <td><%= subject.subject_id %></td>
-      <td><%= subject.units_range %></td>
-      <td><%= subject.days_times %></td>
-      <td><%= subject.room %></td>
-      <td><%= subject.listed_instructor %></td>
-      <td><%= subject.instruct_mode %></td>
-      <td><%= subject.enrld_wait %></td>
-      <td><%= subject.open_status %></td>
-      
-      <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
-      
-      
-     
-    </tr>
-<% end %>
-
-</table>
-<% end %>
-<% if @courses %>
-<h2>Your courses</h2>
-<table border="1">
-<tr>
-    <td>Course ID </td>
-    <td>Class Number</td>
-    <td>Unit</td>
-    <td>Days&Times</td>
-    <td>Room</td>
-    <td>Instructor</set_recommendation
-    <td>select</td>
-  </tr>
-  </div>
-  <div>
-<% @courses.each do |subject|%>
-<tr>
-
-      <td>CSE-<%= subject.course.course_id %> </td>
-      <td><%= subject.subject_id %></td>
-      <td><%= subject.units_range %></td>
-      <td><%= subject.days_times %></td>
-      <td><%= subject.room %></td>
-      <td><%= subject.listed_instructor %></td>
-      <td><%= subject.instruct_mode %></td>
-      <td><%= subject.enrld_wait %></td>
-      <td><%= subject.open_status %></td>
-      <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
-      <td><%= link_to 'Manage', recommendations_path(subject.subject_id),method: :get%></td>
-
-     
-    </tr>
+  <% if @search_result %>
+    <h2>Search result</h2>
+    <table border="1">
+      <tr>
+        <td>Course ID </td>
+        <td>Class Number</td>
+        <td>Unit</td>
+        <td>Days&Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Enrld / Wait</td>
+        <td>Status</td>
+        <td>select</td>
+      </tr>
+      </div>
+      <div>
+    <% @search_result.each do |subject|%>
+    <tr>
+        
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.units_range %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.enrld_wait %></td>
+          <td><%= subject.open_status %></td>   
+          <td><%= link_to 'Add', add_course_path(subject),method: :put%></td>
+        </tr>
+    <% end %>
+    </table>
   <% end %>
-
-</table>
+  <% if @courses %>
+    <h2>Your courses</h2>
+    <table border="1">
+    <tr>
+        <td>Course ID </td>
+        <td>Class Number</td>
+        <td>Unit</td>
+        <td>Days&Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Enrld / Wait</td>
+        <td>Status</td>
+        <td>Semester</td>
+        <td colspan="2" >select</td>
+      </tr>
+      </div>
+      <div>
+      <% @courses.each do |subject|%>
+        <tr>
+    
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.units_range %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.enrld_wait %></td>
+          <td><%= subject.open_status %></td>
+          <td><%= subject.semester.description %></td>
+          <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
+          <% if current_user.role == "instructor" && current_user.isActive %>
+            <td><%= link_to 'Manage', recommendations_path(:operating=>subject.subject_id),method: :get%></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
   <% end %>
-
-
-
-
 </div>

@@ -1,6 +1,8 @@
 <%= form_with(model: recommendation,url:path ,local: true,method: method ) do |form| %>
    <%= form.label :selection %>
   <%= form.select :selection, student_list%>
+    <%= form.label :message, "message for student" %>
+  <%= form.text_field :message %>
    <div class="actions">
   <%= form.submit submit_text %>
   </div>

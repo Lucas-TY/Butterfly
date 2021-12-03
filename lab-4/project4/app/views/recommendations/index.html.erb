@@ -4,9 +4,10 @@
   <thead class="thead-light">
      <tr>
         <th>Name</th>
-        <th>ID</th>
+        <th>Student ID</th>
         <th>Email</th>
         <th>Section</th>
+        <th>Message</th>
       </tr>
     </thead>
  
@@ -20,7 +21,8 @@
           <td><%= student.name %></td>
           <td><%= student.id %></td>
           <td><%= student.email %></td>
-          <td><%= recommendation.subject_id %></td>
+          <td><%= recommendation.subject.subject_id %></td>
+          <td><%= recommendation.message %></td>
         <td><%= link_to 'Show', "/recommendations/#{params[:operating]}/#{recommendation.id}" %></td>
         <td><%= link_to 'Edit', edit_recommendation_path(id: recommendation.id) %></td>
         <td><%= link_to 'Destroy', "/recommendations/#{params[:operating]}/#{recommendation.id}", method: :delete, data: { confirm: 'Are you sure?' } %></td>

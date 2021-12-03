@@ -107,3 +107,20 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
 
 Program also supports entering commands from a built-in menu. Command list is provided upon running.
 Using this option allows for running multiple commands in one run - recommended for bulk work.
+
+---
+
+## Update
+
+### Add a addTestData script to add two student with some taken_courses.
+
+Run it with rails runner: `rails runner addTestData/add_test_student.rb`
+
+student 1:  
+email: jack@osu.edu   |   password: 123456
+
+student 2:  
+email: jack@osu.edu   |   password: 123456
+
+Admin:  
+email: admin@osu.edu   |   password: 123456
