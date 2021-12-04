@@ -3,8 +3,8 @@ class Subject < ApplicationRecord
     belongs_to :course
     belongs_to :semester, required: true
     belongs_to :instructor, required: false
-    has_many :plans
-    has_many :recommendations
+    has_many :plans,:dependent => :destroy
+    has_many :recommendations,:dependent => :destroy
     has_many :users, through: :plans
     has_many :grading_assignments
     has_many :graders, class_name: 'Student', through: :grading_assignments, foreign_key: "student_id"
