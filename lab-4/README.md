@@ -1,12 +1,62 @@
 # OSU CSE Grading Assignment Web Application
 
-## Jquery Setup
+# Initial Setup
 
-To create the time selector we use jquery, to add jquery to rails, run
-<code>yarn add  jquery </code>
+## Step 1: Accessing the web view
++ While in the project4 folder, first run the command <code>bundle install --without production</code> to install all of the necessary gems
++ Next, you might need to run <code>rails db:migrate</code> before your first time running the server
++ Finally, run the command <code>rails s</code> to start the web server.
+  + To access the website, now go to <link>http://localhost:3000/</link> in a browser of your choice (recommended: chrome)
+  + If you run into an issue when running the server for the first time where the application.js file is not found, you need to run: <code>rails webpacker:install.</code>
 
-in  project  root dir. Settings have been changed in application.js and environment.js.
+---
 
+## Step 2: Jquery Setup
+To create the time selector we use jquery, to add jquery to rails, run <code>yarn add  jquery </code> in  project4 root dir. Settings have been changed in application.js and environment.js.
+
+<em>Only follow the next two steps if you had to run webpacker:install</em>
+
++ In project4/app/javascript/packs/application.js, replace the file's contents with:
+  ```
+  import Rails from "@rails/ujs"
+  import Turbolinks from "turbolinks"
+  import * as ActiveStorage from "@rails/activestorage"
+  import "channels"
+  require("jquery")
+  Rails.start()
+  Turbolinks.start()
+  ActiveStorage.start()
+
+  window.jQuery = $;
+  window.$ = $;
+  ```
++ In project4/config/webpack/environment.js, replace the file's contents with:
+  ```
+  const { environment } = require('@rails/webpacker')
+
+  const webpack = require('webpack')
+  environment.plugins.prepend('Provide',
+    new webpack.ProvidePlugin({
+      $: 'jquery/src/jquery',
+      jQuery: 'jquery/src/jquery'
+    })
+  )
+
+  module.exports = environment
+
+  ```
+
+## Step 3: Add a default admin account
+
+To create a default admin account (the initial administrator to the database), you must add them through the command line
+  + Open the rails console: <code>rails console</code>
+  + Enter the following command (replace [ ] with user chosen values): 
+  <br>
+        <code>User.create(name:[name], email:[email], role:"admin", isActive:"true", password:[password])</code>
+  + example: <code>User.create(name:"admin", email:"admin@admin.admin", role:"admin", isActive:"true", password:"123456")</code>
+  + Exit the console using the command: <code>quit</code>
+
+---
 
 ## Developers: How to use the database
 
@@ -44,15 +94,6 @@ in  project  root dir. Settings have been changed in application.js and environm
 
 # OSU CSE Course Web Scraper (Copied from Project 3)
 <em> All commands shown are demonstrating how to run the command line arguments while inside the project3 directory </em>
-
-## Accessing the web view
-+ While in the project4 folder, first run the command <code>bundle install --without production</code> to install all of the necessary gems
-+ Next, you might need to run <code>rails db:migrate</code> before your first time running the server
-+ Finally, run the command <code>rails s</code> to start the web server.
-  + To access the website, now go to <link>http://localhost:3000/</link> in a browser of your choice (recommended: chrome)
-  + If you run into an issue when running the server for the first time where the application.js file is not found, you need to run: <code>rails webpacker:install.</code>
-
----
 
 ## Handling Users
 + Users can be created through the web view by clicking the "Sign Up" link in the navigation bar.
