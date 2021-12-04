@@ -14,9 +14,11 @@ class AdminApplicationController < ApplicationController
             assigneds=GradingAssignment.all
             assigneds.each do |assigned|
                 student=Student.find(assigned.student_id)
-                subject=Subject.find(assigned.subject_id)
+                if Subject.exists?(assigned.subject_id)
+                    subject=Subject.find(assigned.subject_id)
+                end
                 # not this semester, next
-                if !(subject.semester.id==@semester.id)
+                if !subject || !(subject.semester.id == @semester.id)
                     next
                 end
                 
