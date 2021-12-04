@@ -22,6 +22,7 @@ class RecommendationsController < ApplicationController
   # GET /recommendations/new
   def new
     @recommendation = Recommendation.new
+    @operating=params[:operating]
   end
 
   # GET /recommendations/1/edit
@@ -31,10 +32,9 @@ class RecommendationsController < ApplicationController
   # POST /recommendations or /recommendations.json
   def create
     @recommendation = Recommendation.new(recommendation_params)
-    @recommendation.section=params[:operating]
     respond_to do |format|
       if @recommendation.save
-        format.html { redirect_to @recommendation,section: @section, notice: "Recommendation was successfully created." }
+        format.html { redirect_to recommendations_path(@recommendation.subject.subject_id),id: @recommendation.id, notice: "Recommendation was successfully created." }
         format.json { render :show, status: :created, location: @recommendation }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class RecommendationsController < ApplicationController
   def update
     respond_to do |format|
       if @recommendation.update(recommendation_params)
-        format.html { redirect_to @recommendation,section: @section, notice: "Recommendation was successfully updated." }
+        format.html { redirect_to recommendations_path(@recommendation.subject.subject_id),section: @section, notice: "Recommendation was successfully updated." }
         format.json { render :show, status: :ok, location: @recommendation }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +65,10 @@ class RecommendationsController < ApplicationController
     end
   end
 
+  # CREATE recommendation for a group of students
+  def rule
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_recommendation
@@ -75,9 +79,11 @@ class RecommendationsController < ApplicationController
     def recommendation_params
       recommendation=params.require(:recommendation)
       selected={}
+      puts params
       selected[:instructor]=current_user.instructor
       selected[:student]=User.find(params.require(:recommendation).require(:selection)).student
-      selected[:section]="1222"
+      selected[:subject]=(Subject.find_by(subject_id: params[:operating]))
+      selected[:message]=params.require(:recommendation).require(:message)
       selected
     end
   private def selected_student_params
@@ -89,3 +95,4 @@ class RecommendationsController < ApplicationController
       selection
   end
 end
+
