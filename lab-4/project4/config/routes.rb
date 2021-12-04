@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :recommendations, path: "recommendations/:operating"
   # users routes
   devise_for :users
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
   get '/users', to: 'admin_controls#show_users'
   delete '/users/:id', to: 'admin_controls#delete_user', as: :admin_delete
   post '/users/:id', to: 'admin_controls#activate_user', as: :admin_verify
