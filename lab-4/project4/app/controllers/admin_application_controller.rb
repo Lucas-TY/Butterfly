@@ -46,7 +46,12 @@ class AdminApplicationController < ApplicationController
         application.save
         redirect_to admin_application_path({selection:{semester:subject.semester.code}})
     end
-
+    def reject
+        application=Application.find(params[:application])
+        application.closed="Rejected"
+        application.save
+        redirect_to admin_application_path({selection:{semester:application.semester.code}})
+    end
     private def options_setup
         @semester_list = []
         Semester.all.each do |semester|

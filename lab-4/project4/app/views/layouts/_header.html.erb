@@ -12,6 +12,7 @@
           <% if current_user.role == "admin" && current_user.isActive %>
             <li><%= link_to 'Manage Users', users_path %></li>
             <li><%= link_to 'Manage Application', admin_application_path %></li>
+            <li><%= link_to 'Manage Recommandation', show_recommendation_path %></li>
             <li><%= link_to 'Manage Semesters', semesters_path %></li>
             <li><%= link_to "Scraper", scraper_path %></li>
           <% end %>

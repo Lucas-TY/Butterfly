@@ -1,0 +1,61 @@
+<h2>Manage Recommendation Page</h2>
+<% if @semester %>
+  <h1>Recommendations for semester <%= @semester.description %></h1>
+<% else %>
+  <h1> Select a Semester to Display Courses/Sections </h1>
+<% end %>
+<%= render partial: "semesters/semester_select",
+           locals: {
+             semester_list: @semester_list,
+             submit_text: "Display Semester",
+             path: show_recommendation_path,
+             method: :get
+           } %>
+
+
+
+<h3>Waiting Applications</h3>
+  <div style="border:1px solid #000; padding:20px 3px 1px 3px; ">
+    <table class="table table-sm table-bordered">
+      <tr>
+        <td>Recommander</td>
+        <td>Recommended Grader </td>
+        <td>Recommended Grader Id </td>
+        <td>Class Number</td>
+        <td>Subject Number</td>
+        <td>Day Times</td>
+        <td>Room</td>
+        <td>Instructor</td>
+        <td>Instruction Mode</td>
+        <td>Status</td>
+        <td>Semester</td>
+        <td>Grading Positions</td>
+        <td>Assign</td>
+        <td>Reject</td>
+      </tr>
+    <% @recommendations.each do |recommendation|%>
+      <% subject=recommendation.subject %>
+        <tr>
+          <td> <%=recommendation.instructor.user.name%></td>
+          <td><%=recommendation.student.user.name%></td>
+          <td><%=recommendation.student.id%>  </td>
+          <td>CSE-<%= subject.course.course_id %> </td>
+          <td><%= subject.subject_id %></td>
+          <td><%= subject.days_times %></td>
+          <td><%= subject.room %></td>
+          <td><%= subject.listed_instructor %></td>
+          <td><%= subject.instruct_mode %></td>
+          <td><%= subject.open_status %></td>
+          <td><%= subject.semester.description %></td>
+          <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
+          <% if count_open_grading_positions(subject)<=0%>
+            <td></td>
+            <td> <%= link_to "Reject", reject_recommendation_path({recommendation:recommendation,semester:subject.semester}) ,method: :delete %> </td> 
+          <%else%>
+            <td> <%= link_to "Assign", assign_recommendation_path({recommendation:recommendation,semester:subject.semester}) ,method: :put %> </td>
+            <td> <%= link_to "Reject", reject_recommendation_path({recommendation:recommendation,semester:subject.semester}) ,method: :delete %> </td> 
+          <%end%>
+        </tr>
+    </table>
+    <%end%>
+  </div>
