@@ -1,5 +1,5 @@
 <% if current_user.role == 'instructor' && current_user.isActive %>
-  <h1>New Recommendation Setup</h1>
+  <h1>New Recommendation for section <%=params[:operating]%></h1>
   <%@student_list = []%>
   <% Student.all.each do |student|%>
   <%@student_list << [student.user.name,student.user.id]%>

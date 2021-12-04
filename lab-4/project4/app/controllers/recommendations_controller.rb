@@ -83,7 +83,10 @@ class RecommendationsController < ApplicationController
       selected[:instructor]=current_user.instructor
       selected[:student]=User.find(params.require(:recommendation).require(:selection)).student
       selected[:subject]=(Subject.find_by(subject_id: params[:operating]))
-      selected[:message]=params.require(:recommendation).require(:message)
+      selected[:message]="Defualt message"
+      if params.require(:recommendation)[:message]!=""
+        selected[:message]=params.require(:recommendation)[:message]
+      end
       selected
     end
   private def selected_student_params
