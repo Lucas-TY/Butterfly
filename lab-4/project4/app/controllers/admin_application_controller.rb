@@ -2,7 +2,7 @@ class AdminApplicationController < ApplicationController
 
     
     def show
-        
+        @days_of_week = ["Mon", "Tue", "Wed", "Thr", "Fri"]
         @semester_code = selected_semester_params
         @semester = Semester.find_by code: @semester_code
         # semester=Semester.find_by(id:params[:semester])
