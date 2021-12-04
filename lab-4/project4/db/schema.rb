@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_021149) do
+ActiveRecord::Schema.define(version: 2021_12_04_195909) do
 
   create_table "applications", force: :cascade do |t|
     t.string "availability"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_12_03_021149) do
   end
 
   create_table "recommendations", force: :cascade do |t|
+    t.string "section"
     t.string "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -110,6 +111,8 @@ ActiveRecord::Schema.define(version: 2021_12_03_021149) do
     t.integer "instructor_id"
     t.integer "semester_id"
     t.integer "num_graders_required"
+    t.string "component"
+    t.string "primary_section"
     t.index ["course_id"], name: "index_subjects_on_course_id"
     t.index ["instructor_id"], name: "index_subjects_on_instructor_id"
     t.index ["semester_id"], name: "index_subjects_on_semester_id"
@@ -132,7 +135,6 @@ ActiveRecord::Schema.define(version: 2021_12_03_021149) do
     t.datetime "remember_created_at"
     t.string "name"
     t.string "role"
-    t.string "operating_course"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "isActive"

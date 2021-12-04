@@ -71,6 +71,8 @@ class Scrape
                 subject_data["instruct_mode"] = section["instructionMode"]
                 subject_data["components"] = section["primaryComponent"]
                 subject_data["career"] = section["career"]
+                subject_data["component"] = section["component"]
+                subject_data["section_code"] = section["section"]
                 subject_data["dates"] = "#{section["startDate"]} - #{section["endDate"]}"
                 subject_data["grading"] = course["course"]["grading"]
                 subject_data["location"] = section["location"]

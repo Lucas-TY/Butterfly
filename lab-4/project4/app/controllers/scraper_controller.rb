@@ -81,6 +81,8 @@ class ScraperController < ApplicationController
           enrld_wait:temp_elw,
           instruct_mode:sub["instruct_mode"],
           open_status:sub["open_status"],
+          component: sub["component"],
+          primary_section: sub["section_code"],
           listed_instructor:teachers,
           semester: semester,
           course: course,
