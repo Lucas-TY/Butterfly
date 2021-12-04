@@ -33,7 +33,14 @@ Rails.application.routes.draw do
   delete '/application/:application' , to: 'student_application#destory' , as: :drop_appliction
   get "/admin/application", to: 'admin_application#show'
   get "/admin/application/:application/:subject", to: 'admin_application#assign' , as: :assign_application
+  delete "/admin/application/:application", to: 'admin_application#reject' , as: :reject_application
+  
+  # recommendation
+  get "/admin/recommandation", to: "admin_recommendation#show_recommendation" , as: :show_recommendation
+  put "/admin/recommandation/assign",  to:  "admin_recommendation#assigned_recommendation" , as: :assign_recommendation
+  delete "/admin/recommandation/reject", to: "admin_recommendation#reject_recommendation",  as: :reject_recommendation
   # general routes
   get '/welcome', to: 'general_pages#welcome'
   root to: 'general_pages#home'
+
 end

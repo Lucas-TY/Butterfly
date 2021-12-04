@@ -1,5 +1,5 @@
 <h2>Application Edit</h2>
-<%= form_tag(add_appliction_path, :method => "post", id: "add-form") do %>
+<%= form_tag(add_appliction_path, :method => "post", id: "add-form",class: "big_text") do %>
   Availability
   <br>
   (Hint: just enter your available times on weekdays, such as Mon 1pm-5pm, Tue 10am-1pm)
@@ -23,3 +23,104 @@
   <%= text_field_tag :contact_info,  @application.contact_info  %>
   <%= submit_tag "Submit application" %>
 <% end %>
+
+<%# header %>
+<div style="width:100%;height:60px">
+  <div  style="float:left;height:50px;width:50px; text-align:center"></div>
+  <%(0..11).each do |hour|%>
+    
+    <div style="float:left;height:50px;width:50px;border:1px;margin:2px">
+     <p style="margin:30px 0px 0px 0px;user-select: none;"><%= 8+hour %>:00 </p>
+     
+    </div>
+  <%end%>
+</div>
+<% days=["Mon ","Tues","Wed ","Thur","Fri"] %>
+<%# content %>
+<% (0..4).each do |day| %>
+  <div style="width:100%;height:60px">
+    <div  style="float:left;height:50px;width:50px; text-align:center;user-select: none;"><%=days[day] %></div>
+    <%(0..11).each do |hour|%>
+      <div class="block" style="float:left;height:50px;width:50px;border:1px;background-color:gray;margin:2px;user-select: none;"> </div>
+    <%end%>
+  </div>
+<%end%>
+
+
+
+<script>
+console.log("hahahs")
+blocks=$("div.block")
+input=$("#add-form > #availability")
+
+for(var i=0; i<60;i++ )
+{
+  div=$("div.block:eq("+i+")")
+  div.data("index",i)
+  if( input.val()[i]=="0")
+    div.css("background-color","gray")
+    
+  else
+    div.css("background-color","green")
+}
+
+
+$("div.block").mouseenter(function(event){
+  if(event.which==1)
+  {
+    my=$(this)
+    console.log(my.data("index"))
+    console.log(input.val()[my.data("index")])
+    // console.log(input.val())
+    if(input.val()[my.data("index")]=="0")
+    {
+      old=input.val().split("")
+      old[my.data("index")]="1"
+      console.log(old)
+      input.val(old.join("")).trigger('change')
+      my.css("background-color","green");
+    }
+    else
+    {
+      old=input.val().split("")
+      old[my.data("index")]="0"
+      input.val(old.join("")).trigger('change')
+      my.css("background-color","gray");
+    }
+  }
+});
+
+
+$("div.block").mousedown(function(event){
+  if(event.which==1)
+  {
+    my=$(this)
+    console.log(my.data("index"))
+    console.log(input.val()[my.data("index")])
+    // console.log(input.val())
+    if(input.val()[my.data("index")]=="0")
+    {
+      old=input.val().split("")
+      old[my.data("index")]="1"
+      console.log(old)
+      input.val(old.join("")).trigger('change')
+      my.css("background-color","green");
+    }
+    else
+    {
+      old=input.val().split("")
+      old[my.data("index")]="0"
+      input.val(old.join("")).trigger('change')
+      my.css("background-color","gray");
+    }
+  }
+});
+// for(var i=0; i<60;i++ )
+// {
+//   // console.log(blocks[i])
+//   blocks[i].onmouseenter(function(){
+//   $("p").css("background-color","yellow");
+//   });
+// }
+// console.log($("div.block"))
+</script>

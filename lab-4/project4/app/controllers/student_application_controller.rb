@@ -41,7 +41,7 @@ class StudentApplicationController < ApplicationController
             if student.applications.where(course_interest:course.course_id).empty?
                 @application=Application.new(
                   student:student,
-                  availability:"",
+                  availability:"000000000000000000000000000000000000000000000000000000000000",
                   course_interest:course.course_id,
                   semester:@subject.semester,
                   contact_info:"",
@@ -69,6 +69,7 @@ class StudentApplicationController < ApplicationController
             application.course_interest=params[:course_interest]
             application.semester=semester
             application.contact_info=params[:contact_info]
+            application.closed="False"
             application.save
         else
             Application.create(

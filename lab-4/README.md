@@ -1,6 +1,15 @@
 # OSU CSE Grading Assignment Web Application
 
+## Jquery Setup
+
+To create the time selector we use jquery, to add jquery to rails, run
+<code>yarn add  jquery </code>
+
+in  project  root dir. Settings have been changed in application.js and environment.js.
+
+
 ## Developers: How to use the database
+
 + *see documentation on the database's relationships and schema design*
 + When saving an object to the database, make sure that all of the required foreign keys are added to the object
   + <code>has_many</code>: use the <code> << </code> operator to add an object to the list of foreign keys of another.
@@ -99,8 +108,8 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
   <h4>Scrape data</h4>
 <li> (Admin only) click scrape, and then click the the semester that you want to scrape, then click load to load those data into database</li>
 
-  ---
-  
+---
+
   <h4>add/delete course(project 4 part)</h4>
   <li> click planner, then input the course that you are looking for. You can click on add or drop to change your courses</li>
 

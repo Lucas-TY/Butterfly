@@ -21,15 +21,35 @@
       <td>Edit</td>
       <td>Cancel</td>
     </tr>
+    <% @days_of_week = ["Mon", "Tue", "Wed", "Thr", "Fri"] %>
     <% @applications.each do |application| %>
       <tr>
-        <td><%= application.availability %></td>
+        <td>
+          
+          <% (0..4).each do |day| %>
+            <div  style="width:100%;height:12px;">
+              <span class="block availability-time-black"> <%= @days_of_week[day] %> </span>
+              <%(0..11).each do |hour|%>
+                <% if application.availability[day*12+hour]=="0" %>
+                  <div class="block availability-time-black"> <%= (hour+8) %> </div>
+                <%else%>
+                  <div class="block availability-time-color"> <%=(hour+8) %> </div>
+                <%end%>
+              <%end%>
+            </div>
+          <%end%>
+
+        </td>
         <td><%= application.course_interest %></td>
         <td><%= application.semester.description %></td>
         <td><%= application.contact_info %></td>
-        <%if application.closed=="True" %>
-          <td>Accepted</td>
-          <td>Accepted </td>
+        <%if ! (application.closed=="False") %>
+          <td><%=application.closed%></td>
+          <%if (application.closed=="Rejected") %>
+            <td> <%= link_to 'cancel', drop_appliction_path(application,{code:@semester.code}),method: :delete%> </td>
+          <%else%>
+            <td><%=application.closed%> </td>
+          <%end%>
         <%else%>
           <td> <a href="<%= edit_appliction_path(0,application) %>">edit</a> </td>
           <td> <%= link_to 'cancel', drop_appliction_path(application,{code:@semester.code}),method: :delete%> </td>

@@ -21,10 +21,12 @@ class UserPanelController < ApplicationController
       @user.student.courses << section.course
       @user.student.save
     end
-    # A temporary method for adding instructor courses
-    if @user.role == "student" && @user.instructor.courses.exists?(section.course.id)
-      @user.student.courses.delete section.course
+    # Adds instructor to a section
+    if @user.role == "instructor" && !@user.instructor.sections.exists?(section.id)
+      @user.instructor.sections << section
+      section.instructor = @user.instructor
       @user.instructor.save
+      section.save
     end
     @user.save
     
@@ -40,6 +42,12 @@ class UserPanelController < ApplicationController
     section = Subject.find(params[:subject])
     if @user.role == "student" && @user.student.courses.exists?(section.course.id)
       @user.student.courses.delete section.course
+    end
+    # Removes section from an instructor
+    if @user.role == "instructor" && !@user.instructor.sections.exists?(section.id)
+      @user.instructor.sections.delete section
+      @user.instructor.save
+      section.save
     end
     @courses=@user.subjects
     @user.save
