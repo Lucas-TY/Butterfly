@@ -58,6 +58,52 @@ To create a default admin account (the initial administrator to the database), y
 
 ---
 
+# Website Functionality and Assumptions
+
+## admins
++ Functions:
+  + Manage Users
+    + admins can verify any unverified admin and instructor accounts
+    + admins can delete users
+  + Manage Application
+    + Select a semester to display applications to sections for that semester
+    + Either assign a grading position to one section for an application or reject the application
+  + Manage Recommendation
+    + Select a semester to display recommendations to sections for that semester
+    + Either assign a grading position to one section for a recommendation or reject the recommendation
+  + Manage Semester
+    + Add a semester with the following information
+      + code - The code used for scraping data for that specific semester (currently increments by 4 every semester)
+      + description - a brief title/description for the semester
+    + At least one semester must be added to the database before scraping any course data.
+    + When deleting a semester, all corresponding sections that were linked the semester are also deleted.
+  + Scraper
+    1. Select a semester to frist scrape course/section data. This data will be stored in an intermediate folder.
+    2. Load the data into the corresponding semester. This will remove all sections stored in the database for that semester before loading in the newly scraped section data.
+      + This will load whatever data was last scraped into the selected semester.
+      + It is possible to load the scraped data into a different semester. This is intentially designed in case an admin needs to archive a semester's data without changing the semester code. Be careful when loading data that the correct semester is being loaded. 
+  + Sections
+    + In the "change positions" column, an admin can change the amount of graders needed for a section. By default, each section requires 1 grader.
+
+## Instructors
++ Functions:
+  + Add Courses
+    + Adds the sections that the instructor account teaches/manages
+    + Manage Section
+      + Here, the instructor can add a recommendation for a student to grade for the given section.
++ Assumptions:
+  + Only one instructor can be assigned to a section at a time
+
+## Students
++ Functions:
+  + Add Courses
+    + Adds sections to the student's history of taken courses.
+    + A student must have a course listed as being taken before they are able to apply for that course. Otherwise, an instructor must recommend them for a specific section.
++ Assumptions:
+  + An application is only intended to apply for one position (must apply multiple times to get multiple positions)
+  + A student can only apply to courses that they have taken
+---
+
 ## Developers: How to use the database
 
 + *see documentation on the database's relationships and schema design*
@@ -93,7 +139,7 @@ To create a default admin account (the initial administrator to the database), y
 ---
 
 # OSU CSE Course Web Scraper (Copied from Project 3)
-<em> All commands shown are demonstrating how to run the command line arguments while inside the project3 directory </em>
+<em> All commands shown are demonstrating how to run the command line arguments while inside the project4 directory </em>
 
 ## Handling Users
 + Users can be created through the web view by clicking the "Sign Up" link in the navigation bar.
