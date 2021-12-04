@@ -28,7 +28,7 @@
         <td>Instructor</td>
         <td>Instruction Mode</td>
         <td>Status</td>
-        <td>Semester</td>
+        <td>Message</td>
         <td>Grading Positions</td>
         <td>Assign</td>
         <td>Reject</td>
@@ -46,7 +46,7 @@
           <td><%= subject.listed_instructor %></td>
           <td><%= subject.instruct_mode %></td>
           <td><%= subject.open_status %></td>
-          <td><%= subject.semester.description %></td>
+          <td><%= recommendation.message %></td>
           <td><%= count_open_grading_positions(subject) %> / <%= subject.num_graders_required%></td>
           <% if count_open_grading_positions(subject)<=0%>
             <td></td>
