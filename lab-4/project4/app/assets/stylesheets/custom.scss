@@ -9,3 +9,25 @@ body {
 .center {
     text-align: center;
 }
+
+.availability-time-black {
+
+    text-align:center;
+    color:black; 
+    float:left;
+    height:6px;
+    width:12px;
+    font-size: 8px; 
+    margin:2px
+}
+
+.availability-time-color {
+
+    text-align:center;
+    color:#009933; 
+    float:left;
+    height:6px;
+    width:12px;
+    font-size: 8px; 
+    margin:2px
+}
