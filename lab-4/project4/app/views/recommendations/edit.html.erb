@@ -1,3 +1,4 @@
+<div class="content">
 <h1>Editing Recommendation</h1>
   <%@student_list = []%>
   <% Student.all.each do |student|%>
@@ -13,3 +14,4 @@
       } %>
  <td><%= link_to 'Show', "/recommendations/#{params[:operating]}/#{@recommendation.id}"%></td>
 <%= link_to 'Back', recommendations_path %>
+</div>

@@ -1,3 +1,5 @@
+
+<div class="content">
 <div class="jumbotron jumbotron-fluid">
     <h1>Home Page</h1>
     <% if user_signed_in? %>
@@ -10,10 +12,11 @@
             <% end %>
         </p>
     <% end %>
-</div>
+
 <% if !user_signed_in? %>
     <div class="alert alert-info center">
         Please log in
     </div>
 <% end %>
-
+</div>
+</div>

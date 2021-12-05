@@ -1,3 +1,4 @@
+<div class="content">
 <h1>Input New Positions</h1>
 <%= form_tag(apply_position_path, :method => "get", id: "add-form") do %>
   <%= hidden_field_tag  :subject_id,   @subject.id  %>
@@ -10,3 +11,4 @@
   <br>
   <%= submit_tag "Submit" %>
 <% end %>
+</div>

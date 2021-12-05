@@ -1,3 +1,4 @@
+<div class="content">
 <p id="notice"><%= notice %></p>
 <% if current_user.role == 'instructor' && current_user.isActive %>
   <h1>Recommendation from professor</h1>
@@ -24,3 +25,4 @@
 <% end %>
 <%= link_to 'Edit', "/recommendations/#{params[:operating]}/#{@recommendation.id}/edit",method: :get  %> |
 <%= link_to 'Back', recommendations_path(section: @section)  %>
+</div>

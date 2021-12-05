@@ -4,10 +4,25 @@
 
 body {
     padding-top: 10px;
+    background: #f5f5f5;
+    a:hover {color: #ff8f00}
+    
 }
-
+.jumbotron{
+    background:#c5e1a5; 
+}
 .center {
     text-align: center;
+}
+.content {
+    background:#fafafa; 
+    border-radius: 25px;
+    padding: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    
+
+    
 }
 
 .availability-time-black {
@@ -30,4 +45,11 @@ body {
     width:12px;
     font-size: 8px; 
     margin:2px
+}
+td ,th {
+    border: 1px solid #ddd;
+    
+  }
+table {
+    border-top: 1px solid #ddd;
 }

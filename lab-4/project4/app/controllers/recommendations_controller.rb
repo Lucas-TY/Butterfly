@@ -65,9 +65,6 @@ class RecommendationsController < ApplicationController
     end
   end
 
-  # CREATE recommendation for a group of students
-  def rule
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
