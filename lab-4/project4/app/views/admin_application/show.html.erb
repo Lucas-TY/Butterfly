@@ -32,7 +32,14 @@
       <td> <%= subject.course.course_id %> </td>
       <td> <%= subject.subject_id %> </td>
       <td> <%= student.id %> </td>
-      <td> <%= student.applications.where(semester:@semester).find_by(course_interest:subject.course.course_id).contact_info %> </td>
+      <% if student.applications.length > 0 %>
+        <% application = student.applications.where(semester:@semester).find_by(course_interest:subject.course.course_id) %>
+        <% if application %>
+          <td> <%= application.contact_info %> </td>
+        <% else %>
+          <td> <%= User.find_by(student: student).email %> </td>
+        <% end %>
+      <% end %>
       <td> <%= student.user.name %> </td>
       <td> <%= subject.days_times %> </td>
       <td> <%= subject.room %> </td>
