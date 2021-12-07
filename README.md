@@ -1,3 +1,8 @@
+# Project preview
+- [Project1](https://github.com/cse-3901-sharkey/Butterfly/releases/tag/v1.1)
+- [Project2](https://setgame.lucas-ty.space/)
+- [Project3&Project4](https://butterfly.lucas-ty.monster/)
+---
 # <font color=red>Beta deadline is December 4 at 11:59pm (Midnight)</font>
 # <font color=red>Full release deadline is December 10 at 12:00pm (Noon)</font>
 ---
