@@ -1,5 +1,5 @@
 # Project preview
-- [Project1](https://github.com/cse-3901-sharkey/Butterfly/releases/tag/v1.1)
+- [Project1](https://github.com/cse-3901-sharkey/Butterfly/releases/tag/v1.1) (Java Executable)
 - [Project2](https://setgame.lucas-ty.space/)
 - [Project3&Project4](https://butterfly.lucas-ty.monster/)
 ---
