@@ -22,8 +22,9 @@ Rails.application.routes.draw do
   get '/scraper/loading/:code',to: 'scraper#load_loading_screen', as: :scrape_loading
   # planner routes
   get '/planner' ,to: 'user_panel#planner'
-  put '/planner/:subject' ,to:'user_panel#add', as: :add_course
-  delete '/planner/:subject' ,to:'user_panel#drop', as: :drop_course
+  put '/planner/:subject', to:'user_panel#add', as: :add_course
+  get '/planner/:subject', to:'user_panel#planner'
+  delete '/planner/:subject', to:'user_panel#drop', as: :drop_course
   # courses/sections/subjects routes
   get '/courses', to: 'subjects#subjects'
   get '/courses/semester', to: 'subjects#show_semester', as: :show_semester
