@@ -1,7 +1,0 @@
-<div class="content">
-<% if current_user.role == 'instructor' && current_user.isActive %>
-  <h1>Evaluate grader in section <%=params[:id]%></h1>
-<% else %>
-  <h1>Access Denied.</h1>
-<% end %>
-</div>

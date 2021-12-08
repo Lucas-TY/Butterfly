@@ -10,20 +10,20 @@
       <th>Message</th>
     </tr>
     <% @evaluations.each do |evaluation| %>
+    <% user = User.find(Student.find(evaluation.student_id).user_id)%>
     <tr>
-      <td><%= evaluation.student.name %></td>
-      <td><%= evaluation.student.id %></td>
-      <td><%= evaluation.student.email %></td>
-      <td><%= evaluation.subject.subject_id %></td>
+      <td><%= user.name %></td>
+      <td><%= user.id %></td>
+      <td><%= user.email %></td>
+      <td><%= evaluation.section %></td>
       <td><%= evaluation.message %></td>
-      <td><%= link_to 'Show', show_evaluation_path(id: evaluation.id) %></td>
-      <td><%= link_to 'Edit', edit_evaluation_path(id: evaluation.id) %></td>
-      <td><%= link_to 'Delete', delete_evaluation_path(id: evaluation.id), data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Edit', edit_evaluation_path(subject: params[:subject], id: evaluation.id) %></td>
+      <td><%= link_to 'Delete', evaluation_path(subject: params[:subject], id: evaluation.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <%end%>
   </table>
 
-  <%= link_to 'New Evaluation', add_evaluation_path(params[:id]) %>
+  <%= link_to 'New Evaluation', new_evaluation_path(subject: params[:subject]) %>
 
   <% else %>
     <h1>Access Denied.</h1>
