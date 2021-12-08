@@ -1,0 +1,32 @@
+<div class="content">
+  <% if current_user.role == 'instructor' && current_user.isActive %>
+  <h1>Evaluations</h1>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Student ID</th>
+      <th>Email</th>
+      <th>Section</th>
+      <th>Message</th>
+    </tr>
+    <% @evaluations.each do |evaluation| %>
+    <tr>
+      <td><%= evaluation.student.name %></td>
+      <td><%= evaluation.student.id %></td>
+      <td><%= evaluation.student.email %></td>
+      <td><%= evaluation.subject.subject_id %></td>
+      <td><%= evaluation.message %></td>
+      <td><%= link_to 'Show', show_evaluation_path(id: evaluation.id) %></td>
+      <td><%= link_to 'Edit', edit_evaluation_path(id: evaluation.id) %></td>
+      <td><%= link_to 'Delete', delete_evaluation_path(id: evaluation.id), data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <%end%>
+  </table>
+
+  <%= link_to 'New Evaluation', add_evaluation_path(params[:id]) %>
+
+  <% else %>
+    <h1>Access Denied.</h1>
+  <% end %>
+
+</div>

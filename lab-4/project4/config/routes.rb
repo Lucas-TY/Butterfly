@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
+  
   resources :recommendations, path: "recommendations/:operating"
+  # evaluations
+  get 'evaluations/:id/add', to: 'evaluations#add', as: :add_evaluation
+  get 'evaluations/edit', to: 'evaluations#edit', as: :edit_evaluation
+  delete 'evaluations/delete', to: 'evaluations#delete', as: :delete_evaluation
+  get 'evaluations/:id', to: 'evaluations#index', as: :index_evaluation
+  get 'evaluations/show' , to: 'evaluations#show', as: :show_evaluation
   # users routes
   devise_for :users
   devise_scope :user do
@@ -22,6 +29,7 @@ Rails.application.routes.draw do
   get '/scraper/loading/:code',to: 'scraper#load_loading_screen', as: :scrape_loading
   # planner routes
   get '/planner' ,to: 'user_panel#planner'
+  get 'planner/:subject', to: 'user_panel#planner'
   put '/planner/:subject' ,to:'user_panel#add', as: :add_course
   delete '/planner/:subject' ,to:'user_panel#drop', as: :drop_course
   # courses/sections/subjects routes
