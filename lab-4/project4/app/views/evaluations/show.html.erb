@@ -1,0 +1,11 @@
+<div class="content">
+<% if current_user.role == 'instructor' && current_user.isActive %>
+  <h1>Evaluation for grader <%= @name %> in section <%=params[:subject]%></h1>
+  <p> <%= "Student: #{@name}"%> </p>
+  <br>
+  <p> <%= "Evaluation: #{@message}" %> </p>
+  <br>
+<td><%= link_to 'Edit', edit_evaluation_path(subject: params[:subject], id: @evaluation.id) %></td>
+<% else %>
+  <h1>Access Denied.</h1>
+<% end %>

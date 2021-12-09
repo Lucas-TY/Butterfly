@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :recommendations, path: "recommendations/:operating"
+  # evaluation routes
+  resources :evaluations, path: "evaluations/:subject"
+  get 'admin_evaluation/index', to: "admin_evaluation#index", as: :index_admin_evaluation
+  get 'admin_evaluation/show/:id', to: "admin_evaluation#show", as: :show_admin_evaluation
   # users routes
   devise_for :users
   devise_scope :user do

@@ -1,0 +1,16 @@
+<div class="content">
+<% if current_user.role == 'instructor' && current_user.isActive %>
+  <h1>Evaluate grader in section <%=params[:subject]%></h1>
+  <%= form_with model: Evaluation.new do |form| %>
+    <%= form.label :graders, "Student: " %>
+    <%= form.select :graders, @graders.each_key %>
+    <br>
+    <%= form.label :evaluation, "Evaluation: "%>
+    <%= form.text_area :evaluation, size: "30x4" %>
+    <br>
+    <%= form.submit "Submit Evaluation"%>
+  <%end%>
+<% else %>
+  <h1>Access Denied.</h1>
+<% end %>
+</div>

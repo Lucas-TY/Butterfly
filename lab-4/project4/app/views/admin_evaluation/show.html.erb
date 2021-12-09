@@ -1,0 +1,28 @@
+<div class="content">
+  <% if current_user.role == 'admin' && current_user.isActive %>
+  <h1>Evaluations for <%= @student.user.name %></h1>
+  <table>
+    <tr>
+      <th>Course</th>
+      <th>Section</th>
+      <th>Instructor</th>
+      <th>Semester</th>
+      <th>Evaluation</th>
+    </tr>
+    <% @evaluations.each do |evaluation| %>
+    <% subject = Subject.find_by(subject_id:evaluation.section)%>
+    <tr>
+      <td><%= subject.course.course_id %></td>
+      <td><%= evaluation.section %></td>
+      <td><%= evaluation.instructor.user.name %></td>
+      <td><%= subject.semester.description %></td>
+      <td><%= evaluation.message %></td>
+    </tr>
+    <%end%>
+  </table>
+
+  <% else %>
+    <h1>Access Denied.</h1>
+  <% end %>
+
+</div>
