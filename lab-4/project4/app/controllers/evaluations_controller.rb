@@ -60,7 +60,8 @@ class EvaluationsController < ApplicationController
       @graders = {}
       assignments = GradingAssignment.where(subject_id:Subject.find_by(subject_id:params[:subject]).id)
       assignments.each do |assignment|
-        if !(Evaluation.find_by(student_id: assignment.student_id))
+        evaluation = Evaluation.find_by(student_id: assignment.student_id, section:params[:subject])
+        if !evaluation
           id = assignment.student_id
           user = User.find(Student.find(id).user_id)
           @graders[user.name] = id
