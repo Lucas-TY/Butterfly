@@ -1,0 +1,24 @@
+<div class="content">
+  <% if current_user.role == 'admin' && current_user.isActive %>
+  <h1>Graders</h1>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Student ID</th>
+      <th>Email</th>
+    </tr>
+    <% @graders.each do |grader| %>
+    <tr>
+      <td><%= grader.name %></td>
+      <td><%= grader.id %></td>
+      <td><%= grader.email %></td>
+      <td><%= link_to 'View Evaluations', show_admin_evaluation_path(id: grader.id), method: :get %></td>
+    </tr>
+    <%end%>
+  </table>
+
+  <% else %>
+    <h1>Access Denied.</h1>
+  <% end %>
+
+</div>
