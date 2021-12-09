@@ -23,8 +23,9 @@
     </tr>
     <%end%>
   </table>
-
+  <%if @graders.size != 0%>
   <%= link_to 'New Evaluation', new_evaluation_path(subject: params[:subject]) %>
+  <%end%>
 
 
   <% else %>

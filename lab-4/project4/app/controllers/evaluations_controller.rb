@@ -2,9 +2,7 @@ class EvaluationsController < ApplicationController
   before_action :set_evaluation, only: [:update, :edit, :destroy, :show]
   # Make a new evaluation form, need names of graders for dropdown
   def new
-    section = Subject.find_by(subject_id:params[:subject])
-    assignments = GradingAssignment.where(subject_id:section.id)
-    @graders = get_graders(assignments) 
+    @graders = get_graders()
   end
 
   # Send information to update evaluation
@@ -31,16 +29,20 @@ class EvaluationsController < ApplicationController
 
   # Get all evaluations for a section
   def index
-    @evaluations = Evaluation.where(instructor:current_user.instructor).where(section:params[:subject])    
+    @evaluations = Evaluation.where(instructor:current_user.instructor).where(section:params[:subject])
+    @graders = get_graders()
   end
 
   # Create a new evaluation
   def create
-    eval = Evaluation.new()
-    assignments = GradingAssignment.where(subject_id:Subject.find_by(subject_id:params[:subject]).id)
-    @graders = get_graders(assignments) 
+    @graders = get_graders()
+    eval = Evaluation.new()  
     eval.section = params[:subject]
-    eval.message = params[:evaluation]["evaluation"]
+    if params[:evaluation]["evaluation"].length == 0
+      eval.message = "No message given"
+    else
+      eval.message = params[:evaluation]["evaluation"]
+    end
     eval.instructor_id = current_user.instructor.id
     eval.student_id = @graders[params[:evaluation]["graders"]]
     eval.save!
@@ -54,12 +56,15 @@ class EvaluationsController < ApplicationController
     end
 
     # Get the grader names and ids in a hash
-    def get_graders(assignments)
+    def get_graders()
       @graders = {}
+      assignments = GradingAssignment.where(subject_id:Subject.find_by(subject_id:params[:subject]).id)
       assignments.each do |assignment|
-        id = assignment.student_id
-        user = User.find(Student.find(id).user_id)
-        @graders[user.name] = id
+        if !(Evaluation.find_by(student_id: assignment.student_id))
+          id = assignment.student_id
+          user = User.find(Student.find(id).user_id)
+          @graders[user.name] = id
+        end
       end
       return @graders
     end
