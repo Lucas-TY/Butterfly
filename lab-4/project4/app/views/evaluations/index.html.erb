@@ -17,6 +17,7 @@
       <td><%= user.email %></td>
       <td><%= evaluation.section %></td>
       <td><%= evaluation.message %></td>
+      <td><%= link_to 'Show', evaluation_path(subject: params[:subject], id: evaluation.id), method: :get %></td>
       <td><%= link_to 'Edit', edit_evaluation_path(subject: params[:subject], id: evaluation.id) %></td>
       <td><%= link_to 'Delete', evaluation_path(subject: params[:subject], id: evaluation.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
@@ -24,6 +25,7 @@
   </table>
 
   <%= link_to 'New Evaluation', new_evaluation_path(subject: params[:subject]) %>
+
 
   <% else %>
     <h1>Access Denied.</h1>

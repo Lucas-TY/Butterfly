@@ -1,5 +1,5 @@
 class EvaluationsController < ApplicationController
-  before_action :set_evaluation, only: [:edit, :destroy, :show]
+  before_action :set_evaluation, only: [:update, :edit, :destroy, :show]
   # Make a new evaluation form, need names of graders for dropdown
   def new
     section = Subject.find_by(subject_id:params[:subject])
@@ -7,10 +7,20 @@ class EvaluationsController < ApplicationController
     @graders = get_graders(assignments) 
   end
 
+  # Send information to update evaluation
   def edit
+    @name = User.find(Student.find(@evaluation.student_id).user_id).name
+  end
+
+  def update
+    @evaluation.message = params["evaluation"][:message]
+    @evaluation.save
+    redirect_to evaluations_path(@evaluation.section)
   end
 
   def show
+    @name = User.find(Student.find(@evaluation.student_id).user_id).name
+    @message = @evaluation.message
   end
 
   # Delete an evaluation
@@ -21,8 +31,7 @@ class EvaluationsController < ApplicationController
 
   # Get all evaluations for a section
   def index
-    @evaluations = Evaluation.where(instructor:current_user.instructor).where(section:params[:subject])
-    
+    @evaluations = Evaluation.where(instructor:current_user.instructor).where(section:params[:subject])    
   end
 
   # Create a new evaluation
