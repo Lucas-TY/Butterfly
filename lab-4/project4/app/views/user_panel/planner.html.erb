@@ -2,11 +2,16 @@
 <% if current_user.role != 'admin' && !(current_user.role == "instructor" && !current_user.isActive)%>
   <h1>Planner</h1>
   <div>
-    <%= form_tag(planner_path, :method => "get", id: "search-form") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
-      <%= label_tag :semester %>
-      <%= select_tag :semester, options_for_select(@semester_list)%>
-      <%= submit_tag "Search" %>
+    <% if @semester_list.length > 0 %>
+      <%= form_tag(planner_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search courses" %>
+        <%= label_tag :semester %>
+        <%= select_tag :semester, options_for_select(@semester_list)%>
+        <%= submit_tag "Search" %>
+      <% end %>
+    <% else %>
+      <p> Please first add a semester <p>
+      <%= link_to 'Go to semesters page', semesters_path, method: :get%>
     <% end %>
   </div>
   <div>
@@ -77,7 +82,11 @@
             <td><%= subject.semester.description %></td>
             <td><%= link_to 'Drop', drop_course_path(subject),method: :delete%></td>
             <% if current_user.role == "instructor" && current_user.isActive %>
-              <td><%= link_to 'Recommend', recommendations_path(:operating=>subject.subject_id),method: :get%></td>
+              <% if Student.all.length > 0 %>
+                <td><%= link_to 'Recommend', recommendations_path(:operating=>subject.subject_id),method: :get%></td>
+              <% else %>
+                <td> No Students Registered. Please ask your student to sign up. </td>
+              <% end %>
               <td><%= link_to 'Evaluate', evaluations_path(subject: subject.subject_id), method: :get%></td>
             <% end %>
           </tr>

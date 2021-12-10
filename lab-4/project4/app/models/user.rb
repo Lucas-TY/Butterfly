@@ -7,7 +7,7 @@ class User < ApplicationRecord
   # associations
   has_one :operating
   has_many :plans,:dependent => :destroy
-  has_many :subjects, through: :plans
+  has_many :subjects, through: :plans, :dependent => :destroy
   has_one :student, required: false, :dependent => :destroy
   has_one :instructor, required: false, :dependent => :destroy
 
