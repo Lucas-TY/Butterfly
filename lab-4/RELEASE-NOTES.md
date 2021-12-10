@@ -1,7 +1,9 @@
 <h3>New Features -</h3>
-Added grader evaluations
-
-
+<b>Added grader evaluations</b>
+<ul>
+  <li>Instructors can evaluate students that graded for their sections, accessible from the 'Add/Manage Courses tab'</li>
+  <li>Administrators can view all evaluations for every grader assuming that their is still a semester in the database that the grader has graded for</li>
+</ul>
 
 <h3>Bug Fixes - </h3>
 <ul>
@@ -12,6 +14,7 @@ Added grader evaluations
   <li>Bug fix: Sections and applications not being deleted when a semester is deleted</li>
   <li>Bug fix: Semester dropdown in planner only shows when there are semesters</li>
   <li>Bug fix: Only allow adding a recommendation if there are students to recommend</li>
+  <li>Bug fix: Grading assignments weren't being removed when a subject was deleted</li>
 </ul>
 
 <h3>Misc - </h3>
