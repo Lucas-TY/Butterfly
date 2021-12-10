@@ -51,9 +51,13 @@ To create the time selector we use jquery, to add jquery to rails, run <code>yar
 To create a default admin account (the initial administrator to the database), you must add them through the command line
   + Open the rails console: <code>rails console</code>
   + Enter the following command (replace [ ] with user chosen values): 
-  <br>
-        <code>User.create(name:[name], email:[email], role:"admin", isActive:"true", password:[password])</code>
-  + example: <code>User.create(name:"admin", email:"admin@admin.admin", role:"admin", isActive:"true", password:"123456")</code>
+    ```
+    User.create(name:[name], email:[email], role:"admin", isActive:"true", password:[password])
+    ```
+  + example: 
+    ```
+    User.create(name:"admin", email:"admin@admin.admin", role:"admin", isActive:"true", password:"123456")
+    ```
   + Exit the console using the command: <code>quit</code>
 
 ---
@@ -74,6 +78,7 @@ To create a default admin account (the initial administrator to the database), y
   + Manage Semester
     + Add a semester with the following information
       + code - The code used for scraping data for that specific semester (currently increments by 4 every semester)
+        + see examples of semester codes in the Web Scraper details below 
       + description - a brief title/description for the semester
     + At least one semester must be added to the database before scraping any course data.
     + When deleting a semester, all corresponding sections that were linked the semester are also deleted.
@@ -190,37 +195,14 @@ Program supports 1 argument on each run. If multiple commands must be used, reco
 <li>1214 : SU21</li>
 <li>1218 : AU21</li>
 <li>1222 : SP22 - Specified by default if no param given</li>
-
+</ul>
 <h3>Option 2 - Using the in-program menu</h3>
   <h4>Scrape data</h4>
+<ul>
 <li> (Admin only) click scrape, and then click the the semester that you want to scrape, then click load to load those data into database</li>
+</ul>
 
 ---
 
-  <h4>add/delete course(project 4 part)</h4>
-  <li> click planner, then input the course that you are looking for. You can click on add or drop to change your courses</li>
-
-
-Program also supports entering commands from a built-in menu. Command list is provided upon running.
-Using this option allows for running multiple commands in one run - recommended for bulk work.
-
----
-
-## Update
-
-### Add a addTestData script to add two student with some taken_courses.
-
-Run it with rails runner: `rails runner addTestData/add_test_student.rb`
-
-student 1:  
-email: jack@osu.edu   |   password: 123456
-
-student 2:  
-email: jack@osu.edu   |   password: 123456
-
-Admin:  
-email: admin@osu.edu   |   password: 123456
-  
----
 Reference
   - [html Canvas-nest](https://github.com/hustcc/canvas-nest.js)
