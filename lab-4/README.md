@@ -75,6 +75,9 @@ To create a default admin account (the initial administrator to the database), y
   + Manage Recommendation
     + Select a semester to display recommendations to sections for that semester
     + Either assign a grading position to one section for a recommendation or reject the recommendation
+  + View Evaluations
+    + Select a grader to view all of their evaluations
+    + Only shows graders that are assigned to a currently available semester
   + Manage Semester
     + Add a semester with the following information
       + code - The code used for scraping data for that specific semester (currently increments by 4 every semester)
@@ -92,10 +95,10 @@ To create a default admin account (the initial administrator to the database), y
 
 ## Instructors
 + Functions:
-  + Add Courses
-    + Adds the sections that the instructor account teaches/manages
-    + Manage Section
-      + Here, the instructor can add a recommendation for a student to grade for the given section.
+  + Add/Manage Courses
+    + Add sections that the instructor account teaches/manages
+    + Add a recommendation for a student to grade for the given section.
+    + Add an evaluation for a student that graded for the section
 + Assumptions:
   + Only one instructor can be assigned to a section at a time
 
