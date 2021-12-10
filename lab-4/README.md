@@ -1,5 +1,11 @@
 # OSU CSE Grading Assignment Web Application
 
+Deployed on a sever: https://butterfly.lucas-ty.monster/
+<br>
+Admin login: 
+  + email: admin@admin.admin
+  + password: 123456
+
 # Initial Setup
 
 ## Step 1: Accessing the web view
