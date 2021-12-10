@@ -12,7 +12,7 @@ class EvaluationsController < ApplicationController
 
   def update
     @evaluation.message = params["evaluation"][:message]
-    @evaluation.save
+    @evaluation.save!
     redirect_to evaluations_path(@evaluation.section)
   end
 
@@ -45,6 +45,8 @@ class EvaluationsController < ApplicationController
     end
     eval.instructor_id = current_user.instructor.id
     eval.student_id = @graders[params[:evaluation]["graders"]]
+    eval.course_id = Subject.find_by(subject_id:params[:subject]).course.course_id
+    eval.semester = Subject.find_by(subject_id:params[:subject]).semester.description
     eval.save!
     redirect_to evaluations_path(subject: params[:subject])
   end

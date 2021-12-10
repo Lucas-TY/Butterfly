@@ -10,12 +10,11 @@
       <th>Evaluation</th>
     </tr>
     <% @evaluations.each do |evaluation| %>
-    <% subject = Subject.find_by(subject_id:evaluation.section)%>
     <tr>
-      <td><%= subject.course.course_id %></td>
+      <td><%= evaluation.course_id %></td>
       <td><%= evaluation.section %></td>
       <td><%= evaluation.instructor.user.name %></td>
-      <td><%= subject.semester.description %></td>
+      <td><%= evaluation.semester %></td>
       <td><%= evaluation.message %></td>
     </tr>
     <%end%>

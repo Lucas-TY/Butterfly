@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_04_195909) do
+ActiveRecord::Schema.define(version: 2021_12_10_161342) do
 
   create_table "applications", force: :cascade do |t|
     t.string "availability"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 2021_12_04_195909) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "instructor_id"
     t.integer "student_id"
+    t.string "course_id"
+    t.string "semester"
     t.index ["instructor_id"], name: "index_evaluations_on_instructor_id"
     t.index ["student_id"], name: "index_evaluations_on_student_id"
   end
