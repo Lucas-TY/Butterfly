@@ -5,6 +5,6 @@
   - [Rules for setgame](https://en.wikipedia.org/wiki/Set_(card_game)) 
 
 
-- [CSE department grader hire system(lab3&lab4)](https://butterfly.lucas-ty.space/)
+- [CSE department grader hire system(lab3&lab4)](https://butterfly.lucas-ty.monster/)
 
 
