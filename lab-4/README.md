@@ -1,6 +1,6 @@
 # OSU CSE Grading Assignment Web Application
 
-Deployed on a sever: https://butterfly.lucas-ty.space/
+Deployed on a sever: https://butterfly.lucas-ty.monster/
 <br>
 Admin login: 
   + email: admin@admin.admin
