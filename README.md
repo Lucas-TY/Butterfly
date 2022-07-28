@@ -1,7 +1,7 @@
 # Project preview
 
 - [Setgame_Excutable(lab1)](https://github.com/Lucas-TY/Butterfly/releases/tag/v1.0) (Java Executable)
-- [Setgame_Website(lab2)](https://setgame.lucas-ty.space/)
+- [Setgame_Website(lab2)](https://setgame.lucas-ty.space/) （Webview）
   - [Rules for setgame](https://en.wikipedia.org/wiki/Set_(card_game)) 
 
 
