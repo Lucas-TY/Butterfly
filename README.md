@@ -6,5 +6,9 @@
 
 
 - [CSE department grader hire system(lab3&lab4)](https://butterfly.lucas-ty.monster/)
+  ```
+  email: admin@admin.admin
+  password: 123456
+  ```
 
 
